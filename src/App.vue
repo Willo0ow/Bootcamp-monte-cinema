@@ -12,4 +12,8 @@ import HomePage from "./pages/HomePage.vue";
 import { NavBar } from "./components/common";
 </script>
 
-<style scoped></style>
+<style lang="scss">
+body {
+  margin: 0;
+}
+</style>

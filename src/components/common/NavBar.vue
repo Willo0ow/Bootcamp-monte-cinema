@@ -1,20 +1,39 @@
 <template>
-  <nav>{{ testData }}</nav>
+  <nav>
+    <Logo />
+    <div>
+      <TabHeader v-for="tab in tabs" :key="tab" :title="tab" />
+    </div>
+    <div class="nav-buttons">
+      <CustomButton label="Register" text />
+      <CustomButton label="Login" />
+    </div>
+  </nav>
 </template>
 <script>
+import Logo from "@assets/images/logo.svg?component";
+import { TabHeader, CustomButton } from "./index";
 export default {
-  components: {},
+  components: { Logo, TabHeader, CustomButton },
   setup() {
-    const testData = "Navbar";
+    const tabs = ["Movies", "Screenings", "Contact Us"];
     return {
-      testData,
+      tabs,
     };
   },
 };
 </script>
-<style scoped>
+<style lang="scss" scoped>
 nav {
   height: 112px;
   width: 100%;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 48px;
+}
+.nav-buttons {
+  display: flex;
 }
 </style>
