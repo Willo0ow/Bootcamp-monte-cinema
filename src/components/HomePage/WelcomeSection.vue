@@ -1,20 +1,44 @@
 <template>
-  <div id="welcome-section">{{ testData }}</div>
+  <div id="welcome-section">
+    <div class="welcome-text">
+      <SectionTitle
+        text="Welcome to the best cinema in Monterail"
+        class="mb-40"
+        style="margin-right: 100px"
+      />
+      <SectionSubtitle text="Best movies, best experiences, best people." />
+      <SectionSubtitle class="mb-40" text="And all that doesn't exist. Yikes." />
+      <CustomButton label="Book a ticket" size="56" />
+    </div>
+    <div class="welcome-image">
+      <Welcome />
+    </div>
+  </div>
 </template>
 <script>
+import { SectionTitle, SectionSubtitle, CustomButton } from "../common";
+import Welcome from "@assets/images/welcome.svg?component";
+
 export default {
-  components: {},
+  components: { SectionTitle, SectionSubtitle, CustomButton, Welcome },
   setup() {
-    const testData = "Welcome Section";
-    return {
-      testData,
-    };
+    return {};
   },
 };
 </script>
-<style scoped>
+<style lang="scss" scoped>
 #welcome-section {
-  height: 616px;
   width: 100%;
+  display: flex;
+  background: $wisp-pink;
+}
+.welcome-text {
+  margin: 80px;
+}
+.mb-40 {
+  margin-bottom: 40px;
+}
+.welcome-image {
+  min-width: 457px;
 }
 </style>
