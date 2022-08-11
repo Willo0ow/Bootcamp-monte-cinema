@@ -7,8 +7,11 @@
         style="margin-right: 100px"
       />
       <SectionSubtitle text="Best movies, best experiences, best people." />
-      <SectionSubtitle class="mb-40" text="And all that doesn't exist. Yikes." />
-      <CustomButton label="Book a ticket" size="56" />
+      <SectionSubtitle
+        class="mb-40"
+        text="And all that doesn't exist. Yikes."
+      />
+      <CustomButton label="Book a ticket" href="/book" size="56" />
     </div>
     <div class="welcome-image">
       <Welcome />
