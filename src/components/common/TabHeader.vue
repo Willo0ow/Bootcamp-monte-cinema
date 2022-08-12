@@ -1,5 +1,5 @@
 <template>
-  <div>{{ title }}</div>
+  <div class="tab-header">{{ title }}</div>
 </template>
 <script>
 export default {
@@ -9,7 +9,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-div {
+.tab-header {
   font-family: "Roboto", sans-serif;
   font-size: 18px;
   font-weight: 400;

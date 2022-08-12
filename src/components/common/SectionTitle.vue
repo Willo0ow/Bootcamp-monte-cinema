@@ -1,5 +1,5 @@
 <template>
-  <div>{{ text }}</div>
+  <div class="title">{{ text }}</div>
 </template>
 <script>
 export default {
@@ -9,7 +9,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-div {
+.title {
   font-family: "Eczar", serif;
   font-weight: 600;
   font-size: 80px;

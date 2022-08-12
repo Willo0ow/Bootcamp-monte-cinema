@@ -1,6 +1,6 @@
 <template>
-  <div id="welcome-section">
-    <div class="welcome-text">
+  <div class="welcome">
+    <div class="welcome__text">
       <SectionTitle
         text="Welcome to the best cinema in Monterail"
         class="mb-40"
@@ -13,7 +13,7 @@
       />
       <CustomButton label="Book a ticket" href="/book" size="56" />
     </div>
-    <div class="welcome-image">
+    <div class="welcome__image">
       <Welcome />
     </div>
   </div>
@@ -30,18 +30,16 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-#welcome-section {
+.welcome {
   width: 100%;
   display: flex;
   background: $wisp-pink;
 }
-.welcome-text {
+.welcome__text {
   margin: 80px;
 }
-.mb-40 {
-  margin-bottom: 40px;
-}
-.welcome-image {
+
+.welcome__image {
   min-width: 457px;
 }
 </style>

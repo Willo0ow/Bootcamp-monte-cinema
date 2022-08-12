@@ -1,5 +1,5 @@
 <template>
-  <div>{{ text }}</div>
+  <div class="subtitle">{{ text }}</div>
 </template>
 <script>
 export default {
@@ -9,7 +9,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-div {
+.subtitle {
   font-family: "Roboto Mono", monospace;
   font-style: normal;
   font-weight: 400;
