@@ -1,10 +1,12 @@
 <template>
-  <div class="actions">
-    <CapitalLink text="Soon in the cinema" color="dark-grey" />
-    <CapitalLink text="See all" color="red" />
-  </div>
-  <div class="movies">
-    <MovieCard v-for="movie of movies" :key="movie.id" :movie="movie" />
+  <div class="mb-64">
+    <div class="actions">
+      <CapitalLink text="Soon in the cinema" color="dark-grey" />
+      <CapitalLink text="See all" color="red" href="#" />
+    </div>
+    <div class="movies">
+      <MovieCard v-for="movie of movies" :key="movie.id" :movie="movie" />
+    </div>
   </div>
 </template>
 <script>
@@ -18,7 +20,6 @@ export default {
         title: "Predator",
         length: "1h 30min",
         image: "predator.svg",
-        imageComponent: "Predator",
         tags: ["Action"],
       },
       {
@@ -26,7 +27,6 @@ export default {
         title: "Commando",
         length: "1h 30min",
         image: "commando.svg",
-        imageComponent: "Commando",
         tags: ["Action"],
       },
       {
@@ -34,7 +34,6 @@ export default {
         title: "Terminator 2",
         length: "1h 30min",
         image: "terminator2.svg",
-        imageComponent: "Terminator",
         tags: ["Action"],
       },
     ];

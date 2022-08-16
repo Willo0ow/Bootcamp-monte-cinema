@@ -8,7 +8,7 @@ export default {
     href: { type: String, default: "" },
   },
   setup(props) {
-    const element = props.href ? "a" : "sapn";
+    const element = props.href ? "a" : "span";
     return { element };
   },
 };

@@ -37,13 +37,21 @@ export default {
   border-radius: 64px;
   border: none;
   width: fit-content;
+  text-decoration: none;
 }
 .custom-button[color="red"] {
   background: $cherry-red;
+  border-color: $cherry-red;
 }
 .custom-button[text] {
   background: transparent;
+  border-color: none;
   color: $cherry-red;
+}
+.custom-button[outlined] {
+  background: transparent;
+  color: $cherry-red;
+  border: $cherry-red 2px solid;
 }
 .custom-button[size="56"] {
   padding: 19px 40px;
@@ -52,5 +60,18 @@ export default {
 .custom-button[size="40"] {
   padding: 12px 32px;
   font-size: 16px;
+}
+
+.custom-button[outlined]:hover {
+  background: #a60c0e;
+  color: white;
+}
+
+.custom-button:active {
+  border: 2px solid #f47073;
+}
+.custom-button:focus {
+  background: #a60c0e;
+  color: white;
 }
 </style>

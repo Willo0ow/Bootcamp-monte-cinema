@@ -1,18 +1,18 @@
 <template>
   <WelcomeSection class="mb-64" />
   <MovieRow />
-  <MovieList />
+  <Screenings />
   <ContactUs />
 </template>
 <script>
 import {
   ContactUs,
-  MovieList,
+  Screenings,
   MovieRow,
   WelcomeSection,
 } from "../components/HomePage";
 export default {
-  components: { ContactUs, MovieList, MovieRow, WelcomeSection },
+  components: { ContactUs, Screenings, MovieRow, WelcomeSection },
   setup() {
     const testData = "Homepage";
     return {

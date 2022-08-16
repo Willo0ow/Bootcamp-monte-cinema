@@ -5,12 +5,8 @@
     <div class="card__image">
       <img :src="imgUrl" />
     </div>
-    <div class="card__actions">
-      <CustomChip
-        v-for="action of movie.actions"
-        :key="action"
-        :text="action"
-      ></CustomChip>
+    <div class="card__tags">
+      <CustomChip v-for="tag of movie.tags" :key="tag" :text="tag"></CustomChip>
     </div>
   </div>
 </template>
@@ -26,7 +22,6 @@ export default {
       `/src/assets/images/${props.movie.image}`,
       import.meta.url
     ).href;
-    console.log(imgUrl);
 
     return {
       imgUrl,
@@ -34,7 +29,7 @@ export default {
   },
 };
 </script>
-<style lang="scss">
+<style lang="scss" scoped>
 .card {
   padding: 40px;
   background: #ffffff;
@@ -47,7 +42,7 @@ export default {
 .card__image {
   margin: 18px 0;
 }
-.card__actions {
+.card__tags {
   font-size: 22px;
 }
 </style>

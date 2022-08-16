@@ -17,4 +17,10 @@ export default {
   letter-spacing: -0.01em;
   color: $gray-tuna;
 }
+.title[color="bombay"] {
+  color: $gray-bombay;
+}
+.title[size="64"] {
+  font-size: 64px;
+}
 </style>
