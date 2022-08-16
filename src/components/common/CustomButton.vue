@@ -5,6 +5,7 @@
     :color="color"
     :size="size"
     class="custom-button"
+    :href="href"
     >{{ label }}</component
   >
 </template>

@@ -1,5 +1,5 @@
 <template>
-  <WelcomeSection />
+  <WelcomeSection class="mb-64" />
   <MovieRow />
   <MovieList />
   <ContactUs />
