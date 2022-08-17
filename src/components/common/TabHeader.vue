@@ -1,12 +1,10 @@
 <template>
-  <div class="tab-header">{{ title }}</div>
+  <div class="tab-header">
+    <slot />
+  </div>
 </template>
 <script>
-export default {
-  props: {
-    title: { type: String, required: true },
-  },
-};
+export default {};
 </script>
 <style lang="scss" scoped>
 .tab-header {

@@ -1,27 +1,31 @@
 <template>
   <div class="card">
-    <CardTitle :text="movie.title" />
-    <CardSubtitle :text="movie.length" />
+    <CardTitle>{{ movie.title }}</CardTitle>
+    <CardSubtitle>{{ movie.length }}</CardSubtitle>
     <div class="card__image">
       <img :src="imgUrl" />
     </div>
     <div class="card__tags">
-      <CustomChip v-for="tag of movie.tags" :key="tag" :text="tag"></CustomChip>
+      <CustomChip v-for="tag of movie.tags" :key="tag">{{ tag }}</CustomChip>
     </div>
   </div>
 </template>
 <script>
-import { CardTitle, CardSubtitle, CustomChip } from "./index";
+
+import { computed } from "vue";
+import CardTitle from "./CardTitle.vue";
+import CardSubtitle from "./CardSubtitle.vue";
+import CustomChip from "./CustomChip.vue";
 export default {
   components: { CardTitle, CardSubtitle, CustomChip },
   props: {
     movie: { type: Object, required: true },
   },
   setup(props) {
-    const imgUrl = new URL(
-      `/src/assets/images/${props.movie.image}`,
-      import.meta.url
-    ).href;
+    const imgUrl = computed(
+      () =>
+        new URL(`/src/assets/images/${props.movie.image}`, import.meta.url).href
+    );
 
     return {
       imgUrl,

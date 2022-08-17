@@ -1,12 +1,10 @@
 <template>
-  <div class="chip">{{ text }}</div>
+  <div class="chip">
+    <slot />
+  </div>
 </template>
 <script>
-export default {
-  props: {
-    text: { type: String, default: "" },
-  },
-};
+export default {};
 </script>
 <style lang="scss">
 .chip {

@@ -9,7 +9,7 @@
 </template>
 <script setup>
 import HomePage from "./pages/HomePage.vue";
-import { NavBar } from "./components/common";
+import NavBar from "./components/common/NavBar.vue";
 </script>
 
 <style lang="scss">

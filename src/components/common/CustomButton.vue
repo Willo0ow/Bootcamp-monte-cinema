@@ -6,13 +6,12 @@
     :size="size"
     class="custom-button"
     :href="href"
-    >{{ label }}</component
-  >
+    ><slot
+  /></component>
 </template>
 <script>
 export default {
   props: {
-    label: { type: String, default: "" },
     color: { type: String, default: "red" },
     href: { type: String, default: "" },
     size: { type: String, default: "40" },

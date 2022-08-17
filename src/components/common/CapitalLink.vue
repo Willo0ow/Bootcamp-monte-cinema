@@ -1,14 +1,16 @@
 <template>
-  <component :is="element" class="capital-link">{{ text }}</component>
+  <component :is="element" class="capital-link">
+    <slot />
+  </component>
 </template>
 <script>
+import { computed } from "vue";
 export default {
   props: {
-    text: { type: String, required: true },
     href: { type: String, default: "" },
   },
   setup(props) {
-    const element = props.href ? "a" : "span";
+    const element = computed(() => (props.href ? "a" : "span"));
     return { element };
   },
 };

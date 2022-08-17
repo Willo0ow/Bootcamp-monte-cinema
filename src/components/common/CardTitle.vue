@@ -1,12 +1,10 @@
 <template>
-  <div class="card__title">{{ text }}</div>
+  <div class="card__title">
+    <slot />
+  </div>
 </template>
 <script>
-export default {
-  props: {
-    text: { type: String, default: "" },
-  },
-};
+export default {};
 </script>
 <style lang="scss">
 .card__title {

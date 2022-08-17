@@ -1,12 +1,10 @@
 <template>
-  <div class="subtitle">{{ text }}</div>
+  <div class="subtitle">
+    <slot />
+  </div>
 </template>
 <script>
-export default {
-  props: {
-    text: { type: String, required: true },
-  },
-};
+export default {};
 </script>
 <style lang="scss" scoped>
 .subtitle {

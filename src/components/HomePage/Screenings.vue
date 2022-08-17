@@ -1,14 +1,15 @@
 <template>
   <div class="">
-    <SectionTitle size="64" text="Screenings:"></SectionTitle>
-    <SectionTitle size="64" color="bombay" :text="today"></SectionTitle>
+    <SectionTitle size="64">Screenings:</SectionTitle>
+    <SectionTitle size="64" color="bombay">{{ today }}</SectionTitle>
     <MovieList :movies="movies"></MovieList>
   </div>
 </template>
 <script>
-import { SectionTitle, MovieList } from "@components/common";
-import { useWeekdays } from "@composables";
+import { useWeekdays } from "@composables/useWeekdays";
 import { useTestMovies } from "./useTestMovies";
+import SectionTitle from "@components/common/SectionTitle.vue";
+import MovieList from "@components/common/MovieList.vue";
 export default {
   components: { SectionTitle, MovieList },
   setup() {
