@@ -10,6 +10,8 @@ import CustomChip from "./CustomChip.vue";
 import MovieCard from "./MovieCard.vue";
 import MovieCardDetailed from "./MovieCardDetailed.vue";
 import MovieList from "./MovieList.vue";
+import CustomLabel from "./CustomLabel.vue";
+import CustomSelect from "./CustomSelect.vue";
 export {
   NavBar,
   CustomButton,
@@ -23,4 +25,6 @@ export {
   MovieCard,
   MovieCardDetailed,
   MovieList,
+  CustomLabel,
+  CustomSelect,
 };

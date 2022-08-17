@@ -1,11 +1,11 @@
 export const useWeekdays = () => {
   return [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
+    { fullName: "Sunday", short: "Sun" },
+    { fullName: "Monday", short: "Mon" },
+    { fullName: "Tuesday", short: "Tue" },
+    { fullName: "Wednesday", short: "Wed" },
+    { fullName: "Thursday", short: "Thu" },
+    { fullName: "Friday", short: "Fri" },
+    { fullName: "Saturday", short: "Sat" },
   ];
 };
