@@ -9,7 +9,7 @@
 </template>
 <script>
 import VSelect from "vue-select";
-import { CustomLabel } from "./index";
+import CustomLabel from "./CustomLabel.vue";
 export default {
   components: { VSelect, CustomLabel },
   props: {

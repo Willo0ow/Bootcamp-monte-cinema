@@ -2,17 +2,18 @@
   <nav>
     <Logo />
     <div>
-      <TabHeader v-for="tab in tabs" :key="tab" :title="tab" />
+      <TabHeader v-for="tab in tabs" :key="tab">{{ tab }}</TabHeader>
     </div>
     <div class="nav-buttons">
-      <CustomButton label="Register" text />
-      <CustomButton label="Login" />
+      <CustomButton text>Register</CustomButton>
+      <CustomButton>Login</CustomButton>
     </div>
   </nav>
 </template>
 <script>
 import Logo from "@assets/images/logo.svg?component";
-import { TabHeader, CustomButton } from "./index";
+import CustomButton from "./CustomButton.vue";
+import TabHeader from "./TabHeader.vue";
 export default {
   components: { Logo, TabHeader, CustomButton },
   setup() {

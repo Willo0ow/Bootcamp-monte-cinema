@@ -5,13 +5,13 @@
       size="56"
       v-for="day in days"
       :key="day"
-      :label="day"
       outlined
       color="gray"
       @click="selectDay(day)"
       class="mr-8"
       :class="{ selected: selectedDay === day }"
-    />
+      >{{ day }}</CustomButton
+    >
     <DatePicker v-model="selectedDate" color="red">
       <template v-slot="{ togglePopover }">
         <CustomButton
@@ -29,11 +29,12 @@
   </div>
 </template>
 <script>
-import { CustomLabel, CustomButton } from "@components/common";
 import { DatePicker } from "v-calendar";
 import CalendarIcon from "@icons/CalendarIcon.vue";
-import { useWeekdays } from "@composables";
+import { useWeekdays } from "@composables/useWeekdays";
 import { ref } from "vue";
+import CustomLabel from "@components/common/CustomLabel.vue";
+import CustomButton from "@components/common/CustomButton.vue";
 
 export default {
   components: {

@@ -1,12 +1,8 @@
 <template>
-  <div class="title">{{ text }}</div>
+  <div class="title"><slot /></div>
 </template>
 <script>
-export default {
-  props: {
-    text: { type: String, required: true },
-  },
-};
+export default {};
 </script>
 <style lang="scss" scoped>
 .title {

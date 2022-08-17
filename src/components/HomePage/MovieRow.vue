@@ -1,8 +1,8 @@
 <template>
   <div class="mb-64">
     <div class="actions">
-      <CapitalLink text="Soon in the cinema" color="dark-grey" />
-      <CapitalLink text="See all" color="red" href="#" />
+      <CapitalLink color="dark-grey">Soon in the cinema</CapitalLink>
+      <CapitalLink color="red" href="#">See all</CapitalLink>
     </div>
     <div class="movies">
       <MovieCard v-for="movie of movies" :key="movie.id" :movie="movie" />
@@ -10,7 +10,8 @@
   </div>
 </template>
 <script>
-import { CapitalLink, MovieCard } from "../common";
+import CapitalLink from "@components/common/CapitalLink.vue";
+import MovieCard from "@components/common/MovieCard.vue";
 export default {
   components: { CapitalLink, MovieCard },
   setup() {

@@ -5,19 +5,14 @@
   <ContactUs />
 </template>
 <script>
-import {
-  ContactUs,
-  Screenings,
-  MovieRow,
-  WelcomeSection,
-} from "../components/HomePage";
+import ContactUs from "../components/HomePage/ContactUs.vue";
+import Screenings from "../components/HomePage/Screenings.vue";
+import MovieRow from "../components/HomePage/MovieRow.vue";
+import WelcomeSection from "../components/HomePage/WelcomeSection.vue";
 export default {
-  components: { ContactUs, Screenings, MovieRow, WelcomeSection },
+  components: { WelcomeSection, MovieRow, Screenings, ContactUs },
   setup() {
-    const testData = "Homepage";
-    return {
-      testData,
-    };
+    return {};
   },
 };
 </script>

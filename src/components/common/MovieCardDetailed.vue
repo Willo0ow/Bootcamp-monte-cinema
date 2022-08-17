@@ -5,16 +5,12 @@
     </div>
     <div class="card__details">
       <div>
-        <CardTitle :text="movie.title" />
+        <CardTitle>{{ movie.title }}</CardTitle>
         <div class="details__basics">
           <div class="details__tags">
-            <CustomChip
-              v-for="action of movie.tags"
-              :key="action"
-              :text="action"
-            ></CustomChip>
+            <CustomChip v-for="tag of movie.tags" :key="tag">{{ tag }}</CustomChip>
           </div>
-          <CardSubtitle :text="movie.length" />
+          <CardSubtitle>{{ movie.length }}</CardSubtitle>
         </div>
       </div>
       <div class="details__actions">
@@ -22,16 +18,20 @@
           class="mr-8"
           v-for="seance in movie.screenings"
           :key="seance"
-          :label="seance"
           outlined
           @click="selectScreening(seance)"
-        />
+          >{{ seance }}</CustomButton
+        >
       </div>
     </div>
   </div>
 </template>
 <script>
-import { CardTitle, CardSubtitle, CustomChip, CustomButton } from "./index";
+
+import CustomButton from "./CustomButton.vue";
+import CardTitle from "./CardTitle.vue";
+import CardSubtitle from "./CardSubtitle.vue";
+import CustomChip from "./CustomChip.vue";
 export default {
   components: { CardTitle, CardSubtitle, CustomChip, CustomButton },
   props: {

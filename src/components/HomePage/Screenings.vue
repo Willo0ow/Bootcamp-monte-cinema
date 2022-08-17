@@ -1,12 +1,9 @@
 <template>
   <div class="">
-    <SectionTitle size="64" text="Screenings:"></SectionTitle>
-    <SectionTitle
-      size="64"
-      color="bombay"
-      :text="today"
-      class="mb-32"
-    ></SectionTitle>
+    <SectionTitle size="64">Screenings:</SectionTitle>
+    <SectionTitle size="64" color="bombay" class="mb-32">{{
+      today
+    }}</SectionTitle>
     <div class="filters-wrapper mb-64">
       <div>
         <SelectDayFilter></SelectDayFilter>
@@ -18,16 +15,18 @@
         ></CustomSelect>
       </div>
     </div>
-
     <MovieList :movies="movies"></MovieList>
   </div>
 </template>
 <script>
-import { SectionTitle, MovieList, CustomSelect } from "@components/common";
-import { useWeekdays } from "@composables";
-import { useTestMovies } from "./useTestMovies";
 import { ref } from "vue";
 import SelectDayFilter from "./SelectDayFilter.vue";
+import { useWeekdays } from "@composables/useWeekdays";
+import { useTestMovies } from "./useTestMovies";
+import SectionTitle from "@components/common/SectionTitle.vue";
+import MovieList from "@components/common/MovieList.vue";
+import CustomSelect from "../common/CustomSelect.vue";
+
 export default {
   components: { SectionTitle, MovieList, CustomSelect, SelectDayFilter },
   setup() {
