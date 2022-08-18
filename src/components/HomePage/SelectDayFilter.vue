@@ -68,7 +68,7 @@ export default {
 </script>
 <style scoped lang="scss">
 .filter-days {
-  display: flex;
+  @include flex();
 }
 .filter-days button {
   align-self: center;

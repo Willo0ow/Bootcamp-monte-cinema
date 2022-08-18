@@ -5,14 +5,9 @@
 </template>
 <style scoped lang="scss">
 .select-label {
-  font-family: "Roboto Mono";
-  font-style: normal;
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 18px;
+  @include font-roboto-mono(14px, 700, 18px, #f47073);
   text-transform: uppercase;
   display: block;
-  color: #f47073;
   margin-bottom: 12px;
 }
 </style>

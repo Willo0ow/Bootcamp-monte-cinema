@@ -11,6 +11,7 @@
   /></component>
 </template>
 <script>
+import { computed } from "vue";
 export default {
   props: {
     color: { type: String, default: "red" },
@@ -20,85 +21,102 @@ export default {
   },
   emits: ["click"],
   setup(props) {
-    const element = props.href ? "a" : "button";
+    const element = computed(() => (props.href ? "a" : "button"));
     return { element };
   },
 };
 </script>
 <style lang="scss" scoped>
 .custom-button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include font-roboto-mono(false, 500, 100%);
+  @include flex(row, center, center);
   color: white;
-  font-family: "Roboto Mono", monospace;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 100%;
   border-radius: 64px;
   border: none;
   width: fit-content;
   text-decoration: none;
   box-sizing: border-box;
-}
-.custom-button[color="red"] {
-  background: $cherry-red;
-  border-color: $cherry-red;
-}
-.custom-button[color="gray"] {
-  background: $gray-tuna;
-  border-color: $gray-tuna;
-}
-.custom-button[text] {
-  background: transparent;
-  border-color: none;
-  color: $cherry-red;
-}
-.custom-button[outlined] {
-  background: transparent;
-  color: $cherry-red;
-  border: $cherry-red 2px solid;
-}
-.custom-button[outlined][color="gray"] {
-  background: transparent;
-  color: $gray-tuna;
-  border: $gray-tuna 2px solid;
-}
-.custom-button[size="56"] {
-  padding: 19px 40px;
-  font-size: 18px;
-  height: 56px;
-}
-.custom-button[size="40"] {
-  padding: 12px 32px;
-  font-size: 16px;
-  height: 40px;
-}
 
-.custom-button[outlined]:hover {
-  background: #a60c0e;
-  color: white;
-}
-.custom-button[outlined][color="gray"]:hover {
-  background: $gray-tuna;
-  color: white;
-}
+  &[size="56"] {
+    padding: 19px 40px;
+    font-size: 18px;
+    height: 56px;
+    &[rounded] {
+      width: 56px;
+    }
+  }
+  &[size="40"] {
+    padding: 12px 32px;
+    font-size: 16px;
+    height: 40px;
+    &[rounded] {
+      width: 40px;
+    }
+  }
 
-.custom-button:active {
-  border: 2px solid #f47073;
-}
-.custom-button:focus {
-  background: #a60c0e;
-  color: white;
-}
-.selected[color="gray"][outlined] {
-  background: $gray-tuna;
-  color: white;
-}
-.custom-button[rounded] {
-  align-content: center;
-  justify-content: center;
-  padding: 0;
-  width: 56px;
+  &[color="red"] {
+    background: $cherry-red;
+    border-color: $cherry-red;
+    &[text] {
+      color: $cherry-red;
+      &.selected {
+        background: $cherry-red;
+        color: white;
+      }
+    }
+    &[outlined] {
+      color: $cherry-red;
+      &:hover {
+        background: #a60c0e;
+        color: white;
+      }
+      &.selected {
+        background: $cherry-red;
+        color: white;
+      }
+    }
+    &:active {
+      border: 2px solid #f47073;
+    }
+  }
+  &[color="gray"] {
+    background: $gray-tuna;
+    border-color: $gray-tuna;
+    &[text] {
+      color: $gray-tuna;
+      &.selected {
+        background: $gray-tuna;
+        color: white;
+      }
+    }
+    &[outlined] {
+      color: $gray-tuna;
+      &:hover {
+        background: #212229;
+        color: white;
+      }
+      &.selected {
+        background: $gray-tuna;
+        color: white;
+      }
+    }
+    &:active {
+      border: 2px solid #626262;
+    }
+  }
+  &[text] {
+    background: transparent;
+    border-color: none;
+  }
+  &[outlined] {
+    background: transparent;
+    border-width: 2px;
+    border-style: solid;
+  }
+  &[rounded] {
+    align-content: center;
+    justify-content: center;
+    padding: 0;
+  }
 }
 </style>

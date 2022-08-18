@@ -8,11 +8,6 @@ export default {};
 </script>
 <style lang="scss">
 .card__subtitle {
-  font-family: "Roboto", sans-serif;
-  font-style: normal;
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 16px;
-  color: $gray-jumbo;
+  @include font-roboto(14px, 700, 16px, $gray-jumbo);
 }
 </style>

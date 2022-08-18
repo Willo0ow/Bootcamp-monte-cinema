@@ -50,7 +50,6 @@ export default {
 </script>
 <style scoped lang="scss">
 .filters-wrapper {
-  display: flex;
-  justify-content: space-between;
+  @include flex(row, space-between);
 }
 </style>

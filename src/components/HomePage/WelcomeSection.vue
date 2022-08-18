@@ -33,7 +33,7 @@ export default {
 <style lang="scss" scoped>
 .welcome {
   width: 100%;
-  display: flex;
+  @include flex();
   background: $wisp-pink;
 }
 .welcome__text {

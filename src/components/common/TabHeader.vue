@@ -8,12 +8,8 @@ export default {};
 </script>
 <style lang="scss" scoped>
 .tab-header {
-  font-family: "Roboto", sans-serif;
-  font-size: 18px;
-  font-weight: 400;
-  line-height: 21px;
+  @include font-roboto(18px, 400, 21px, $gray-jumbo);
   letter-spacing: 0em;
-  color: $gray-jumbo;
   display: inline-block;
   width: 141px;
   text-align: center;

@@ -46,12 +46,10 @@ export default {
 </script>
 <style lang="scss" scoped>
 .actions {
-  display: flex;
-  justify-content: space-between;
+  @include flex(row, space-between);
   margin-bottom: 24px;
 }
 .movies {
-  display: flex;
-  justify-content: space-between;
+  @include flex(row, space-between);
 }
 </style>

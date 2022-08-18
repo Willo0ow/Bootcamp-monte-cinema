@@ -29,12 +29,10 @@ nav {
   height: 112px;
   width: 100%;
   box-sizing: border-box;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  @include flex(row, space-between, center);
   padding: 0 48px;
 }
 .nav-buttons {
-  display: flex;
+  @include flex();
 }
 </style>

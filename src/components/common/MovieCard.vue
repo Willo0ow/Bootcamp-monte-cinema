@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <CardTitle>{{ movie.title }}</CardTitle>
+    <CardTitle size="36">{{ movie.title }}</CardTitle>
     <CardSubtitle>{{ movie.length }}</CardSubtitle>
     <div class="card__image">
       <img :src="imgUrl" />

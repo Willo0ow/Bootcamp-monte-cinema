@@ -17,18 +17,16 @@ export default {
 </script>
 <style lang="scss" scoped>
 .capital-link {
-  font-family: "Roboto Mono", monospace;
-  font-style: normal;
-  font-weight: 700;
-  font-size: 22px;
-  line-height: 170%;
+  @include font-roboto-mono(22px, 700, 170%);
   letter-spacing: 0.015em;
   text-transform: uppercase;
-}
-.capital-link[color="red"] {
-  color: $cherry-red;
-}
-.capital-link[color="dark-grey"] {
-  color: $gray-tuna;
+
+  &[color="red"] {
+    color: $cherry-red;
+  }
+
+  &[color="dark-grey"] {
+    color: $gray-tuna;
+  }
 }
 </style>
