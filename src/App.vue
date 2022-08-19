@@ -4,11 +4,10 @@
   </header>
 
   <main>
-    <HomePage />
+    <router-view></router-view>
   </main>
 </template>
 <script setup>
-import HomePage from "./pages/HomePage.vue";
 import NavBar from "./components/common/NavBar.vue";
 </script>
 
