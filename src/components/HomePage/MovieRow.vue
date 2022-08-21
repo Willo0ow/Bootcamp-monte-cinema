@@ -5,41 +5,43 @@
       <CapitalLink color="red" href="#">See all</CapitalLink>
     </div>
     <div class="movies">
-      <MovieCard v-for="movie of movies" :key="movie.id" :movie="movie" />
+      <MovieCard
+        v-for="movie in reducedMovies"
+        :key="movie.id"
+        :movie="movie"
+      />
     </div>
   </div>
 </template>
 <script>
 import CapitalLink from "@components/common/CapitalLink.vue";
 import MovieCard from "@components/common/MovieCard.vue";
+import { useMovieStore } from "../../stores/movies";
+import { storeToRefs } from "pinia";
+import { computed } from "vue";
 export default {
   components: { CapitalLink, MovieCard },
   setup() {
-    const movies = [
-      {
-        id: 1,
-        title: "Predator",
-        length: "1h 30min",
-        image: "predator.svg",
-        tags: ["Action"],
-      },
-      {
-        id: 1,
-        title: "Commando",
-        length: "1h 30min",
-        image: "commando.svg",
-        tags: ["Action"],
-      },
-      {
-        id: 1,
-        title: "Terminator 2",
-        length: "1h 30min",
-        image: "terminator2.svg",
-        tags: ["Action"],
-      },
-    ];
+    const movieStore = useMovieStore();
+    const { movies } = storeToRefs(movieStore);
+    const reducedMovies = computed(() =>
+      movies.value.reduce((soonMovies, movie) => {
+        const { id, title, length, tag, image } = movie;
+        if (soonMovies.length < 3) {
+          soonMovies.push({
+            id,
+            title,
+            length,
+            tag,
+            image,
+          });
+        }
+        return soonMovies;
+      }, [])
+    );
     return {
       movies,
+      reducedMovies,
     };
   },
 };

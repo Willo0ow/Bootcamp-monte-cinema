@@ -4,15 +4,19 @@
     <CustomButton
       size="56"
       v-for="day in days"
-      :key="day"
+      :key="day.date"
       outlined
       color="gray"
-      @click="selectDay(day)"
+      @click="selectDay(day.date)"
       class="mr-8"
-      :class="{ selected: selectedDay === day }"
-      >{{ day }}</CustomButton
+      :class="{ selected: selectedDay === day.date }"
+      >{{ day.label }}</CustomButton
     >
-    <DatePicker v-model="selectedDate" color="red">
+    <DatePicker
+      v-model="selectedDay"
+      @update:modelValue="(event) => selectDay(event.toDateString())"
+      color="red"
+    >
       <template v-slot="{ togglePopover }">
         <CustomButton
           size="56"
@@ -43,25 +47,29 @@ export default {
     CalendarIcon,
     DatePicker,
   },
-  setup() {
+  emits: ["updateCurrentDate"],
+  setup(props, context) {
     const weekdays = useWeekdays();
     const today = new Date();
-    const days = ["Today"];
+    const days = [{ date: today.toDateString(), label: "Today" }];
     for (let offset = 1; offset < 6; offset++) {
       const nextDay = new Date();
       nextDay.setDate(today.getDate() + offset);
-      days.push(weekdays[nextDay.getDay()].short);
+      days.push({
+        date: nextDay.toDateString(),
+        label: weekdays[nextDay.getDay()].short,
+      });
     }
-    const selectedDay = ref("Today");
+    const selectedDay = ref(today.toDateString());
     function selectDay(day) {
       selectedDay.value = day;
+      context.emit("updateCurrentDate", day);
     }
-    const selectedDate = ref("");
+
     return {
       days,
       selectDay,
       selectedDay,
-      selectedDate,
     };
   },
 };

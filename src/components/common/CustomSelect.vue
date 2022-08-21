@@ -3,6 +3,7 @@
   <VSelect
     class="custom-select"
     :options="options"
+    :reduce="(filter) => filter.value"
     :model-value="modelValue"
     @update:modelValue="(event) => $emit('update:modelValue', event)"
   ></VSelect>

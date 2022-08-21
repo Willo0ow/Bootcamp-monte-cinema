@@ -1,14 +1,14 @@
 <template>
   <div class="card">
     <div class="card__image">
-      <img :src="imgUrl" />
+      <img :src="movie.image" />
     </div>
     <div class="card__details">
       <div>
         <CardTitle size="24">{{ movie.title }}</CardTitle>
         <div class="details__basics">
           <div class="details__tags">
-            <CustomChip v-for="tag of movie.tags" :key="tag">{{
+            <CustomChip v-for="tag in [movie.tag]" :key="tag">{{
               tag
             }}</CustomChip>
           </div>
@@ -18,12 +18,12 @@
       <div class="details__actions">
         <CustomButton
           class="mr-8"
-          v-for="seance in movie.screenings"
-          :key="seance"
+          v-for="seance in movie.seances"
+          :key="seance.id"
           outlined
-          @click="selectScreening(seance)"
-          :class="{ selected: selectedScreening === seance }"
-          >{{ seance }}</CustomButton
+          @click="selectScreening(seance.id)"
+          :class="{ selected: selectedScreening === seance.id }"
+          >{{ seance.time }}</CustomButton
         >
       </div>
     </div>
@@ -72,6 +72,10 @@ export default {
 }
 .card__image {
   margin-right: 40px;
+}
+img {
+  height: 132px;
+  width: 98px;
 }
 .details__tags {
   font-size: 22px;

@@ -3,7 +3,7 @@
     <MovieCardDetailed
       class="mb-40"
       v-for="movie in movies"
-      :key="movie.title"
+      :key="movie.id"
       :movie="movie"
     />
   </div>
