@@ -15,5 +15,12 @@ export default {};
   &[size="64"] {
     font-size: 64px;
   }
+
+  @include max-sm {
+    font-size: 48px;
+    &[center] {
+      text-align: center;
+    }
+  }
 }
 </style>

@@ -8,8 +8,9 @@
       outlined
       color="gray"
       @click="selectDay(day.date)"
-      class="mr-8"
+      class="mr-8 hide-day"
       :class="{ selected: selectedDay === day.date }"
+      sm-size
       >{{ day.label }}</CustomButton
     >
     <DatePicker
@@ -24,6 +25,7 @@
           rounded
           color="gray"
           class="mr-8"
+          sm-size
           @click="togglePopover()"
         >
           <CalendarIcon />
@@ -77,8 +79,27 @@ export default {
 <style scoped lang="scss">
 .filter-days {
   @include flex();
+  overflow-x: scroll;
 }
 .filter-days button {
   align-self: center;
+}
+.hide-day {
+  @include md {
+    &:nth-last-child(3) {
+      display: none;
+    }
+    &:nth-last-child(2) {
+      display: none;
+    }
+  }
+  @include lg {
+    &:nth-last-child(3) {
+      display: none;
+    }
+    &:nth-last-child(2) {
+      display: none;
+    }
+  }
 }
 </style>

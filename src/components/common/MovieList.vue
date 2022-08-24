@@ -18,3 +18,10 @@ export default {
   },
 };
 </script>
+<style lang="scss" scoped>
+.mb-40 {
+  @include max-sm {
+    margin-bottom: 0;
+  }
+}
+</style>

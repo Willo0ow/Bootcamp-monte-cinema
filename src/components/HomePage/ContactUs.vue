@@ -1,6 +1,6 @@
 <template>
-  <div class="center-self" style="width: fit-content; margin-top: 188px">
-    <SectionTitle size="64" class="mb-48" style="text-align: center;">
+  <div class="center-self contact-container">
+    <SectionTitle size="64" class="mb-48" style="text-align: center">
       Contact Us
     </SectionTitle>
     <div class="contact-card">
@@ -40,6 +40,13 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.contact-container {
+  width: fit-content;
+  margin-top: 188px;
+  @include max-sm {
+    margin-top: 144px;
+  }
+}
 .contact-card {
   width: 600px;
   margin-bottom: 124px;
@@ -49,5 +56,9 @@ export default {
   @include font-roboto-mono(18px, 400, 32px, $gray-tuna);
   letter-spacing: 0.015em;
   box-sizing: border-box;
+  @include max-sm {
+    padding: 24px 17px;
+    width: 315px;
+  }
 }
 </style>

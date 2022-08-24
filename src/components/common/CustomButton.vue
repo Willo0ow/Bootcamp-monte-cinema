@@ -53,6 +53,32 @@ export default {
       width: 40px;
     }
   }
+  &[size="24"] {
+    padding: 5px 16px;
+    font-size: 14px;
+    height: 24px;
+    &[rounded] {
+      width: 24px;
+    }
+  }
+  &[size="32"] {
+    padding: 9px 24px;
+    font-size: 14px;
+    height: 32px;
+    &[rounded] {
+      width: 32px;
+    }
+  }
+  @include max-sm {
+    &[sm-size] {
+      padding: 9px 24px;
+      font-size: 14px;
+      height: 32px;
+      &[rounded] {
+        width: 32px;
+      }
+    }
+  }
 
   &[color="red"] {
     background: $cherry-red;

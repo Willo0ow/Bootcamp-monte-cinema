@@ -1,5 +1,6 @@
 <template>
   <svg
+    class="icon"
     width="32"
     height="32"
     viewBox="0 0 32 32"
@@ -78,3 +79,11 @@ export default {
   },
 };
 </script>
+<style scoped lang="scss">
+.icon {
+  @include max-sm {
+    height: 20px;
+    width: 20px;
+  }
+}
+</style>

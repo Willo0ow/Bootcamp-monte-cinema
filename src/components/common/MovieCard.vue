@@ -33,14 +33,18 @@ export default {
     0px 5.36071px 17.4223px rgba(0, 0, 0, 0.0238443),
     0px 1.59602px 5.18708px rgba(0, 0, 0, 0.0161557);
   border-radius: 8px;
+  flex: 1;
   @include flex(column, space-between);
-  margin-right: 40px;
+  @include max-sm {
+    padding: 24px;
+  }
 }
 .card__image {
   margin: 18px 0;
 }
 img {
-  width: 341px;
+  // width: 341px;
+  width: 100%;
   height: 191px;
   object-fit: cover;
   object-position: 20% 10%;

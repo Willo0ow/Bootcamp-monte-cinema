@@ -1,17 +1,20 @@
 <template>
   <div class="">
-    <SectionTitle size="64">Screenings:</SectionTitle>
-    <SectionTitle size="64" color="bombay" class="mb-32">{{
-      dateString
-    }}</SectionTitle>
-    <div class="filters-wrapper mb-64">
-      <div>
+    <div class="helper">
+      <SectionTitle size="64">Screenings:</SectionTitle>
+      <SectionTitle size="64" color="bombay" class="mb-32">{{
+        dateString
+      }}</SectionTitle>
+    </div>
+    <div class="filters-container mb-64">
+      <div class="days-container">
         <SelectDayFilter
           @updateCurrentDate="updateCurrentDate"
         ></SelectDayFilter>
       </div>
-      <div style="min-width: 300px">
+      <div class="select-container">
         <CustomSelect
+          label="Movie"
           v-model="selectedFilter"
           :options="filters"
         ></CustomSelect>
@@ -91,7 +94,34 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-.filters-wrapper {
+.filters-container {
   @include flex(row, space-between);
+  @include max-md {
+    @include flex(column, false, start);
+  }
+  @include max-sm {
+    margin-right: 24px;
+    margin-left: 24px;
+  }
+}
+.select-container {
+  min-width: 325px;
+  width: 31%;
+  @include max-md {
+    width: 100%;
+    margin-top: 10px;
+  }
+}
+.days-container {
+  width: 79%;
+  @include max-md {
+    width: 100%;
+  }
+}
+.helper {
+  @include max-sm {
+    margin-right: 24px;
+    margin-left: 24px;
+  }
 }
 </style>

@@ -1,16 +1,17 @@
 <template>
-  <CustomLabel>Movie</CustomLabel>
+  <CustomLabel>{{ label }}</CustomLabel>
   <VSelect
     class="custom-select"
     :options="options"
     :reduce="(filter) => filter.value"
     :model-value="modelValue"
-    @update:modelValue="(event) => $emit('update:modelValue', event)"
+    @update:modelValue="(event) => updateValue(event)"
   ></VSelect>
 </template>
 <script>
 import VSelect from "vue-select";
 import CustomLabel from "./CustomLabel.vue";
+import { ref } from "vue";
 export default {
   components: { VSelect, CustomLabel },
   props: {
@@ -18,10 +19,21 @@ export default {
       type: Array,
       required: true,
     },
-    modelValue: { type: [Number, String], required: true },
+    modelValue: { type: [Number, String], default: null },
+    label: { type: String, default: "" },
   },
   emits: ["update:modelValue"],
-  setup() {},
+  setup(props, context) {
+    const value = ref(props.modelValue);
+    function updateValue(event) {
+      value.value = event;
+      context.emit("update:modelValue", event);
+    }
+    return {
+      value,
+      updateValue,
+    };
+  },
 };
 </script>
 <style lang="scss">
@@ -29,12 +41,29 @@ export default {
   font-family: "Roboto", sans-serif !important;
   font-style: normal !important;
   font-weight: 400 !important;
-  font-size: 18px !important;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 .custom-select .vs__dropdown-toggle {
   background: $gray-athens !important;
   border-radius: 8px !important;
   border: none !important;
-  padding: 16px 12px;
+  padding: 18px 12px;
+}
+.custom-select .vs__selected-options {
+  flex-wrap: nowrap;
+  max-width: calc(100% - 40px);
+}
+
+.custom-select .vs__selected {
+  display: block;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  max-width: 100%;
+  overflow: hidden;
+}
+>>> {
+  --vs-font-size: 16px;
+  --vs-line-height: 1;
 }
 </style>

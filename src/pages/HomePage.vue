@@ -16,10 +16,4 @@ export default {
   },
 };
 </script>
-<style scoped>
-main {
-  padding: 48px;
-  width: 100%;
-  box-sizing: border-box;
-}
-</style>
+<style scoped lang="scss"></style>
