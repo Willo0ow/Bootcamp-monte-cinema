@@ -1,7 +1,7 @@
 <template>
-  <div class="tab-header">
+  <a class="tab-header">
     <slot />
-  </div>
+  </a>
 </template>
 <script>
 export default {};

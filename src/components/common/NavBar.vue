@@ -2,13 +2,25 @@
   <nav>
     <Logo />
     <div class="nav-headers">
-      <TabHeader v-for="tab in tabs" :key="tab">{{ tab }}</TabHeader>
+      <TabHeader v-for="tab in tabs" :key="tab.label">{{
+        tab.label
+      }}</TabHeader>
     </div>
     <div class="nav-buttons">
       <CustomButton text>Register</CustomButton>
       <CustomButton>Login</CustomButton>
     </div>
-    <NavigrationIcon class="nav-icon" />
+    <NavigrationIcon class="nav-icon" v-s-dropdown-toggle:nav-options />
+    <SDropdown name="nav-options">
+      <ul>
+        <li class="option" v-for="tab in tabs" :key="tab.label">
+          <a :href="tab.path">{{ tab.label }}</a>
+        </li>
+        <hr class="divider" />
+        <li class="option"><a href="/login">Login</a></li>
+        <li class="option"><a href="/register">Register</a></li>
+      </ul>
+    </SDropdown>
   </nav>
 </template>
 <script>
@@ -19,7 +31,11 @@ import NavigrationIcon from "../icons/NavigrationIcon.vue";
 export default {
   components: { Logo, TabHeader, CustomButton, NavigrationIcon },
   setup() {
-    const tabs = ["Movies", "Screenings", "Contact Us"];
+    const tabs = [
+      { label: "Movies", path: "/" },
+      { label: "Screenings", path: "/" },
+      { label: "Contact Us", path: "/" },
+    ];
     return {
       tabs,
     };
@@ -54,5 +70,24 @@ nav {
   @include max-sm {
     display: block;
   }
+}
+.option {
+  padding: 15px 32px;
+  &:hover {
+    background-color: $pink-fair;
+  }
+}
+.divider {
+  margin: 0 20px;
+  color: $gray-bombay;
+}
+</style>
+<style lang="scss">
+.s-dropdown {
+  background-color: white;
+  @include font-roboto(18px, 400, 16px, $gray-mid);
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 10px 15px -3px,
+    rgba(0, 0, 0, 0.05) 0px 4px 6px -2px;
 }
 </style>
