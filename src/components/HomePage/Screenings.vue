@@ -17,6 +17,7 @@
           label="Movie"
           v-model="selectedFilter"
           :options="filters"
+          :clear-value="0"
         ></CustomSelect>
       </div>
     </div>
@@ -41,7 +42,7 @@ import { storeToRefs } from "pinia";
 export default {
   components: { SectionTitle, MovieList, CustomSelect, SelectDayFilter },
   setup() {
-    const selectedFilter = ref(null);
+    const selectedFilter = ref(0);
     const weekdays = useWeekdays();
     const currentDate = ref(new Date());
 
@@ -71,7 +72,7 @@ export default {
         const { id, title } = item;
         return { value: id, label: title };
       });
-      return [{ label: "All", value: null }, ...movieFilters];
+      return [{ label: "All", value: 0 }, ...movieFilters];
     });
     const filteredMovieSeances = computed(() => {
       if (selectedFilter.value) {

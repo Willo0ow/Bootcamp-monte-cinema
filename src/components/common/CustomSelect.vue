@@ -24,13 +24,14 @@ export default {
     label: { type: String, default: "" },
     optionValue: { type: String, default: "value" },
     optionLabel: { type: String, default: "label" },
+    clearValue: { type: [String, Number], default: null },
   },
   emits: ["update:modelValue"],
   setup(props, context) {
     const value = ref(props.modelValue);
     function updateValue(event) {
-      value.value = event;
-      context.emit("update:modelValue", event);
+      value.value = event === null ? props.clearValue : event;
+      context.emit("update:modelValue", value.value);
     }
     return {
       value,
@@ -51,7 +52,7 @@ export default {
   background: $gray-athens !important;
   border-radius: 8px !important;
   border: none !important;
-  padding: 18px 12px;
+  padding: 10px 12px;
 }
 .custom-select .vs__selected-options {
   flex-wrap: nowrap;

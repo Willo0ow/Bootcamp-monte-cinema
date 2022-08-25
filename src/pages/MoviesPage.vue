@@ -21,10 +21,15 @@
           option-label="name"
           :options="categories"
           v-model="selectedCategory"
+          :clear-value="0"
         />
       </div>
 
-      <MovieCard v-for="movie of movies" :key="movie.id" :movie="movie" />
+      <MovieCard
+        v-for="movie of filteredMovies"
+        :key="movie.id"
+        :movie="movie"
+      />
     </div>
   </div>
 </template>
@@ -33,7 +38,7 @@ import BreadCrumbs from "../components/common/BreadCrumbs.vue";
 import SectionTitle from "../components/common/SectionTitle.vue";
 import CustomSelect from "../components/common/CustomSelect.vue";
 import useMovieGenresApi from "../api/useMovieGenresApi";
-import { onMounted, ref } from "vue";
+import { onMounted, ref, computed } from "vue";
 import CustomInput from "../components/common/CustomInput.vue";
 import SearchIcon from "@assets/images/icons/magnifyIcon.svg?component";
 import MovieCard from "../components/common/MovieCard.vue";
@@ -65,7 +70,22 @@ export default {
     });
     const search = ref("");
 
-    return { steps, categories, selectedCategory, search, movies };
+    const filteredMovies = computed(() => {
+      const searchedMovies = !search.value
+        ? movies.value
+        : movies.value.filter((movie) =>
+            movie.title
+              .toLowerCase()
+              .includes(search.value.toLowerCase().trim())
+          );
+      return selectedCategory.value === 0
+        ? searchedMovies
+        : searchedMovies.filter(
+            (movie) => movie.genre.id === selectedCategory.value
+          );
+    });
+
+    return { steps, categories, selectedCategory, search, filteredMovies };
   },
 };
 </script>
