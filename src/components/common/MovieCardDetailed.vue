@@ -84,7 +84,7 @@ export default {
   border-radius: 8px;
   overflow-x: scroll;
   @include max-sm {
-    box-shadow: inset 0px -1px 0px #eaeaea;
+    box-shadow: inset 0px -1px 0px $gray-some;
     padding: 32px 16px;
     border-radius: 0;
   }
