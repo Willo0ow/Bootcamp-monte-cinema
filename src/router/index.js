@@ -13,6 +13,16 @@ const router = createRouter({
       component: () => import("@/pages/MoviesPage.vue"),
       name: "Movies",
     },
+    {
+      path: "/screenings",
+      component: () => import("@/pages/MoviesPage.vue"),
+      name: "Screenings",
+    },
+    {
+      path: "/contactUs",
+      component: () => import("@/pages/MoviesPage.vue"),
+      name: "ContactUs",
+    },
   ],
 });
 export default router;

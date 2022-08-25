@@ -1,5 +1,5 @@
 <template>
-  <div><BreadCrumbs :steps="steps" back-route="/" /></div>
+  <div><BreadCrumbs :steps="steps" :back-route="{ name: 'Home' }" /></div>
 </template>
 <script>
 import BreadCrumbs from "../components/common/BreadCrumbs.vue";
