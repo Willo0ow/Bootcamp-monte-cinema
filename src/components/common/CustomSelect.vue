@@ -3,9 +3,10 @@
   <VSelect
     class="custom-select"
     :options="options"
-    :reduce="(filter) => filter.value"
+    :reduce="(filter) => filter[optionValue]"
     :model-value="modelValue"
     @update:modelValue="(event) => updateValue(event)"
+    :label="optionLabel"
   ></VSelect>
 </template>
 <script>
@@ -21,6 +22,8 @@ export default {
     },
     modelValue: { type: [Number, String], default: null },
     label: { type: String, default: "" },
+    optionValue: { type: String, default: "value" },
+    optionLabel: { type: String, default: "label" },
   },
   emits: ["update:modelValue"],
   setup(props, context) {
