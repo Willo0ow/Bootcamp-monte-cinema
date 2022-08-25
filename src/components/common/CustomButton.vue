@@ -10,6 +10,7 @@
   /></component>
 </template>
 <script>
+import { computed } from "vue";
 export default {
   props: {
     color: { type: String, default: "red" },
@@ -18,7 +19,7 @@ export default {
   },
   emits: ["click"],
   setup(props) {
-    const element = props.href ? "a" : "button";
+    const element = computed( () => props.href ? "a" : "button");
     return { element };
   },
 };
