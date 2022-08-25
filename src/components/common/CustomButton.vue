@@ -7,6 +7,7 @@
     class="custom-button"
     :href="href"
     :class="class"
+    :to="to"
     ><slot
   /></component>
 </template>
@@ -16,12 +17,17 @@ export default {
   props: {
     color: { type: String, default: "red" },
     href: { type: String, default: "" },
+    to: { type: [Object, String], default: "" },
     size: { type: String, default: "40" },
     class: { type: [String, Array, Object], default: "" },
   },
   emits: ["click"],
   setup(props) {
-    const element = computed(() => (props.href ? "a" : "button"));
+    const element = computed(() => {
+      if (props.href) return "a";
+      if (props.to) return "router-link";
+      return "button";
+    });
     return { element };
   },
 };
@@ -88,6 +94,9 @@ export default {
       &.selected {
         background: $cherry-red;
         color: white;
+        & :deep(.icon *) {
+          stroke: white;
+        }
       }
     }
     &[outlined] {
@@ -95,10 +104,16 @@ export default {
       &:hover {
         background: #a60c0e;
         color: white;
+        & :deep(.icon *) {
+          stroke: white;
+        }
       }
       &.selected {
         background: $cherry-red;
         color: white;
+        & :deep(.icon *) {
+          stroke: white;
+        }
       }
     }
     &:active {
@@ -113,6 +128,9 @@ export default {
       &.selected {
         background: $gray-tuna;
         color: white;
+        & :deep(.icon *) {
+          stroke: white;
+        }
       }
     }
     &[outlined] {
@@ -120,10 +138,16 @@ export default {
       &:hover {
         background: #212229;
         color: white;
+        & :deep(.icon *) {
+          stroke: white;
+        }
       }
       &.selected {
         background: $gray-tuna;
         color: white;
+        & :deep(.icon *) {
+          stroke: white;
+        }
       }
     }
     &:active {

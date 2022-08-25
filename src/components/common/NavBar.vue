@@ -2,7 +2,7 @@
   <nav>
     <Logo />
     <div class="nav-headers">
-      <TabHeader v-for="tab in tabs" :key="tab.label">{{
+      <TabHeader :to="tab.path" v-for="tab in tabs" :key="tab.label">{{
         tab.label
       }}</TabHeader>
     </div>
@@ -30,11 +30,12 @@ import TabHeader from "./TabHeader.vue";
 import NavigrationIcon from "../icons/NavigrationIcon.vue";
 export default {
   components: { Logo, TabHeader, CustomButton, NavigrationIcon },
+
   setup() {
     const tabs = [
-      { label: "Movies", path: "/" },
-      { label: "Screenings", path: "/" },
-      { label: "Contact Us", path: "/" },
+      { label: "Movies", path: { name: "Movies" } },
+      { label: "Screenings", path: { name: "Movies" } },
+      { label: "Contact Us", path: { name: "Movies" } },
     ];
     return {
       tabs,
@@ -56,18 +57,23 @@ nav {
 }
 .nav-buttons {
   @include flex();
-  @include max-sm {
+  @media (max-width: 960px) {
     display: none;
   }
 }
 .nav-headers {
-  @include max-sm {
+  @include flex(false, false, center);
+  height: 100%;
+  @media (max-width: 960px) {
     display: none;
+  }
+  & :deep(.tab-header) {
+    @include flex(false, center, center);
   }
 }
 .nav-icon {
   display: none;
-  @include max-sm {
+  @media (max-width: 960px) {
     display: block;
   }
 }

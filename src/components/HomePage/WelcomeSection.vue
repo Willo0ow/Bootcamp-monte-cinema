@@ -39,7 +39,7 @@ export default {
 .welcome {
   width: 100%;
   @include flex();
-  background: $wisp-pink;
+  background: $pink-wisp;
 }
 .welcome__text {
   margin: 80px;
