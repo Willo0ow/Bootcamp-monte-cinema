@@ -6,21 +6,18 @@ export default {};
 </script>
 <style lang="scss" scoped>
 .title {
-  @include font-eczar(80px, 600, 102%, $gray-tuna);
+  @include font-eczar(48px, 600, 102%, $gray-tuna);
   letter-spacing: -0.01em;
+  text-align: start;
+  @include sm {
+    font-size: 80px;
+  }
 
   &[color="bombay"] {
     color: $gray-bombay;
   }
   &[size="64"] {
     font-size: 64px;
-  }
-
-  @include max-sm {
-    font-size: 48px;
-    &[center] {
-      text-align: center;
-    }
   }
 }
 </style>

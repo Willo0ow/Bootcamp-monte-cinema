@@ -1,24 +1,28 @@
 <template>
   <div class="welcome">
     <div class="welcome__text">
-      <SectionTitle class="mb-40 mr-100" center
+      <SectionTitle class="mb-40 text__title"
         >Welcome to the best cinema in Monterail</SectionTitle
       >
-      <SectionSubtitle
-        >Best movies, best experiences, best people.</SectionSubtitle
+      <div class="text__subtitles">
+        <SectionSubtitle
+          >Best movies, best experiences, best people.</SectionSubtitle
+        >
+        <SectionSubtitle class="mb-40"
+          >And all that doesn't exist. Yikes.</SectionSubtitle
+        >
+      </div>
+      <CustomButton class="button--book" href="/book" size="56"
+        >Book a ticket</CustomButton
       >
-      <SectionSubtitle class="mb-40"
-        >And all that doesn't exist. Yikes.</SectionSubtitle
-      >
-      <CustomButton href="/book" size="56">Book a ticket</CustomButton>
     </div>
     <div class="welcome__image">
-      <Welcome />
+      <WelcomeImage />
     </div>
   </div>
 </template>
 <script>
-import Welcome from "@assets/images/welcome.svg?component";
+import WelcomeImage from "@assets/images/welcome.svg?component";
 import CustomButton from "@components/common/CustomButton.vue";
 import SectionTitle from "@components/common/SectionTitle.vue";
 import SectionSubtitle from "@components/common/SectionSubtitle.vue";
@@ -28,7 +32,7 @@ export default {
     SectionTitle,
     SectionSubtitle,
     CustomButton,
-    Welcome,
+    WelcomeImage,
   },
   setup() {
     return {};
@@ -38,27 +42,37 @@ export default {
 <style lang="scss" scoped>
 .welcome {
   width: 100%;
-  @include flex();
+  @include flex(row, space-between);
   background: $wisp-pink;
 }
 .welcome__text {
-  margin: 80px;
-  @include max-sm {
-    margin: 40px 32px;
-    @include flex(column, false, center);
+  margin: 40px 32px;
+  @include flex(column, false, start);
+  @include md {
+    margin: 80px;
+  }
+}
+.text__subtitles {
+  width: 100%;
+}
+.text__title {
+  max-width: 710px;
+  @include xs {
+    text-align: center;
   }
 }
 
 .welcome__image {
-  min-width: 457px;
-  @include max-md {
-    display: none;
+  display: none;
+  @media (min-width: 1300px) {
+    display: block;
+    min-width: 457px;
   }
 }
-.mr-100 {
-  margin-right: 100px;
-  @include max-sm {
-    margin-right: 0;
+.button--book {
+  width: 100%;
+  @include sm {
+    width: fit-content;
   }
 }
 </style>

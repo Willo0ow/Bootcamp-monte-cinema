@@ -1,26 +1,28 @@
 <template>
-  <nav>
+  <nav class="nav">
     <Logo />
-    <div class="nav-headers">
+    <div class="nav__headers">
       <TabHeader v-for="tab in tabs" :key="tab.label">{{
         tab.label
       }}</TabHeader>
     </div>
-    <div class="nav-buttons">
+    <div class="nav__buttons">
       <CustomButton text>Register</CustomButton>
       <CustomButton>Login</CustomButton>
     </div>
-    <NavigrationIcon class="nav-icon" v-s-dropdown-toggle:nav-options />
-    <SDropdown name="nav-options">
-      <ul>
-        <li class="option" v-for="tab in tabs" :key="tab.label">
-          <a :href="tab.path">{{ tab.label }}</a>
-        </li>
-        <hr class="divider" />
-        <li class="option"><a href="/login">Login</a></li>
-        <li class="option"><a href="/register">Register</a></li>
-      </ul>
-    </SDropdown>
+    <div class="nav__menu">
+      <NavigrationIcon class="menu__icon" v-s-dropdown-toggle:menu__options />
+      <SDropdown name="menu__options">
+        <ul>
+          <li class="option" v-for="tab in tabs" :key="tab.label">
+            <a :href="tab.path">{{ tab.label }}</a>
+          </li>
+          <hr class="divider" />
+          <li class="option"><a href="/login">Login</a></li>
+          <li class="option"><a href="/register">Register</a></li>
+        </ul>
+      </SDropdown>
+    </div>
   </nav>
 </template>
 <script>
@@ -43,32 +45,32 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-nav {
+.nav {
   height: 112px;
   width: 100%;
   box-sizing: border-box;
   @include flex(row, space-between, center);
   padding: 0 48px;
+  max-width: 1440px;
   @include xl {
-    width: 1440px;
     margin: 0 auto;
   }
 }
-.nav-buttons {
-  @include flex();
-  @include max-sm {
-    display: none;
-  }
-}
-.nav-headers {
-  @include max-sm {
-    display: none;
-  }
-}
-.nav-icon {
+.nav__buttons {
   display: none;
-  @include max-sm {
+  @include md-plus {
+    @include flex();
+  }
+}
+.nav__headers {
+  display: none;
+  @include md-plus {
     display: block;
+  }
+}
+.nav__menu {
+  @include md-plus {
+    display: none;
   }
 }
 .option {

@@ -69,7 +69,7 @@ export default {
       width: 32px;
     }
   }
-  @include max-sm {
+  @include xs {
     &[sm-size] {
       padding: 9px 24px;
       font-size: 14px;
