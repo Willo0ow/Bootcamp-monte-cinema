@@ -1,7 +1,9 @@
 <template>
   <div class="mb-64 movie-row">
     <div class="actions">
-      <CapitalLink color="dark-grey">{{ soonText }}</CapitalLink>
+      <CapitalLink color="dark-grey"
+        >Soon <span class="desktop-only">in the cinema</span></CapitalLink
+      >
       <CapitalLink color="red" href="#">See all</CapitalLink>
     </div>
     <div class="movies">
@@ -21,39 +23,19 @@ import CapitalLink from "@components/common/CapitalLink.vue";
 import MovieCard from "@components/common/MovieCard.vue";
 import { useMovieStore } from "../../stores/movies";
 import { storeToRefs } from "pinia";
-import { computed, inject } from "vue";
+import { computed } from "vue";
 
 export default {
   components: { CapitalLink, MovieCard },
   setup() {
-    const movieStore = useMovieStore();
-    const { movies } = storeToRefs(movieStore);
+    const { movies } = storeToRefs(useMovieStore());
+    // const movieStore = useMovieStore();
+    // const { movies } = storeToRefs(movieStore);
 
-    const windowWidth = inject("windowWidth");
-    const soonText = computed(() =>
-      windowWidth.value > 480 ? "Soon in the Cinema" : "Soon"
-    );
-
-    const reducedMovies = computed(() =>
-      movies.value.reduce((soonMovies, movie) => {
-        const { id, title, length, tag, image } = movie;
-        if (soonMovies.length < 3) {
-          soonMovies.push({
-            id,
-            title,
-            length,
-            tag,
-            image,
-          });
-        }
-        return soonMovies;
-      }, [])
-    );
+    const reducedMovies = computed(() => movies.value.slice(0, 3));
     return {
       movies,
       reducedMovies,
-      windowWidth,
-      soonText,
     };
   },
 };
@@ -83,6 +65,11 @@ export default {
   @include max-sm {
     margin-right: 0;
     margin-bottom: 24px;
+  }
+}
+.desktop-only {
+  @include max-sm {
+    display: none;
   }
 }
 .hide-card {

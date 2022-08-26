@@ -8,22 +8,20 @@
     </div>
     <div class="filters-container mb-64">
       <div class="days-container">
-        <SelectDayFilter
-          @updateCurrentDate="updateCurrentDate"
-        ></SelectDayFilter>
+        <SelectDayFilter @updateCurrentDate="updateCurrentDate" />
       </div>
       <div class="select-container">
         <CustomSelect
           label="Movie"
           v-model="selectedFilter"
           :options="filters"
-        ></CustomSelect>
+        />
       </div>
     </div>
     <MovieList
       v-if="deateMovieSeances && deateMovieSeances.length"
       :movies="filteredMovieSeances"
-    ></MovieList>
+    />
   </div>
 </template>
 <script>
@@ -63,7 +61,7 @@ export default {
 
     onMounted(async () => {
       await movieStore.getMovies();
-      seanceStore.getDateSeances("21-08-2022");
+      seanceStore.getDateSeances(currentDate.value);
     });
     const { deateMovieSeances } = storeToRefs(seanceStore);
     const filters = computed(() => {

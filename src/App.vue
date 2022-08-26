@@ -8,19 +8,9 @@
 </template>
 <script>
 import NavBar from "./components/common/NavBar.vue";
-import { ref, provide } from "vue";
 export default {
   components: { NavBar },
-  setup() {
-    const windowWidth = ref(window.innerWidth);
-    window.addEventListener("resize", () => {
-      windowWidth.value = window.innerWidth;
-    });
-    provide("windowWidth", windowWidth);
-    return {
-      windowWidth,
-    };
-  },
+  setup() {},
 };
 </script>
 

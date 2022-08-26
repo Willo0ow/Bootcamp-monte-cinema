@@ -43,7 +43,6 @@ export default {
   margin: 18px 0;
 }
 img {
-  // width: 341px;
   width: 100%;
   height: 191px;
   object-fit: cover;

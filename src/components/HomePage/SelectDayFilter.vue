@@ -86,17 +86,13 @@ export default {
 }
 .hide-day {
   @include md {
-    &:nth-last-child(3) {
-      display: none;
-    }
+    &:nth-last-child(3),
     &:nth-last-child(2) {
       display: none;
     }
   }
   @include lg {
-    &:nth-last-child(3) {
-      display: none;
-    }
+    &:nth-last-child(3),
     &:nth-last-child(2) {
       display: none;
     }

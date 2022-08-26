@@ -88,6 +88,9 @@ export default {
       &.selected {
         background: $cherry-red;
         color: white;
+        & :deep(.icon *) {
+          stroke: white;
+        }
       }
     }
     &[outlined] {
@@ -95,10 +98,16 @@ export default {
       &:hover {
         background: #a60c0e;
         color: white;
+        & :deep(.icon *) {
+          stroke: white;
+        }
       }
       &.selected {
         background: $cherry-red;
         color: white;
+        & :deep(.icon *) {
+          stroke: white;
+        }
       }
     }
     &:active {
@@ -113,6 +122,9 @@ export default {
       &.selected {
         background: $gray-tuna;
         color: white;
+        & :deep(.icon *) {
+          stroke: white;
+        }
       }
     }
     &[outlined] {
@@ -120,10 +132,16 @@ export default {
       &:hover {
         background: #212229;
         color: white;
+        & :deep(.icon *) {
+          stroke: white;
+        }
       }
       &.selected {
         background: $gray-tuna;
         color: white;
+        & :deep(.icon *) {
+          stroke: white;
+        }
       }
     }
     &:active {

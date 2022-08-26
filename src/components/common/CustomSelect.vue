@@ -43,26 +43,26 @@ export default {
   font-weight: 400 !important;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
-.custom-select .vs__dropdown-toggle {
-  background: $gray-athens !important;
-  border-radius: 8px !important;
-  border: none !important;
-  padding: 18px 12px;
-}
-.custom-select .vs__selected-options {
-  flex-wrap: nowrap;
-  max-width: calc(100% - 40px);
+  & .vs__dropdown-toggle {
+    background: $gray-athens !important;
+    border-radius: 8px !important;
+    border: none !important;
+    padding: 18px 12px;
+  }
+  & .vs__selected-options {
+    flex-wrap: nowrap;
+    max-width: calc(100% - 40px);
+  }
+  & .vs__selected {
+    display: block;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    max-width: 100%;
+    overflow: hidden;
+  }
 }
 
-.custom-select .vs__selected {
-  display: block;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  max-width: 100%;
-  overflow: hidden;
-}
->>> {
+:root {
   --vs-font-size: 16px;
   --vs-line-height: 1;
 }
