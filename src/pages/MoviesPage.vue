@@ -94,9 +94,23 @@ export default {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 40px;
+  @include max-md {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    & :deep(.card) {
+      grid-area: span 1 / span 3;
+    }
+  }
 }
 .gallery__search {
   grid-column: 1 / span 2;
   grid-row: 1;
+  @include max-md {
+    grid-column: 1 / span 4;
+  }
+}
+.gallery__filter {
+  @include max-md {
+    grid-column: 5 / span 2;
+  }
 }
 </style>

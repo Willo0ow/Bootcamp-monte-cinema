@@ -52,7 +52,7 @@ export default {
   background: $gray-athens !important;
   border-radius: 8px !important;
   border: none !important;
-  padding: 10px 12px;
+  padding: 11.2px 12px;
 }
 .custom-select .vs__selected-options {
   flex-wrap: nowrap;
