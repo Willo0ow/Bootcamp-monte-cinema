@@ -7,8 +7,9 @@
     <template v-for="(step, index) in steps" :key="step.text">
       <component
         class="step mr-8"
-        :is="step.isLink ? 'a' : 'span'"
+        :is="step.isLink ? 'router-link' : 'span'"
         :color="step.isLink ? 'red' : 'gray'"
+        :to="step.isLink ? step.path : ''"
         >{{ step.text }}</component
       >
       <ChevronRightIcon class="mr-8" v-if="isNotLast(index)" />
