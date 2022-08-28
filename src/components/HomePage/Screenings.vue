@@ -1,16 +1,16 @@
 <template>
-  <div class="">
-    <div class="helper">
+  <div class="screenings">
+    <div class="screenings__header mx-sm-24">
       <SectionTitle size="64">Screenings:</SectionTitle>
       <SectionTitle size="64" color="bombay" class="mb-32">{{
         dateString
       }}</SectionTitle>
     </div>
-    <div class="filters-container mb-64">
-      <div class="days-container">
+    <div class="screenings__filters mb-64 mx-sm-24">
+      <div class="filter__day">
         <SelectDayFilter @updateCurrentDate="updateCurrentDate" />
       </div>
-      <div class="select-container">
+      <div class="filter__movie">
         <CustomSelect
           label="Movie"
           v-model="selectedFilter"
@@ -86,34 +86,24 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-.filters-container {
-  @include flex(row, space-between);
-  @include max-md {
-    @include flex(column, false, start);
-  }
-  @include max-sm {
-    margin-right: 24px;
-    margin-left: 24px;
+.screenings__filters {
+  @include flex(column, false, start);
+  @include lg {
+    @include flex(row, space-between);
   }
 }
-.select-container {
-  min-width: 325px;
-  width: 31%;
-  @include max-md {
-    width: 100%;
-    margin-top: 10px;
+.filter__movie {
+  width: 100%;
+  margin-top: 10px;
+  @include lg {
+    min-width: 325px;
+    width: 31%;
   }
 }
-.days-container {
-  width: 79%;
-  @include max-md {
-    width: 100%;
-  }
-}
-.helper {
-  @include max-sm {
-    margin-right: 24px;
-    margin-left: 24px;
+.filter__day {
+  width: 100%;
+  @include lg {
+    width: 79%;
   }
 }
 </style>

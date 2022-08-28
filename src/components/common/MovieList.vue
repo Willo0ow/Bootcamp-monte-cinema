@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <div class="movie__list">
     <MovieCardDetailed
-      class="mb-40"
+      class="list__item"
       v-for="movie in movies"
       :key="movie.id"
       :movie="movie"
@@ -19,9 +19,10 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.mb-40 {
-  @include max-sm {
-    margin-bottom: 0;
+.list__item {
+  margin-bottom: 0;
+  @include md {
+    margin-bottom: 40px;
   }
 }
 </style>

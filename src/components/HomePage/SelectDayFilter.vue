@@ -78,8 +78,12 @@ export default {
 </script>
 <style scoped lang="scss">
 .filter-days {
+  padding-bottom: 10px;
   @include flex();
   overflow-x: scroll;
+  @include lg {
+    padding-bottom: 0;
+  }
 }
 .filter-days button {
   align-self: center;

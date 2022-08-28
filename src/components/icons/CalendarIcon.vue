@@ -67,9 +67,11 @@ export default {
 </script>
 <style scoped lang="scss">
 .icon {
-  @include max-sm {
-    height: 20px;
-    width: 20px;
+  height: 20px;
+  width: 20px;
+  @include md {
+    height: 32px;
+    width: 32px;
   }
 }
 </style>
