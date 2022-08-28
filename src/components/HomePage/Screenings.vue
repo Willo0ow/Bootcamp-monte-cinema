@@ -28,9 +28,7 @@
 import { ref, onMounted, computed } from "vue";
 import SelectDayFilter from "./SelectDayFilter.vue";
 import { useWeekdays } from "@composables/useWeekdays";
-import { useTestMovies } from "./useTestMovies";
 import { useSeanceStore } from "@/stores/seances";
-import { useMovieStore } from "@/stores/movies";
 import SectionTitle from "@components/common/SectionTitle.vue";
 import MovieList from "@components/common/MovieList.vue";
 import CustomSelect from "../common/CustomSelect.vue";
@@ -55,13 +53,10 @@ export default {
           .replace(/\./g, "/")}`
     );
 
-    const movies = useTestMovies();
-    const movieStore = useMovieStore();
     const seanceStore = useSeanceStore();
 
     onMounted(async () => {
-      await movieStore.getMovies();
-      seanceStore.getDateSeances(currentDate.value);
+      await seanceStore.getDateSeances(currentDate.value);
     });
     const { deateMovieSeances } = storeToRefs(seanceStore);
     const filters = computed(() => {
@@ -81,7 +76,6 @@ export default {
     });
     return {
       dateString,
-      movies,
       selectedFilter,
       filters,
       deateMovieSeances,

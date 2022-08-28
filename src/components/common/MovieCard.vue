@@ -27,7 +27,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .card {
-  padding: 40px;
+  padding: 24px;
   background: #ffffff;
   box-shadow: 0px 24px 78px rgba(0, 0, 0, 0.08),
     0px 5.36071px 17.4223px rgba(0, 0, 0, 0.0238443),
@@ -35,8 +35,8 @@ export default {
   border-radius: 8px;
   flex: 1;
   @include flex(column, space-between);
-  @include max-sm {
-    padding: 24px;
+  @include md {
+    padding: 40px;
   }
 }
 .card__image {
