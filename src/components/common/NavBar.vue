@@ -19,7 +19,7 @@
       <SDropdown name="menu__options">
         <ul>
           <li class="option" v-for="tab in tabs" :key="tab.label">
-            <a :href="tab.path">{{ tab.label }}</a>
+            <router-link :to="tab.path">{{ tab.label }}</router-link>
           </li>
           <hr class="divider" />
           <li class="option"><a href="/login">Login</a></li>

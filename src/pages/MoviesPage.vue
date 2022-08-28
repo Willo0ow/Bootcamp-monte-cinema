@@ -24,12 +24,12 @@
           :clear-value="0"
         />
       </div>
-
       <MovieCard
+        :movie="movie"
         class="gallery__card"
         v-for="movie of filteredMovies"
         :key="movie.id"
-        :movie="movie"
+        :to="{ name: 'MovieDetails', params: { id: movie.id } }"
       />
     </div>
   </div>
@@ -105,15 +105,9 @@ export default {
     gap: 40px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-    // & :deep(.card) {
-    //   grid-area: span 1 / span 3;
-    // }
   }
   @include lg {
     grid-template-columns: 1fr 1fr 1fr;
-    // & :deep(.card) {
-    //   grid-area: span 1 / span 1;
-    // }
   }
 }
 .gallery__search {

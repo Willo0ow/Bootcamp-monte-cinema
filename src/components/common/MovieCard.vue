@@ -1,5 +1,5 @@
 <template>
-  <div class="card">
+  <component :is="to ? 'router-link' : 'div'" :to="to" class="card">
     <div>
       <CardTitle size="36">{{ movie.title }}</CardTitle>
     </div>
@@ -12,7 +12,7 @@
         <CustomChip>{{ movie.genre?.name }}</CustomChip>
       </div>
     </div>
-  </div>
+  </component>
 </template>
 <script>
 import CardTitle from "./CardTitle.vue";
@@ -22,6 +22,7 @@ export default {
   components: { CardTitle, CardSubtitle, CustomChip },
   props: {
     movie: { type: Object, required: true },
+    to: { type: [Object, String], default: "" },
   },
 };
 </script>
