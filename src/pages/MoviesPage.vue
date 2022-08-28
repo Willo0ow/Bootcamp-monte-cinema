@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="movies">
     <BreadCrumbs :steps="steps" :back-route="{ name: 'Home' }" class="mb-64" />
-    <SectionTitle class="mb-32">All the movies</SectionTitle>
-    <div class="movie__gallery mb-64">
+    <SectionTitle class="mb-32 mx-sm-24">All the movies</SectionTitle>
+    <div class="movie__gallery mb-64 mx-sm-24">
       <div class="gallery__search">
         <CustomInput
           v-model="search"
@@ -26,6 +26,7 @@
       </div>
 
       <MovieCard
+        class="gallery__card"
         v-for="movie of filteredMovies"
         :key="movie.id"
         :movie="movie"
@@ -90,29 +91,48 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-.movie__gallery {
-  gap: 40px;
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-  & :deep(.card) {
+.gallery__card {
+  margin-bottom: 24px;
+  @include md {
     grid-area: span 1 / span 3;
   }
   @include lg {
+    grid-area: span 1 / span 1;
+  }
+}
+.movie__gallery {
+  @include md {
+    gap: 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    // & :deep(.card) {
+    //   grid-area: span 1 / span 3;
+    // }
+  }
+  @include lg {
     grid-template-columns: 1fr 1fr 1fr;
-    & :deep(.card) {
-      grid-area: span 1 / span 1;
-    }
+    // & :deep(.card) {
+    //   grid-area: span 1 / span 1;
+    // }
   }
 }
 .gallery__search {
-  grid-column: 1 / span 4;
+  margin-bottom: 40px;
+  @include md {
+    margin-bottom: 0;
+    grid-column: 1 / span 4;
+  }
   @include lg {
     grid-column: 1 / span 2;
     grid-row: 1;
   }
 }
 .gallery__filter {
-  grid-column: 5 / span 2;
+  margin-bottom: 32px;
+  @include md {
+    margin-bottom: 0;
+    grid-column: 5 / span 2;
+  }
   @include lg {
     grid-column: 3 / span 1;
   }

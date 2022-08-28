@@ -32,3 +32,9 @@
 .text-center {
   text-align: center;
 }
+.desktop-only {
+  display: none;
+  @include lg {
+    display: inline-block;
+  }
+}

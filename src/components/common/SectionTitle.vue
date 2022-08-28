@@ -15,7 +15,7 @@ export default {
 .title {
   @include font-eczar(v-bind("fontSize.small"), 600, 102%, $gray-tuna);
   letter-spacing: -0.01em;
-  @include sm {
+  @include md {
     font-size: v-bind("fontSize.default");
   }
   &[color="bombay"] {

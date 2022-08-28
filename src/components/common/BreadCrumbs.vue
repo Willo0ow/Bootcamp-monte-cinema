@@ -1,8 +1,8 @@
 <template>
   <div class="breadcrumbs">
-    <CustomButton outlined color="gray" :to="backRoute" class="mr-32">
-      <ArrowLeftIcon class="mr-16" />
-      Back
+    <CustomButton outlined color="gray" :to="backRoute" class="back__btn">
+      <ArrowLeftIcon class="btn__icon" />
+      <span class="desktop-only">Back</span>
     </CustomButton>
     <template v-for="(step, index) in steps" :key="step.text">
       <component
@@ -45,5 +45,16 @@ export default {
   @include flex(false, start, center);
   padding: 20px 24px;
   background-color: $pink-wisp;
+}
+.btn__icon {
+  @include lg {
+    margin-right: 16px;
+  }
+}
+.back__btn {
+  margin-right: 12px;
+  @include lg {
+    margin-right: 32px;
+  }
 }
 </style>

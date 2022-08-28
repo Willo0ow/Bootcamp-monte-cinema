@@ -59,12 +59,6 @@ export default {
     margin-right: 40px;
   }
 }
-.desktop-only {
-  display: none;
-  @include lg {
-    display: inline-block;
-  }
-}
 .movie__card {
   margin-bottom: 24px;
   &:nth-child(3) {
