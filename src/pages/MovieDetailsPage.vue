@@ -16,7 +16,17 @@
       }}</SectionSubtitle>
       <img class="details__image" :src="movie?.poster_url" />
     </div>
-    <div class="movie__screenings"></div>
+    <div class="movie__screenings">
+      <SectionTitle :font-size="titleSize">Screenings:</SectionTitle>
+      <SectionTitle :font-size="titleSize" color="bombay" class="mb-32">{{
+        dateString
+      }}</SectionTitle>
+      <SelectDayFilter
+        :noLabel="true"
+        @updateCurrentDate="updateCurrentDate"
+      ></SelectDayFilter>
+      <MovieCardDetailed v-if="!!movie" :movie="movieData" />
+    </div>
   </div>
 </template>
 
@@ -30,6 +40,11 @@ import CustomChip from "../components/common/CustomChip.vue";
 import useFormatMovieLength from "@composables/useFormatMovieLength";
 import EllipseIcon from "@assets/images/icons/ellipse.svg?component";
 import SectionSubtitle from "../components/common/SectionSubtitle.vue";
+import SelectDayFilter from "../components/HomePage/SelectDayFilter.vue";
+import { useWeekdays } from "../composables/useWeekdays";
+import useSeancesApi from "@/api/useSeancesApi.js";
+import MovieCardDetailed from "../components/common/MovieCardDetailed.vue";
+import useAddDateAndTimeToSeances from "@/composables/useAddDateAndTimeToSeances";
 
 export default {
   setup() {
@@ -47,15 +62,67 @@ export default {
         : ""
     );
 
+    const currentDate = ref(new Date());
+    const { retrieveSeances } = useSeancesApi();
+    const { addDateAndTimeToSeances } = useAddDateAndTimeToSeances();
+
+    const seances = ref([]);
+
+    async function getSeances() {
+      const res = await retrieveSeances({
+        date: currentDate.value,
+        movieId: route.params.id,
+      });
+      seances.value = addDateAndTimeToSeances(res);
+    }
+
+    async function updateCurrentDate(newDate) {
+      currentDate.value = new Date(newDate);
+      await getSeances();
+    }
+
     onBeforeMount(async () => {
       movie.value = await retrieveMovies(route.params.id);
+      movie.value.length = formatMovieLength(movie.value.length);
+      await getSeances();
     });
+
+    const movieData = computed(() =>
+      movie.value
+        ? {
+            ...movie.value,
+            seances: seances.value,
+          }
+        : null
+    );
 
     const steps = computed(() => [
       { text: "Movies", isLink: true, path: "Movies" },
       { text: movie.value?.title || "", isLink: false },
     ]);
-    return { steps, movie, releaseYear, formatMovieLength };
+
+    const weekdays = useWeekdays();
+    const dateString = computed(
+      () =>
+        `${weekdays[currentDate.value.getDay()].fullName} ${currentDate.value
+          .toLocaleDateString()
+          .replace(/\./g, "/")}`
+    );
+
+    const titleSize = { default: "32px", small: "32px" };
+
+    return {
+      steps,
+      movie,
+      releaseYear,
+      formatMovieLength,
+      updateCurrentDate,
+      currentDate,
+      dateString,
+      titleSize,
+      movieData,
+      seances,
+    };
   },
   components: {
     BreadCrumbs,
@@ -63,12 +130,17 @@ export default {
     CustomChip,
     EllipseIcon,
     SectionSubtitle,
+    SelectDayFilter,
+    MovieCardDetailed,
   },
 };
 </script>
 
 <style lang="scss" scoped>
 .movie__details {
+  margin: 24px;
+}
+.movie__screenings {
   margin: 24px;
 }
 .details__basics {

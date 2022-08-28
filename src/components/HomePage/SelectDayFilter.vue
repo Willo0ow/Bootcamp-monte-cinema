@@ -1,5 +1,5 @@
 <template>
-  <CustomLabel>Day</CustomLabel>
+  <CustomLabel v-if="!noLabel">Day</CustomLabel>
   <div class="filter-days">
     <CustomButton
       size="56"
@@ -50,6 +50,9 @@ export default {
     DatePicker,
   },
   emits: ["updateCurrentDate"],
+  props: {
+    noLabel: { type: Boolean, default: false },
+  },
   setup(props, context) {
     const weekdays = useWeekdays();
     const today = new Date();

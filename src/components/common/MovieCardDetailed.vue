@@ -2,14 +2,14 @@
   <div class="card">
     <div class="card__container">
       <div class="card__image">
-        <img :src="movie.image" />
+        <img :src="movie.poster_url" />
       </div>
       <div class="card__details">
         <div>
           <CardTitle size="24" nowrap>{{ movie.title }}</CardTitle>
           <div class="details__basics">
             <div class="details__tags">
-              <CustomChip v-for="tag in [movie.tag]" :key="tag">{{
+              <CustomChip v-for="tag in [movie.genre?.name]" :key="tag">{{
                 tag
               }}</CustomChip>
             </div>
@@ -55,10 +55,6 @@ export default {
     movie: { type: Object, required: true },
   },
   setup(props) {
-    const imgUrl = new URL(
-      `/src/assets/images/small/${props.movie.image}`,
-      import.meta.url
-    ).href;
 
     const selectedScreening = ref("");
 
@@ -67,7 +63,6 @@ export default {
     }
 
     return {
-      imgUrl,
       selectScreening,
       selectedScreening,
     };

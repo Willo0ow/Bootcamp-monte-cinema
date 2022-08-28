@@ -6,10 +6,10 @@
     <div>
       <CardSubtitle>{{ movie.length }}</CardSubtitle>
       <div class="card__image">
-        <img :src="movie.image" />
+        <img :src="movie.poster_url" />
       </div>
       <div class="card__tags">
-        <CustomChip>{{ movie.tag }}</CustomChip>
+        <CustomChip>{{ movie.genre?.name }}</CustomChip>
       </div>
     </div>
   </div>

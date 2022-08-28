@@ -1,7 +1,9 @@
 import { defineStore } from "pinia";
 import { useMovieStore } from "./movies";
 import useSeancesApi from "@/api/useSeancesApi.js";
+import useAddDateAndTimeToSeances from "@composables/useAddDateAndTimeToSeances.js";
 const { retrieveSeances } = useSeancesApi();
+const { addDateAndTimeToSeances } = useAddDateAndTimeToSeances();
 
 export const useSeanceStore = defineStore({
   id: "seances",
@@ -31,11 +33,7 @@ export const useSeanceStore = defineStore({
   actions: {
     async getDateSeances(date) {
       const res = await retrieveSeances({ date });
-      this.dateSeances = res.map((seance) => {
-        const date = seance.datetime.split("T")[0];
-        const time = seance.datetime.split("T")[1].slice(0, 5);
-        return { ...seance, date, time };
-      });
+      this.dateSeances = addDateAndTimeToSeances(res);
     },
   },
 });
