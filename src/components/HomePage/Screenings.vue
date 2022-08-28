@@ -1,8 +1,8 @@
 <template>
   <div class="screenings">
     <div class="screenings__header mx-sm-24">
-      <SectionTitle size="64">Screenings:</SectionTitle>
-      <SectionTitle size="64" color="bombay" class="mb-32">{{
+      <SectionTitle :font-size="titleSize">Screenings:</SectionTitle>
+      <SectionTitle :font-size="titleSize" color="bombay" class="mb-32">{{
         dateString
       }}</SectionTitle>
     </div>
@@ -40,6 +40,8 @@ export default {
     const selectedFilter = ref(null);
     const weekdays = useWeekdays();
     const currentDate = ref(new Date());
+
+    const titleSize = { default: "64px", small: "48px" };
 
     function updateCurrentDate(newDate) {
       currentDate.value = new Date(newDate);
@@ -81,6 +83,7 @@ export default {
       deateMovieSeances,
       updateCurrentDate,
       filteredMovieSeances,
+      titleSize,
     };
   },
 };

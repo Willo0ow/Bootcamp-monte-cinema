@@ -1,9 +1,12 @@
 <template>
-  <div class="center-self contact-container">
-    <SectionTitle size="64" class="mb-48 text-center">
+  <div class="contact">
+    <SectionTitle
+      :font-size="titleSize"
+      class="contact__title mb-48 text-center"
+    >
       Contact Us
     </SectionTitle>
-    <div class="contact-card">
+    <div class="contact__card">
       <div class="mb-40 card__info">
         <LocationIcon class="mr-16" />
         <div class="info__text">
@@ -32,30 +35,33 @@ import EmailIcon from "@assets/images/icons/emailIcon.svg?component";
 export default {
   components: { SectionTitle, LocationIcon, PhoneIcon, EmailIcon },
   setup() {
-    return {};
+    const titleSize = { default: "64px", small: "40px" };
+    return { titleSize };
   },
 };
 </script>
 <style lang="scss" scoped>
-.contact-container {
+.contact {
   width: fit-content;
-  margin-top: 188px;
-  @include max-sm {
-    margin-top: 144px;
+  margin-top: 144px;
+  width: 100%;
+  @include md {
+    margin-top: 188px;
   }
 }
-.contact-card {
-  width: 600px;
-  margin-bottom: 124px;
+
+.contact__card {
+  padding: 24px 17px;
+  margin: 0 auto 124px;
   background: $gray-athens;
-  padding: 64px;
   border-radius: 24px;
   @include font-roboto-mono(18px, 400, 32px, $gray-tuna);
   letter-spacing: 0.015em;
-  box-sizing: border-box;
-  @include max-sm {
-    padding: 24px 17px;
-    width: 315px;
+  width: 50%;
+  min-width: 315px;
+  max-width: 600px;
+  @include sm {
+    padding: 64px;
   }
 }
 .card__info {
