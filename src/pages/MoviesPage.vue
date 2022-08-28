@@ -91,26 +91,30 @@ export default {
 </script>
 <style scoped lang="scss">
 .movie__gallery {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
   gap: 40px;
-  @include max-md {
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  & :deep(.card) {
+    grid-area: span 1 / span 3;
+  }
+  @include lg {
+    grid-template-columns: 1fr 1fr 1fr;
     & :deep(.card) {
-      grid-area: span 1 / span 3;
+      grid-area: span 1 / span 1;
     }
   }
 }
 .gallery__search {
-  grid-column: 1 / span 2;
-  grid-row: 1;
-  @include max-md {
-    grid-column: 1 / span 4;
+  grid-column: 1 / span 4;
+  @include lg {
+    grid-column: 1 / span 2;
+    grid-row: 1;
   }
 }
 .gallery__filter {
-  @include max-md {
-    grid-column: 5 / span 2;
+  grid-column: 5 / span 2;
+  @include lg {
+    grid-column: 3 / span 1;
   }
 }
 </style>

@@ -78,25 +78,25 @@ export default {
 </script>
 <style scoped lang="scss">
 .filter-days {
+  padding-bottom: 10px;
   @include flex();
   overflow-x: scroll;
+  @include lg {
+    padding-bottom: 0;
+  }
 }
 .filter-days button {
   align-self: center;
 }
 .hide-day {
   @include md {
-    &:nth-last-child(3) {
-      display: none;
-    }
+    &:nth-last-child(3),
     &:nth-last-child(2) {
       display: none;
     }
   }
   @include lg {
-    &:nth-last-child(3) {
-      display: none;
-    }
+    &:nth-last-child(3),
     &:nth-last-child(2) {
       display: none;
     }

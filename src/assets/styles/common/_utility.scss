@@ -13,16 +13,22 @@
 .mr-8 {
   margin-right: 8px;
 }
-.mr-40 {
-  margin-right: 40px;
-}
 .mr-16 {
   margin-right: 16px;
 }
 .mr-32 {
   margin-right: 32px;
 }
-.center-self{
-  margin-left: auto;
-  margin-right: auto;
+
+.mx-sm-24 {
+  margin-right: 24px;
+  margin-left: 24px;
+  @include md {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+.text-center {
+  text-align: center;
 }

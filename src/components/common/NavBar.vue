@@ -1,7 +1,7 @@
 <template>
-  <nav>
+  <nav class="nav">
     <Logo />
-    <div class="nav-headers">
+    <div class="nav__headers">
       <TabHeader
         :to="tab.path"
         v-for="tab in tabs"
@@ -10,21 +10,23 @@
         >{{ tab.label }}</TabHeader
       >
     </div>
-    <div class="nav-buttons">
+    <div class="nav__buttons">
       <CustomButton text>Register</CustomButton>
       <CustomButton>Login</CustomButton>
     </div>
-    <NavigrationIcon class="nav-icon" v-s-dropdown-toggle:nav-options />
-    <SDropdown name="nav-options">
-      <ul>
-        <li class="option" v-for="tab in tabs" :key="tab.label">
-          <a :href="tab.path">{{ tab.label }}</a>
-        </li>
-        <hr class="divider" />
-        <li class="option"><a href="/login">Login</a></li>
-        <li class="option"><a href="/register">Register</a></li>
-      </ul>
-    </SDropdown>
+    <div class="nav__menu">
+      <NavigrationIcon class="menu__icon" v-s-dropdown-toggle:menu__options />
+      <SDropdown name="menu__options">
+        <ul>
+          <li class="option" v-for="tab in tabs" :key="tab.label">
+            <a :href="tab.path">{{ tab.label }}</a>
+          </li>
+          <hr class="divider" />
+          <li class="option"><a href="/login">Login</a></li>
+          <li class="option"><a href="/register">Register</a></li>
+        </ul>
+      </SDropdown>
+    </div>
   </nav>
 </template>
 <script>
@@ -54,43 +56,42 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-nav {
+.nav {
   height: 112px;
   width: 100%;
   box-sizing: border-box;
   @include flex(row, space-between, center);
   padding: 0 48px;
+  max-width: 1440px;
   @include xl {
-    width: 1440px;
     margin: 0 auto;
   }
 }
-.nav-buttons {
-  @include flex();
-  @media (max-width: 960px) {
-    display: none;
+.nav__buttons {
+  display: none;
+  @include md-plus {
+    @include flex();
   }
 }
-.nav-headers {
-  @include flex(false, false, center);
-  height: 100%;
-  @media (max-width: 960px) {
-    display: none;
-  }
-  & :deep(.tab-header) {
-    @include flex(false, center, center);
+.nav__headers {
+  display: none;
+  @include md-plus {
+    @include flex(false, false, center);
     height: 100%;
-    line-height: 100%;
-    text-align: center;
-    &[active="true"] {
-      box-shadow: inset 0px -4px 0px #ec1115;
+    & :deep(.tab-header) {
+      @include flex(false, center, center);
+      height: 100%;
+      line-height: 100%;
+      text-align: center;
+      &[active="true"] {
+        box-shadow: inset 0px -4px 0px #ec1115;
+      }
     }
   }
 }
-.nav-icon {
-  display: none;
-  @media (max-width: 960px) {
-    display: block;
+.nav__menu {
+  @include md-plus {
+    display: none;
   }
 }
 .option {

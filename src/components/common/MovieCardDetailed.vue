@@ -1,6 +1,6 @@
 <template>
   <div class="card">
-    <div class="helper">
+    <div class="card__container">
       <div class="card__image">
         <img :src="movie.image" />
       </div>
@@ -16,7 +16,7 @@
             <CardSubtitle>{{ movie.length }}</CardSubtitle>
           </div>
         </div>
-        <div class="details__actions">
+        <div class="details__actions--desktop">
           <CustomButton
             class="mr-8"
             v-for="seance in movie.seances"
@@ -29,7 +29,7 @@
         </div>
       </div>
     </div>
-    <div class="details__actions_sm">
+    <div class="details__actions--mobile">
       <CustomButton
         size="24"
         class="mr-8"
@@ -76,36 +76,36 @@ export default {
 </script>
 <style lang="scss" scoped>
 .card {
-  padding: 40px;
   background: #ffffff;
-  box-shadow: 0px 24px 78px rgba(0, 0, 0, 0.08),
-    0px 5.36071px 17.4223px rgba(0, 0, 0, 0.0238443),
-    0px 1.59602px 5.18708px rgba(0, 0, 0, 0.0161557);
-  border-radius: 8px;
   overflow-x: scroll;
-  @include max-sm {
-    box-shadow: inset 0px -1px 0px $gray-some;
-    padding: 32px 16px;
-    border-radius: 0;
+  box-shadow: inset 0px -1px 0px #eaeaea;
+  padding: 32px 16px;
+  border-radius: 0;
+  @include md {
+    padding: 40px;
+    box-shadow: 0px 24px 78px rgba(0, 0, 0, 0.08),
+      0px 5.36071px 17.4223px rgba(0, 0, 0, 0.0238443),
+      0px 1.59602px 5.18708px rgba(0, 0, 0, 0.0161557);
+    border-radius: 8px;
   }
 }
-.helper {
+.card__container {
   @include flex();
 }
 .card__image {
-  margin-right: 40px;
-  @include max-sm {
-    margin-right: 16px;
+  margin-right: 16px;
+  @include md {
+    margin-right: 40px;
   }
 }
 img {
-  height: 132px;
-  width: 98px;
-  @include max-sm {
-    width: 68px;
-    height: 68px;
-    object-fit: cover;
-    object-position: 20% 10%;
+  width: 68px;
+  height: 68px;
+  object-fit: cover;
+  object-position: 20% 10%;
+  @include md {
+    height: 132px;
+    width: 98px;
   }
 }
 .details__tags {
@@ -116,17 +116,17 @@ img {
 .details__basics {
   @include flex(row, false, center);
 }
-.details__actions {
-  @include flex();
-  @include max-sm {
-    display: none;
+.details__actions--desktop {
+  display: none;
+  @include md {
+    @include flex();
   }
 }
-.details__actions_sm {
-  display: none;
-  @include max-sm {
-    margin-top: 21px;
-    @include flex();
+.details__actions--mobile {
+  margin-top: 21px;
+  @include flex();
+  @include md {
+    display: none;
   }
 }
 .card__details {

@@ -1,17 +1,20 @@
 <template>
-  <div class="mb-64 movie-row">
-    <div class="actions">
-      <CapitalLink color="dark-grey">{{ soonText }}</CapitalLink>
+  <div class="mb-64 mx-sm-24 movie-row">
+    <div class="row__actions">
+      <CapitalLink color="dark-grey"
+        >Soon <span class="desktop-only">in the cinema</span></CapitalLink
+      >
       <CapitalLink color="red" href="#">See all</CapitalLink>
     </div>
-    <div class="movies">
+    <div class="row__movies">
       <MovieCard
         v-for="(movie, index) in reducedMovies"
         :key="movie.id"
         :movie="movie"
-        :class="{ 'not-last-card': index != reducedMovies.length - 1 }"
-        style="max-width: 100%"
-        class="hide-card"
+        :class="{
+          'not-last-card': index != reducedMovies.length - 1,
+        }"
+        class="movie__card"
       />
     </div>
   </div>
@@ -21,77 +24,61 @@ import CapitalLink from "@components/common/CapitalLink.vue";
 import MovieCard from "@components/common/MovieCard.vue";
 import { useMovieStore } from "../../stores/movies";
 import { storeToRefs } from "pinia";
-import { computed, inject } from "vue";
+import { computed } from "vue";
 
 export default {
   components: { CapitalLink, MovieCard },
   setup() {
-    const movieStore = useMovieStore();
-    const { movies } = storeToRefs(movieStore);
+    const { movies } = storeToRefs(useMovieStore());
 
-    const windowWidth = inject("windowWidth");
-    const soonText = computed(() =>
-      windowWidth.value > 480 ? "Soon in the Cinema" : "Soon"
-    );
-
-    const reducedMovies = computed(() =>
-      movies.value.reduce((soonMovies, movie) => {
-        const { id, title, length, tag, image } = movie;
-        if (soonMovies.length < 3) {
-          soonMovies.push({
-            id,
-            title,
-            length,
-            tag,
-            image,
-          });
-        }
-        return soonMovies;
-      }, [])
-    );
+    const reducedMovies = computed(() => movies.value.slice(0, 3));
     return {
       movies,
       reducedMovies,
-      windowWidth,
-      soonText,
     };
   },
 };
 </script>
 <style lang="scss">
 .movie-row {
-  @include max-sm {
-    margin-right: 24px;
-    margin-left: 24px;
-  }
-  .actions {
+  .row__actions {
     @include flex(row, space-between);
     margin-bottom: 24px;
   }
-  .movies {
-    @include flex(row, space-between);
-    @include sm {
-      @include flex(column, start);
-    }
-    @include xs {
-      @include flex(column, start);
+  .row__movies {
+    @include flex(column, start);
+    @include md {
+      @include flex(row, space-between);
     }
   }
 }
+
 .not-last-card {
-  margin-right: 40px;
-  @include max-sm {
-    margin-right: 0;
-    margin-bottom: 24px;
+  margin-right: 0;
+  @include md {
+    margin-right: 40px;
   }
 }
-.hide-card {
-  @include max-lg {
+.desktop-only {
+  display: none;
+  @include lg {
+    display: inline-block;
+  }
+}
+.movie__card {
+  margin-bottom: 24px;
+  &:nth-child(3) {
+    display: none;
+  }
+  &:nth-child(2) {
+    margin-right: 0;
+  }
+  @include xl {
     &:nth-child(3) {
-      display: none;
+      display: flex;
     }
     &:nth-child(2) {
-      margin-right: 0;
+      margin-right: 40px;
     }
   }
 }

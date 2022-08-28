@@ -9,9 +9,20 @@ import ContactUs from "../components/HomePage/ContactUs.vue";
 import Screenings from "../components/HomePage/Screenings.vue";
 import MovieRow from "../components/HomePage/MovieRow.vue";
 import WelcomeSection from "../components/HomePage/WelcomeSection.vue";
+import { onMounted } from "vue";
+import { useMovieStore } from "@/stores/movies";
 export default {
-  components: { WelcomeSection, MovieRow, Screenings, ContactUs },
+  components: {
+    WelcomeSection,
+    MovieRow,
+    Screenings,
+    ContactUs,
+  },
   setup() {
+    const movieStore = useMovieStore();
+    onMounted(async () => {
+      await movieStore.getMovies();
+    });
     return {};
   },
 };

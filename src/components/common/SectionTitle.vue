@@ -2,25 +2,24 @@
   <div class="title"><slot /></div>
 </template>
 <script>
-export default {};
+export default {
+  props: {
+    fontSize: {
+      type: Object,
+      default: () => ({ default: "80px", small: "48px" }),
+    },
+  },
+};
 </script>
 <style lang="scss" scoped>
 .title {
-  @include font-eczar(80px, 600, 102%, $gray-tuna);
+  @include font-eczar(v-bind("fontSize.small"), 600, 102%, $gray-tuna);
   letter-spacing: -0.01em;
-
+  @include sm {
+    font-size: v-bind("fontSize.default");
+  }
   &[color="bombay"] {
     color: $gray-bombay;
-  }
-  &[size="64"] {
-    font-size: 64px;
-  }
-
-  @include max-sm {
-    font-size: 48px;
-    &[center] {
-      text-align: center;
-    }
   }
 }
 </style>
