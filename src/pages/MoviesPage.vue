@@ -95,9 +95,11 @@ export default {
   margin-bottom: 24px;
   @include md {
     grid-area: span 1 / span 3;
+    margin-bottom: 0;
   }
   @include lg {
     grid-area: span 1 / span 1;
+    margin-bottom: 0;
   }
 }
 .movie__gallery {
@@ -105,15 +107,9 @@ export default {
     gap: 40px;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-    // & :deep(.card) {
-    //   grid-area: span 1 / span 3;
-    // }
   }
   @include lg {
     grid-template-columns: 1fr 1fr 1fr;
-    // & :deep(.card) {
-    //   grid-area: span 1 / span 1;
-    // }
   }
 }
 .gallery__search {
