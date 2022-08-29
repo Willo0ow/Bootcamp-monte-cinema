@@ -1,19 +1,17 @@
 <template>
-  <div class="tab-header">
+  <router-link class="tab-header" :to="to">
     <slot />
-  </div>
+  </router-link>
 </template>
 <script>
-export default {};
+export default {
+  props: { to: { type: [String, Object], default: "/" } },
+};
 </script>
 <style lang="scss" scoped>
 .tab-header {
-  font-family: "Roboto", sans-serif;
-  font-size: 18px;
-  font-weight: 400;
-  line-height: 21px;
+  @include font-roboto(18px, 400, 21px, $gray-jumbo);
   letter-spacing: 0em;
-  color: $gray-jumbo;
   display: inline-block;
   width: 141px;
   text-align: center;

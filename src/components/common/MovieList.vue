@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div class="movie-list">
     <MovieCardDetailed
-      class="mb-40"
+      class="movie-list__item"
       v-for="movie in movies"
-      :key="movie.title"
+      :key="movie.id"
       :movie="movie"
     />
   </div>
@@ -18,3 +18,13 @@ export default {
   },
 };
 </script>
+<style lang="scss" scoped>
+.movie-list {
+  &__item {
+    margin-bottom: 0;
+    @include md {
+      margin-bottom: 40px;
+    }
+  }
+}
+</style>

@@ -1,57 +1,85 @@
 <template>
-  <div class="mb-64">
-    <div class="actions">
-      <CapitalLink color="dark-grey">Soon in the cinema</CapitalLink>
+  <div class="mb-64 mx-sm-24 movie-row">
+    <div class="movie-row__actions">
+      <CapitalLink color="dark-grey"
+        >Soon <span class="desktop-only">in the cinema</span></CapitalLink
+      >
       <CapitalLink color="red" href="#">See all</CapitalLink>
     </div>
-    <div class="movies">
-      <MovieCard v-for="movie of movies" :key="movie.id" :movie="movie" />
+    <div class="movie-row__movies">
+      <MovieCard
+        v-for="(movie, index) in reducedMovies"
+        :key="movie.id"
+        :movie="movie"
+        :class="{
+          'not-last-card': index != reducedMovies.length - 1,
+        }"
+        class="movie-row__card"
+      />
     </div>
   </div>
 </template>
 <script>
 import CapitalLink from "@components/common/CapitalLink.vue";
 import MovieCard from "@components/common/MovieCard.vue";
+import { useMovieStore } from "../../stores/movies";
+import { storeToRefs } from "pinia";
+import { computed } from "vue";
+
 export default {
   components: { CapitalLink, MovieCard },
   setup() {
-    const movies = [
-      {
-        id: 1,
-        title: "Predator",
-        length: "1h 30min",
-        image: "predator.svg",
-        tags: ["Action"],
-      },
-      {
-        id: 1,
-        title: "Commando",
-        length: "1h 30min",
-        image: "commando.svg",
-        tags: ["Action"],
-      },
-      {
-        id: 1,
-        title: "Terminator 2",
-        length: "1h 30min",
-        image: "terminator2.svg",
-        tags: ["Action"],
-      },
-    ];
+    const { movies } = storeToRefs(useMovieStore());
+
+    const reducedMovies = computed(() => movies.value.slice(0, 3));
     return {
       movies,
+      reducedMovies,
     };
   },
 };
 </script>
-<style lang="scss" scoped>
-.actions {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 24px;
+<style lang="scss">
+.movie-row {
+  &__actions {
+    @include flex(row, space-between);
+    margin-bottom: 24px;
+  }
+  &__movies {
+    @include flex(column, start);
+    @include md {
+      @include flex(row, space-between);
+    }
+  }
+  &__card {
+    margin-bottom: 24px;
+    &:nth-child(3) {
+      display: none;
+    }
+    &:nth-child(2) {
+      margin-right: 0;
+    }
+    @include xl {
+      &:nth-child(3) {
+        display: flex;
+      }
+      &:nth-child(2) {
+        margin-right: 40px;
+      }
+    }
+  }
 }
-.movies {
-  display: flex;
-  justify-content: space-between;
+
+.not-last-card {
+  margin-right: 0;
+  @include md {
+    margin-right: 40px;
+  }
+}
+.desktop-only {
+  display: none;
+  @include lg {
+    display: inline-block;
+  }
 }
 </style>

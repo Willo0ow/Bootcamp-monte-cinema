@@ -1,12 +1,17 @@
 <template>
-  <nav>
+  <nav class="nav">
     <Logo />
-    <div>
-      <TabHeader v-for="tab in tabs" :key="tab">{{ tab }}</TabHeader>
+    <div class="nav__headers">
+      <TabHeader v-for="tab in tabs" :to="tab.path" :key="tab.label">{{
+        tab.label
+      }}</TabHeader>
     </div>
-    <div class="nav-buttons">
+    <div class="nav__buttons">
       <CustomButton text>Register</CustomButton>
       <CustomButton>Login</CustomButton>
+    </div>
+    <div class="nav__menu">
+      <CustomMenu :tabs="tabs" />
     </div>
   </nav>
 </template>
@@ -14,10 +19,15 @@
 import Logo from "@assets/images/logo.svg?component";
 import CustomButton from "./CustomButton.vue";
 import TabHeader from "./TabHeader.vue";
+import CustomMenu from "./CustomMenu.vue";
 export default {
-  components: { Logo, TabHeader, CustomButton },
+  components: { Logo, TabHeader, CustomButton, CustomMenu },
   setup() {
-    const tabs = ["Movies", "Screenings", "Contact Us"];
+    const tabs = [
+      { label: "Movies", path: "/" },
+      { label: "Screenings", path: "/" },
+      { label: "Contact Us", path: "/" },
+    ];
     return {
       tabs,
     };
@@ -25,16 +35,32 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-nav {
+.nav {
   height: 112px;
   width: 100%;
   box-sizing: border-box;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  @include flex(row, space-between, center);
   padding: 0 48px;
-}
-.nav-buttons {
-  display: flex;
+  max-width: 1440px;
+  @include xl {
+    margin: 0 auto;
+  }
+  &__buttons {
+    display: none;
+    @include md-plus {
+      @include flex();
+    }
+  }
+  &__headers {
+    display: none;
+    @include md-plus {
+      display: block;
+    }
+  }
+  &__menu {
+    @include md-plus {
+      display: none;
+    }
+  }
 }
 </style>

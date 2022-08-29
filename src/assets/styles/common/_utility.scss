@@ -1,0 +1,30 @@
+.mb-40 {
+  margin-bottom: 40px;
+}
+.mb-48 {
+  margin-bottom: 48px;
+}
+.mb-64 {
+  margin-bottom: 64px;
+}
+.mb-32 {
+  margin-bottom: 32px;
+}
+.mr-8 {
+  margin-right: 8px;
+}
+.mr-16 {
+  margin-right: 8px;
+}
+.mx-sm-24 {
+  margin-right: 24px;
+  margin-left: 24px;
+  @include md {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}
+
+.text-center {
+  text-align: center;
+}

@@ -11,12 +11,7 @@ export default {};
   padding: 8px 16px;
   border-radius: 24px;
   background: $wisp-pink;
-  font-family: "Roboto", sans-serif;
-  font-style: normal;
-  font-weight: 700;
-  font-size: 14px;
-  line-height: 16px;
+  @include font-roboto(14px, 700, 16px, $red-bittersweet);
   display: inline-block;
-  color: $red-bittersweet;
 }
 </style>

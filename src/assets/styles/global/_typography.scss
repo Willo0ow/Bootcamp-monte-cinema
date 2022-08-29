@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Eczar:wght@400;500;600;700;800&display=swap');
+
+
+@mixin font($font, $family, $size, $weight, $lh, $color) {
+  font-family: $font, $family;
+  font-style: normal;
+  @if $size {
+    font-size: $size;
+  }
+  @if $color {
+    color: $color;
+  }
+  @if $weight {
+    font-weight: $weight;
+  }
+  @if $lh {
+    line-height: $lh;
+  }
+}
+@mixin font-roboto($size: false, $weight: false, $lh: false, $color: false) {
+  @include font("Roboto", sans-serif, $size, $weight, $lh, $color);
+}
+@mixin font-roboto-mono($size: false, $weight: false, $lh: false, $color: false) {
+  @include font("Roboto Mono", monospace, $size, $weight, $lh, $color);
+}
+@mixin font-eczar($size: false, $weight: false, $lh: false, $color: false) {
+  @include font("Eczar", serif, $size, $weight, $lh, $color);
+}

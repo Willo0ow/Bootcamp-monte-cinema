@@ -1,5 +1,5 @@
 <template>
-  <div class="card__title">
+  <div class="card-title" size="36">
     <slot />
   </div>
 </template>
@@ -7,13 +7,17 @@
 export default {};
 </script>
 <style lang="scss">
-.card__title {
-  font-family: "Roboto", sans-serif;
-  font-style: normal;
-  font-weight: 700;
-  font-size: 36px;
-  line-height: 42px;
-  color: $gray-tuna;
+.card-title {
   margin-bottom: 8px;
+  padding-right: 20px;
+  &[size="36"] {
+    @include font-roboto(36px, 700, 42px, $gray-tuna);
+  }
+  &[size="24"] {
+    @include font-roboto(24px, 700, 28px, $gray-tuna);
+  }
+  &[nowrap] {
+    white-space: nowrap;
+  }
 }
 </style>
