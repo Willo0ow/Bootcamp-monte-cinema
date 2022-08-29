@@ -102,6 +102,7 @@ export default {
     width: 100%;
     margin-top: 10px;
     @include lg {
+      margin-top: 0;
       min-width: 325px;
       width: 31%;
     }
