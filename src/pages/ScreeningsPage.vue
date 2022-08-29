@@ -2,7 +2,7 @@
   <div class="movies">
     <BreadCrumbs :steps="steps" :back-route="{ name: 'Home' }" class="mb-64" />
     <div class="movie__screenings">
-      <Screenings />
+      <Screenings :titleSize="{ default: '80px', small: '48px' }" />
     </div>
   </div>
 </template>

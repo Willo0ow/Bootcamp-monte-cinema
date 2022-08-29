@@ -37,12 +37,16 @@ import { storeToRefs } from "pinia";
 
 export default {
   components: { SectionTitle, MovieList, CustomSelect, SelectDayFilter },
+  props: {
+    titleSize: {
+      type: Object,
+      default: () => ({ default: "64px", small: "48px" }),
+    },
+  },
   setup() {
     const selectedFilter = ref(0);
     const weekdays = useWeekdays();
     const currentDate = ref(new Date());
-
-    const titleSize = { default: "64px", small: "48px" };
 
     function updateCurrentDate(newDate) {
       currentDate.value = new Date(newDate);
@@ -84,7 +88,6 @@ export default {
       deateMovieSeances,
       updateCurrentDate,
       filteredMovieSeances,
-      titleSize,
     };
   },
 };
