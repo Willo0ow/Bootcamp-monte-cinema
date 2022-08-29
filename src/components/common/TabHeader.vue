@@ -1,10 +1,12 @@
 <template>
-  <a class="tab-header">
+  <router-link class="tab-header" :to="to">
     <slot />
-  </a>
+  </router-link>
 </template>
 <script>
-export default {};
+export default {
+  props: { to: { type: [String, Object], default: "/" } },
+};
 </script>
 <style lang="scss" scoped>
 .tab-header {

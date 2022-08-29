@@ -2,7 +2,7 @@
   <nav class="nav">
     <Logo />
     <div class="nav__headers">
-      <TabHeader v-for="tab in tabs" :key="tab.label">{{
+      <TabHeader v-for="tab in tabs" :to="tab.path" :key="tab.label">{{
         tab.label
       }}</TabHeader>
     </div>
