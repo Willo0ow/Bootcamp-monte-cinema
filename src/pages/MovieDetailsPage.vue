@@ -2,18 +2,18 @@
   <div class="movie">
     <BreadCrumbs :steps="steps" :back-route="{ name: 'Movies' }" />
     <div class="movie__details">
-      <SectionTitle class="mb-32">{{ movie?.title }}</SectionTitle>
-      <div class="details__basics">
-        <CustomChip class="mr-16">{{ movie?.genre.name }}</CustomChip>
-        <span class="details__basics--text">{{ releaseYear }}</span>
-        <EllipseIcon class="dot-divider" />
-        <span class="details__basics--text">{{
-          movie?.length ? formatMovieLength(movie.length) : ""
-        }}</span>
+      <div class="details__basics--wrapper">
+        <SectionTitle class="mb-32">{{ movie?.title }}</SectionTitle>
+        <div class="details__basics">
+          <CustomChip class="mr-16">{{ movie?.genre.name }}</CustomChip>
+          <span class="details__basics--text">{{ releaseYear }}</span>
+          <EllipseIcon class="dot-divider" />
+          <span class="details__basics--text">{{ movie?.length }}</span>
+        </div>
+        <SectionSubtitle class="details__description">{{
+          movie?.description
+        }}</SectionSubtitle>
       </div>
-      <SectionSubtitle class="details__description">{{
-        movie?.description
-      }}</SectionSubtitle>
       <img class="details__image" :src="movie?.poster_url" />
     </div>
     <div class="movie__screenings">
@@ -25,7 +25,7 @@
         :noLabel="true"
         @updateCurrentDate="updateCurrentDate"
       ></SelectDayFilter>
-      <MovieCardDetailed v-if="!!movie" :movie="movieData" />
+      <MovieCardDetailed v-if="!!movie" :movie="movieData" class="mt-64" />
     </div>
   </div>
 </template>
@@ -115,7 +115,6 @@ export default {
       steps,
       movie,
       releaseYear,
-      formatMovieLength,
       updateCurrentDate,
       currentDate,
       dateString,
@@ -139,6 +138,9 @@ export default {
 <style lang="scss" scoped>
 .movie__details {
   margin: 24px;
+  @include md-plus {
+    display: flex;
+  }
 }
 .movie__screenings {
   margin: 24px;
@@ -148,6 +150,12 @@ export default {
   @include flex(row, start, center);
   &--text {
     @include font-roboto(14px, 700, 16px, $gray-jumbo);
+  }
+  &--wrapper {
+    @include md-plus {
+      margin-right: 32px;
+      max-width: 600px;
+    }
   }
 }
 .details__description {
@@ -162,5 +170,8 @@ export default {
   object-fit: cover;
   object-position: 20% 10%;
   box-sizing: border-box;
+  @include md {
+    //height: 100%;
+  }
 }
 </style>
