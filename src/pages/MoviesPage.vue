@@ -95,9 +95,11 @@ export default {
   margin-bottom: 24px;
   @include md {
     grid-area: span 1 / span 3;
+    margin-bottom: 0;
   }
   @include lg {
     grid-area: span 1 / span 1;
+    margin-bottom: 0;
   }
 }
 .movie__gallery {
