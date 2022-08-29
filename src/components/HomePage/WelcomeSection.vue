@@ -1,10 +1,10 @@
 <template>
   <div class="welcome">
     <div class="welcome__text">
-      <SectionTitle class="mb-40 text__title"
+      <SectionTitle class="mb-40 welcome__title"
         >Welcome to the best cinema in Monterail</SectionTitle
       >
-      <div class="text__subtitles">
+      <div class="welcome__subtitles">
         <SectionSubtitle
           >Best movies, best experiences, best people.</SectionSubtitle
         >
@@ -12,7 +12,7 @@
           >And all that doesn't exist. Yikes.</SectionSubtitle
         >
       </div>
-      <CustomButton class="button--book" href="/book" size="56"
+      <CustomButton class="welcome__book-button" href="/book" size="56"
         >Book a ticket</CustomButton
       >
     </div>
@@ -44,35 +44,34 @@ export default {
   width: 100%;
   @include flex(row, space-between);
   background: $wisp-pink;
-}
-.welcome__text {
-  margin: 40px 32px;
-  @include flex(column, false, start);
-  @include md {
-    margin: 80px;
+  &__text {
+    margin: 40px 32px;
+    @include flex(column, false, start);
+    @include md {
+      margin: 80px;
+    }
   }
-}
-.text__subtitles {
-  width: 100%;
-}
-.text__title {
-  max-width: 710px;
-  @include xs {
-    text-align: center;
+  &__title {
+    max-width: 710px;
+    @include xs {
+      text-align: center;
+    }
   }
-}
-
-.welcome__image {
-  display: none;
-  @media (min-width: 1300px) {
-    display: block;
-    min-width: 457px;
+  &__subtitles {
+    width: 100%;
   }
-}
-.button--book {
-  width: 100%;
-  @include sm {
-    width: fit-content;
+  &__image {
+    display: none;
+    @media (min-width: 1300px) {
+      display: block;
+      min-width: 457px;
+    }
+  }
+  &__book-button {
+    width: 100%;
+    @include sm {
+      width: fit-content;
+    }
   }
 }
 </style>

@@ -7,8 +7,8 @@
       <div class="card__details">
         <div>
           <CardTitle size="24" nowrap>{{ movie.title }}</CardTitle>
-          <div class="details__basics">
-            <div class="details__tags">
+          <div class="card__basics">
+            <div class="card__tags">
               <CustomChip v-for="tag in [movie.tag]" :key="tag">{{
                 tag
               }}</CustomChip>
@@ -16,7 +16,7 @@
             <CardSubtitle>{{ movie.length }}</CardSubtitle>
           </div>
         </div>
-        <div class="details__actions--desktop">
+        <div class="card__actions-desktop">
           <CustomButton
             class="mr-8"
             v-for="seance in movie.seances"
@@ -29,7 +29,7 @@
         </div>
       </div>
     </div>
-    <div class="details__actions--mobile">
+    <div class="card__actions-mobile">
       <CustomButton
         size="24"
         class="mr-8"
@@ -88,48 +88,48 @@ export default {
       0px 1.59602px 5.18708px rgba(0, 0, 0, 0.0161557);
     border-radius: 8px;
   }
-}
-.card__container {
-  @include flex();
-}
-.card__image {
-  margin-right: 16px;
-  @include md {
-    margin-right: 40px;
-  }
-}
-img {
-  width: 68px;
-  height: 68px;
-  object-fit: cover;
-  object-position: 20% 10%;
-  @include md {
-    height: 132px;
-    width: 98px;
-  }
-}
-.details__tags {
-  font-size: 22px;
-  display: inline-block;
-  margin-right: 16px;
-}
-.details__basics {
-  @include flex(row, false, center);
-}
-.details__actions--desktop {
-  display: none;
-  @include md {
+  &__container {
     @include flex();
   }
-}
-.details__actions--mobile {
-  margin-top: 21px;
-  @include flex();
-  @include md {
-    display: none;
+  &__image {
+    margin-right: 16px;
+    @include md {
+      margin-right: 40px;
+    }
+    & img {
+      width: 68px;
+      height: 68px;
+      object-fit: cover;
+      object-position: 20% 10%;
+      @include md {
+        height: 132px;
+        width: 98px;
+      }
+    }
   }
-}
-.card__details {
-  @include flex(column, space-between);
+  &__tags {
+    font-size: 22px;
+    display: inline-block;
+    margin-right: 16px;
+  }
+  &__basics {
+    @include flex(row, false, center);
+  }
+  &__actions-desktop {
+    display: none;
+    @include md {
+      @include flex();
+    }
+  }
+  &__actions-mobile {
+    margin-top: 21px;
+    @include flex();
+    @include md {
+      display: none;
+    }
+  }
+  &__details {
+    @include flex(column, space-between);
+  }
 }
 </style>

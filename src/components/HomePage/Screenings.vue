@@ -1,16 +1,16 @@
 <template>
   <div class="screenings">
     <div class="screenings__header mx-sm-24">
-      <SectionTitle :font-size="titleSize">Screenings:</SectionTitle>
-      <SectionTitle :font-size="titleSize" color="bombay" class="mb-32">{{
+      <SectionTitle variation="48-64">Screenings:</SectionTitle>
+      <SectionTitle variation="48-64" color="bombay" class="mb-32">{{
         dateString
       }}</SectionTitle>
     </div>
     <div class="screenings__filters mb-64 mx-sm-24">
-      <div class="filter__day">
+      <div class="screenings__filters-day">
         <SelectDayFilter @updateCurrentDate="updateCurrentDate" />
       </div>
-      <div class="filter__movie">
+      <div class="screenings__filters-movie">
         <CustomSelect
           label="Movie"
           v-model="selectedFilter"
@@ -40,8 +40,6 @@ export default {
     const selectedFilter = ref(null);
     const weekdays = useWeekdays();
     const currentDate = ref(new Date());
-
-    const titleSize = { default: "64px", small: "48px" };
 
     function updateCurrentDate(newDate) {
       currentDate.value = new Date(newDate);
@@ -83,7 +81,6 @@ export default {
       deateMovieSeances,
       updateCurrentDate,
       filteredMovieSeances,
-      titleSize,
     };
   },
 };
@@ -94,19 +91,19 @@ export default {
   @include lg {
     @include flex(row, space-between);
   }
-}
-.filter__movie {
-  width: 100%;
-  margin-top: 10px;
-  @include lg {
-    min-width: 325px;
-    width: 31%;
+  &-day {
+    width: 100%;
+    @include lg {
+      width: 79%;
+    }
   }
-}
-.filter__day {
-  width: 100%;
-  @include lg {
-    width: 79%;
+  &-movie {
+    width: 100%;
+    margin-top: 10px;
+    @include lg {
+      min-width: 325px;
+      width: 31%;
+    }
   }
 }
 </style>
