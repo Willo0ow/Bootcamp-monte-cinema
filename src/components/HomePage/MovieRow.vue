@@ -1,12 +1,12 @@
 <template>
   <div class="mb-64 mx-sm-24 movie-row">
-    <div class="row__actions">
+    <div class="movie-row__actions">
       <CapitalLink color="dark-grey"
         >Soon <span class="desktop-only">in the cinema</span></CapitalLink
       >
       <CapitalLink color="red" href="#">See all</CapitalLink>
     </div>
-    <div class="row__movies">
+    <div class="movie-row__movies">
       <MovieCard
         v-for="(movie, index) in reducedMovies"
         :key="movie.id"
@@ -14,7 +14,7 @@
         :class="{
           'not-last-card': index != reducedMovies.length - 1,
         }"
-        class="movie__card"
+        class="movie-row__card"
       />
     </div>
   </div>
@@ -41,14 +41,31 @@ export default {
 </script>
 <style lang="scss">
 .movie-row {
-  .row__actions {
+  &__actions {
     @include flex(row, space-between);
     margin-bottom: 24px;
   }
-  .row__movies {
+  &__movies {
     @include flex(column, start);
     @include md {
       @include flex(row, space-between);
+    }
+  }
+  &__card {
+    margin-bottom: 24px;
+    &:nth-child(3) {
+      display: none;
+    }
+    &:nth-child(2) {
+      margin-right: 0;
+    }
+    @include xl {
+      &:nth-child(3) {
+        display: flex;
+      }
+      &:nth-child(2) {
+        margin-right: 40px;
+      }
     }
   }
 }
@@ -59,21 +76,11 @@ export default {
     margin-right: 40px;
   }
 }
-.movie__card {
-  margin-bottom: 24px;
-  &:nth-child(3) {
-    display: none;
-  }
-  &:nth-child(2) {
-    margin-right: 0;
-  }
-  @include xl {
-    &:nth-child(3) {
-      display: flex;
-    }
-    &:nth-child(2) {
-      margin-right: 40px;
-    }
+
+.desktop-only {
+  display: none;
+  @include lg {
+    display: inline-block;
   }
 }
 </style>

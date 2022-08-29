@@ -38,17 +38,17 @@ export default {
   @include md {
     padding: 40px;
   }
-}
-.card__image {
-  margin: 18px 0;
-}
-img {
-  width: 100%;
-  height: 191px;
-  object-fit: cover;
-  object-position: 20% 10%;
-}
-.card__tags {
-  font-size: 22px;
+  &__image {
+    margin: 18px 0;
+    & img {
+      width: 100%;
+      height: 191px;
+      object-fit: cover;
+      object-position: 20% 10%;
+    }
+  }
+  &__tags {
+    font-size: 22px;
+  }
 }
 </style>
