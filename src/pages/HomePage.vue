@@ -1,30 +1,30 @@
 <template>
-  <WelcomeSection />
+  <WelcomeSection class="mb-64" />
   <MovieRow />
-  <MovieList />
+  <Screenings />
   <ContactUs />
 </template>
 <script>
-import {
-  ContactUs,
-  MovieList,
-  MovieRow,
-  WelcomeSection,
-} from "../components/HomePage";
+import ContactUs from "../components/HomePage/ContactUs.vue";
+import Screenings from "../components/HomePage/Screenings.vue";
+import MovieRow from "../components/HomePage/MovieRow.vue";
+import WelcomeSection from "../components/HomePage/WelcomeSection.vue";
+import { onMounted } from "vue";
+import { useMovieStore } from "@/stores/movies";
 export default {
-  components: { ContactUs, MovieList, MovieRow, WelcomeSection },
+  components: {
+    WelcomeSection,
+    MovieRow,
+    Screenings,
+    ContactUs,
+  },
   setup() {
-    const testData = "Homepage";
-    return {
-      testData,
-    };
+    const movieStore = useMovieStore();
+    onMounted(async () => {
+      await movieStore.getMovies();
+    });
+    return {};
   },
 };
 </script>
-<style scoped>
-main {
-  padding: 48px;
-  width: 100%;
-  box-sizing: border-box;
-}
-</style>
+<style scoped lang="scss"></style>

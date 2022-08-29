@@ -2,14 +2,32 @@
   <header>
     <NavBar />
   </header>
-
   <main>
-    <HomePage />
+    <router-view></router-view>
   </main>
 </template>
-<script setup>
-import HomePage from "./pages/HomePage.vue";
-import { NavBar } from "./components/common";
+<script>
+import NavBar from "./components/common/NavBar.vue";
+export default {
+  components: { NavBar },
+  setup() {},
+};
 </script>
 
-<style scoped></style>
+<style lang="scss">
+body {
+  margin: 0;
+}
+main {
+  max-width: 1440px;
+  box-sizing: border-box;
+  margin: 0;
+  @include md {
+    margin: 0 48px 48px;
+  }
+  @include xl {
+    width: calc(1440px - 2 * 48px);
+    margin: 0 auto;
+  }
+}
+</style>
