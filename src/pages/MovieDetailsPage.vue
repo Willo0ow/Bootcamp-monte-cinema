@@ -37,26 +37,23 @@
 <script>
 import BreadCrumbs from "../components/common/BreadCrumbs.vue";
 import { useRoute } from "vue-router";
-import useMoviesApi from "@/api/useMoviesApi";
+import { retrieveMovies } from "@/api/useMoviesApi";
 import { computed, onBeforeMount, ref } from "vue";
 import SectionTitle from "../components/common/SectionTitle.vue";
 import CustomChip from "../components/common/CustomChip.vue";
-import useFormatMovieLength from "@composables/useFormatMovieLength";
+import { formatMovieLength } from "@composables/useFormatMovieLength";
 import EllipseIcon from "@assets/images/icons/ellipse.svg?component";
 import SectionSubtitle from "../components/common/SectionSubtitle.vue";
 import SelectDayFilter from "../components/HomePage/SelectDayFilter.vue";
-import { useWeekdays } from "../composables/useWeekdays";
-import useSeancesApi from "@/api/useSeancesApi.js";
+import { retrieveSeances } from "@/api/useSeancesApi.js";
 import MovieCardDetailed from "../components/common/MovieCardDetailed.vue";
-import useAddDateAndTimeToSeances from "@/composables/useAddDateAndTimeToSeances";
+import { addDateAndTimeToSeances } from "@/composables/useAddDateAndTimeToSeances";
+
+import { formatDateString } from "../composables/useFormatDateString";
 
 export default {
   setup() {
     const route = useRoute();
-
-    const { retrieveMovies } = useMoviesApi();
-
-    const { formatMovieLength } = useFormatMovieLength();
 
     const movie = ref(null);
 
@@ -67,8 +64,6 @@ export default {
     );
 
     const currentDate = ref(new Date());
-    const { retrieveSeances } = useSeancesApi();
-    const { addDateAndTimeToSeances } = useAddDateAndTimeToSeances();
 
     const seances = ref([]);
 
@@ -105,15 +100,7 @@ export default {
       { text: movie.value?.title || "", isLink: false },
     ]);
 
-    const weekdays = useWeekdays();
-    const dateString = computed(
-      () =>
-        `${weekdays[currentDate.value.getDay()].fullName} ${currentDate.value
-          .toLocaleDateString()
-          .replace(/\./g, "/")}`
-    );
-
-    const titleSize = { default: "32px", small: "32px" };
+    const dateString = computed(() => formatDateString(currentDate.value));
 
     return {
       steps,
@@ -122,7 +109,6 @@ export default {
       updateCurrentDate,
       currentDate,
       dateString,
-      titleSize,
       movieData,
       seances,
     };

@@ -1,9 +1,7 @@
 import { defineStore } from "pinia";
 import { useMovieStore } from "./movies";
-import useSeancesApi from "@/api/useSeancesApi.js";
-import useAddDateAndTimeToSeances from "@composables/useAddDateAndTimeToSeances.js";
-const { retrieveSeances } = useSeancesApi();
-const { addDateAndTimeToSeances } = useAddDateAndTimeToSeances();
+import { retrieveSeances } from "@/api/useSeancesApi.js";
+import { addDateAndTimeToSeances } from "@composables/useAddDateAndTimeToSeances.js";
 
 export const useSeanceStore = defineStore({
   id: "seances",
