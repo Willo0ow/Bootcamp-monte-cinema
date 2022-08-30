@@ -1,22 +1,36 @@
 <template>
-  <div class="title"><slot /></div>
+  <div class="title" :class="`title--${variation}`"><slot /></div>
 </template>
 <script>
 export default {
   props: {
-    fontSize: {
-      type: Object,
-      default: () => ({ default: "80px", small: "48px" }),
+    variation: {
+      type: String,
+      default: "default",
     },
   },
 };
 </script>
 <style lang="scss" scoped>
 .title {
-  @include font-eczar(v-bind("fontSize.small"), 600, 102%, $gray-tuna);
   letter-spacing: -0.01em;
-  @include md {
-    font-size: v-bind("fontSize.default");
+  &--default {
+    @include font-eczar(48px, 600, 102%, $gray-tuna);
+    @include sm {
+      font-size: 80px;
+    }
+  }
+  &--48-64 {
+    @include font-eczar(48px, 600, 102%, $gray-tuna);
+    @include sm {
+      font-size: 64px;
+    }
+  }
+  &--40-64 {
+    @include font-eczar(40px, 600, 102%, $gray-tuna);
+    @include sm {
+      font-size: 64px;
+    }
   }
   &[color="bombay"] {
     color: $gray-bombay;

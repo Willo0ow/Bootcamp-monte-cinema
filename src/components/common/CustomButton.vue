@@ -149,6 +149,12 @@ export default {
           stroke: white;
         }
       }
+      &[sm-text] {
+        border-style: none;
+        @include lg {
+          border-style: solid;
+        }
+      }
     }
     &:active {
       border: 2px solid #626262;

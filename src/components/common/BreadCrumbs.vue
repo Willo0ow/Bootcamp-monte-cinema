@@ -1,6 +1,12 @@
 <template>
   <div class="breadcrumbs">
-    <CustomButton outlined color="gray" :to="backRoute" class="back__btn">
+    <CustomButton
+      outlined
+      sm-text
+      color="gray"
+      :to="backRoute"
+      class="back__btn"
+    >
       <ArrowLeftIcon class="btn__icon" />
       <span class="desktop-only">Back</span>
     </CustomButton>

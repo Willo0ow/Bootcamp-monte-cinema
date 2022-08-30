@@ -4,6 +4,7 @@
     <input
       v-bind="$attrs"
       :name="label"
+      :id="label"
       class="input__base"
       :value="value"
       @input="updateValue($event)"

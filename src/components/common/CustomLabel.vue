@@ -1,10 +1,10 @@
 <template>
-  <label class="select-label">
+  <label class="custom-label">
     <slot></slot>
   </label>
 </template>
 <style scoped lang="scss">
-.select-label {
+.custom-label {
   @include font-roboto-mono(14px, 700, 18px, #f47073);
   text-transform: uppercase;
   display: block;

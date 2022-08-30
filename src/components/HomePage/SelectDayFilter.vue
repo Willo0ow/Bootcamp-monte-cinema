@@ -1,6 +1,6 @@
 <template>
   <CustomLabel v-if="!noLabel">Day</CustomLabel>
-  <div class="filter-days">
+  <div class="select-day__buttons">
     <CustomButton
       size="56"
       v-for="day in days"
@@ -8,7 +8,7 @@
       outlined
       color="gray"
       @click="selectDay(day.date)"
-      class="mr-8 hide-day"
+      class="mr-8 select-day__button"
       :class="{ selected: selectedDay === day.date }"
       sm-size
       >{{ day.label }}</CustomButton
@@ -80,28 +80,36 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-.filter-days {
-  padding-bottom: 10px;
-  @include flex();
-  overflow-x: scroll;
-  @include lg {
-    padding-bottom: 0;
-  }
-}
-.filter-days button {
-  align-self: center;
-}
-.hide-day {
-  @include md {
-    &:nth-last-child(3),
-    &:nth-last-child(2) {
-      display: none;
+.select-day {
+  &__buttons {
+    padding-bottom: 10px;
+    @include flex();
+    overflow-x: scroll;
+    @include lg {
+      padding-bottom: 0;
     }
   }
-  @include lg {
-    &:nth-last-child(3),
-    &:nth-last-child(2) {
-      display: none;
+  & button {
+    align-self: center;
+  }
+  &__button {
+    @include md {
+      &:nth-last-child(3),
+      &:nth-last-child(2) {
+        display: none;
+      }
+    }
+    @include lg {
+      &:nth-last-child(3),
+      &:nth-last-child(2) {
+        display: none;
+      }
+    }
+    @include xl {
+      &:nth-last-child(3),
+      &:nth-last-child(2) {
+        @include flex();
+      }
     }
   }
 }

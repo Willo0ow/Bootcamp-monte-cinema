@@ -1,5 +1,5 @@
 <template>
-  <div class="card__title" size="36">
+  <div class="card-title" size="36">
     <slot />
   </div>
 </template>
@@ -7,7 +7,7 @@
 export default {};
 </script>
 <style lang="scss">
-.card__title {
+.card-title {
   margin-bottom: 8px;
   padding-right: 20px;
   &[size="36"] {
