@@ -5,10 +5,10 @@
         >Welcome to the best cinema in Monterail</SectionTitle
       >
       <div class="welcome__subtitles">
-        <SectionSubtitle
+        <SectionSubtitle class="text-center-xs"
           >Best movies, best experiences, best people.</SectionSubtitle
         >
-        <SectionSubtitle class="mb-40"
+        <SectionSubtitle class="mb-40 text-center-xs"
           >And all that doesn't exist. Yikes.</SectionSubtitle
         >
       </div>

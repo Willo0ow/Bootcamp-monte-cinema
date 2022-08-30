@@ -36,6 +36,11 @@
 .text-center {
   text-align: center;
 }
+.text-center-xs {
+  @include xs {
+    text-align: center;
+  }
+}
 .desktop-only {
   display: none;
   @include lg {

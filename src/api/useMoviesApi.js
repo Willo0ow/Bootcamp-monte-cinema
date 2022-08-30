@@ -8,7 +8,7 @@ function useMoviesApi() {
       return res.data;
     } catch (error) {
       console.log(error);
-      return [];
+      return movieId ? {} : [];
     }
   }
   return {

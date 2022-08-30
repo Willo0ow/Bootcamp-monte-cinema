@@ -32,6 +32,12 @@ export default {
       font-size: 64px;
     }
   }
+  &--32-32 {
+    @include font-eczar(32px, 600, 102%, $gray-tuna);
+    @include sm {
+      font-size: 32px;
+    }
+  }
   &[color="bombay"] {
     color: $gray-bombay;
   }

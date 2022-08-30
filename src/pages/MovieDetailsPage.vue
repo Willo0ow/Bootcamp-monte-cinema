@@ -1,24 +1,28 @@
 <template>
   <div class="movie">
-    <BreadCrumbs :steps="steps" :back-route="{ name: 'Movies' }" />
-    <div class="movie__details">
-      <div class="details__basics--wrapper">
+    <BreadCrumbs
+      :steps="steps"
+      :back-route="{ name: 'Movies' }"
+      class="mb-64"
+    />
+    <div class="movie__details mx-sm-24 mb-64">
+      <div class="movie__details-wrapper">
         <SectionTitle class="mb-32">{{ movie?.title }}</SectionTitle>
-        <div class="details__basics">
+        <div class="movie__details-basics">
           <CustomChip class="mr-16">{{ movie?.genre.name }}</CustomChip>
-          <span class="details__basics--text">{{ releaseYear }}</span>
+          <span class="movie__details-text">{{ releaseYear }}</span>
           <EllipseIcon class="dot-divider" />
-          <span class="details__basics--text">{{ movie?.length }}</span>
+          <span class="movie__details-text">{{ movie?.length }}</span>
         </div>
-        <SectionSubtitle class="details__description">{{
+        <SectionSubtitle class="movie__details-description">{{
           movie?.description
         }}</SectionSubtitle>
       </div>
-      <img class="details__image" :src="movie?.poster_url" />
+      <img class="movie__details-image" :src="movie?.poster_url" />
     </div>
-    <div class="movie__screenings">
-      <SectionTitle :font-size="titleSize">Screenings:</SectionTitle>
-      <SectionTitle :font-size="titleSize" color="bombay" class="mb-32">{{
+    <div class="movie__screenings mx-sm-24">
+      <SectionTitle variation="32-32">Screenings:</SectionTitle>
+      <SectionTitle variation="32-32" color="bombay" class="mb-32">{{
         dateString
       }}</SectionTitle>
       <SelectDayFilter
@@ -136,42 +140,41 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.movie__details {
-  margin: 24px;
-  @include md-plus {
-    display: flex;
-  }
-}
-.movie__screenings {
-  margin: 24px;
-}
-.details__basics {
-  margin-bottom: 24px;
-  @include flex(row, start, center);
-  &--text {
-    @include font-roboto(14px, 700, 16px, $gray-jumbo);
-  }
-  &--wrapper {
+.movie {
+  &__details {
+    margin-top: 24px;
     @include md-plus {
-      margin-right: 32px;
-      max-width: 600px;
+      display: flex;
+    }
+    &-wrapper {
+      @include md-plus {
+        margin-right: 32px;
+        max-width: 600px;
+      }
+    }
+    &-basics {
+      margin-bottom: 24px;
+      @include flex(row, start, center);
+    }
+    &-text {
+      @include font-roboto(14px, 700, 16px, $gray-jumbo);
+    }
+    &-description {
+      margin-bottom: 24px;
+    }
+    &-image {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      object-position: 20% 10%;
+      box-sizing: border-box;
+      @include md {
+        height: 400px;
+      }
     }
   }
 }
-.details__description {
-  margin-bottom: 24px;
-}
 .dot-divider {
   margin: 0 8px;
-}
-.details__image {
-  width: 100%;
-  height: 300px;
-  object-fit: cover;
-  object-position: 20% 10%;
-  box-sizing: border-box;
-  @include md {
-    //height: 100%;
-  }
 }
 </style>
