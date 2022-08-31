@@ -23,8 +23,8 @@
   </div>
 </template>
 <script>
-import CustomButton from "./CustomButton.vue";
-import ArrowLeftIcon from "../icons/ArrowLeftIcon.vue";
+import CustomButton from "@components/common/CustomButton.vue";
+import ArrowLeftIcon from "@components/icons/ArrowLeftIcon.vue";
 import ChevronRightIcon from "@assets/images/icons/chevronRightIcon.svg?component";
 export default {
   props: {

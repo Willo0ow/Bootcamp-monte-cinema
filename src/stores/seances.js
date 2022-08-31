@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { useMovieStore } from "./movies";
+import { useMovieStore } from "@/stores/movies";
 import { retrieveSeances } from "@/api/useSeancesApi.js";
 import { addDateAndTimeToSeances } from "@composables/useAddDateAndTimeToSeances.js";
 

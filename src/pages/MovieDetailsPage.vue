@@ -35,21 +35,21 @@
 </template>
 
 <script>
-import BreadCrumbs from "../components/common/BreadCrumbs.vue";
+import BreadCrumbs from "@components/common/BreadCrumbs.vue";
 import { useRoute } from "vue-router";
 import { retrieveMovies } from "@/api/useMoviesApi";
 import { computed, onBeforeMount, ref } from "vue";
-import SectionTitle from "../components/common/SectionTitle.vue";
-import CustomChip from "../components/common/CustomChip.vue";
+import SectionTitle from "@components/common/SectionTitle.vue";
+import CustomChip from "@components/common/CustomChip.vue";
 import { formatMovieLength } from "@composables/useFormatMovieLength";
 import EllipseIcon from "@assets/images/icons/ellipse.svg?component";
-import SectionSubtitle from "../components/common/SectionSubtitle.vue";
-import SelectDayFilter from "../components/HomePage/SelectDayFilter.vue";
+import SectionSubtitle from "@components/common/SectionSubtitle.vue";
+import SelectDayFilter from "@components/HomePage/SelectDayFilter.vue";
 import { retrieveSeances } from "@/api/useSeancesApi.js";
-import MovieCardDetailed from "../components/common/MovieCardDetailed.vue";
+import MovieCardDetailed from "@components/common/MovieCardDetailed.vue";
 import { addDateAndTimeToSeances } from "@/composables/useAddDateAndTimeToSeances";
 
-import { formatDateString } from "../composables/useFormatDateString";
+import { formatDateString } from "@composables/useFormatDateString";
 
 export default {
   setup() {

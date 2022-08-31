@@ -1,5 +1,5 @@
-import axios from "../axios";
-import { SEANCES } from "./endpoints.js";
+import axios from "@/axios";
+import { SEANCES } from "@/api/endpoints.js";
 
 export const retrieveSeances = async ({ date = null, movieId = null }) => {
   try {

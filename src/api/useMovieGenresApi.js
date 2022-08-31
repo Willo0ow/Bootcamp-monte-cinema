@@ -1,5 +1,5 @@
-import axios from "../axios";
-import { MOVIE_GENRES } from "./endpoints.js";
+import axios from "@/axios";
+import { MOVIE_GENRES } from "@/api/endpoints.js";
 
 export const retrieveMovieGenres = async () => {
   try {

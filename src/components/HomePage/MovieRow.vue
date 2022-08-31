@@ -22,7 +22,7 @@
 <script>
 import CapitalLink from "@components/common/CapitalLink.vue";
 import MovieCard from "@components/common/MovieCard.vue";
-import { useMovieStore } from "../../stores/movies";
+import { useMovieStore } from "@/stores/movies";
 import { storeToRefs } from "pinia";
 import { computed } from "vue";
 

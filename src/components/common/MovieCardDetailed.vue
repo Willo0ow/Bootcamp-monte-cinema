@@ -44,10 +44,10 @@
   </div>
 </template>
 <script>
-import CustomButton from "./CustomButton.vue";
-import CardTitle from "./CardTitle.vue";
-import CardSubtitle from "./CardSubtitle.vue";
-import CustomChip from "./CustomChip.vue";
+import CustomButton from "@components/common/CustomButton.vue";
+import CardTitle from "@components/common/CardTitle.vue";
+import CardSubtitle from "@components/common/CardSubtitle.vue";
+import CustomChip from "@components/common/CustomChip.vue";
 import { ref } from "vue";
 export default {
   components: { CardTitle, CardSubtitle, CustomChip, CustomButton },

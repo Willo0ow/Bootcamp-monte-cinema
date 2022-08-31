@@ -21,10 +21,10 @@
 </template>
 <script>
 import Logo from "@assets/images/logo.svg?component";
-import CustomButton from "./CustomButton.vue";
-import TabHeader from "./TabHeader.vue";
+import CustomButton from "@components/common/CustomButton.vue";
+import TabHeader from "@components/common/TabHeader.vue";
 import { useRouter } from "vue-router";
-import CustomMenu from "./CustomMenu.vue";
+import CustomMenu from "@components/common/CustomMenu.vue";
 export default {
   components: { Logo, TabHeader, CustomButton, CustomMenu },
   setup() {

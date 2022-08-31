@@ -15,9 +15,9 @@
   </component>
 </template>
 <script>
-import CardTitle from "./CardTitle.vue";
-import CardSubtitle from "./CardSubtitle.vue";
-import CustomChip from "./CustomChip.vue";
+import CardTitle from "@components/common/CardTitle.vue";
+import CardSubtitle from "@components/common/CardSubtitle.vue";
+import CustomChip from "@components/common/CustomChip.vue";
 export default {
   components: { CardTitle, CardSubtitle, CustomChip },
   props: {

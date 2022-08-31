@@ -9,7 +9,7 @@
   </div>
 </template>
 <script>
-import MovieCardDetailed from "./MovieCardDetailed.vue";
+import MovieCardDetailed from "@components/common/MovieCardDetailed.vue";
 export default {
   props: { movies: { type: Array, required: true } },
   components: { MovieCardDetailed },

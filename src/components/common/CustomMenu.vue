@@ -18,7 +18,7 @@
   </div>
 </template>
 <script>
-import NavigationIcon from "../icons/NavigationIcon.vue";
+import NavigationIcon from "@components/icons/NavigationIcon.vue";
 export default {
   components: { NavigationIcon },
   props: {

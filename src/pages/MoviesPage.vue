@@ -35,14 +35,14 @@
   </div>
 </template>
 <script>
-import BreadCrumbs from "../components/common/BreadCrumbs.vue";
-import SectionTitle from "../components/common/SectionTitle.vue";
-import CustomSelect from "../components/common/CustomSelect.vue";
-import { retrieveMovieGenres } from "../api/useMovieGenresApi";
+import BreadCrumbs from "@components/common/BreadCrumbs.vue";
+import SectionTitle from "@components/common/SectionTitle.vue";
+import CustomSelect from "@components/common/CustomSelect.vue";
+import { retrieveMovieGenres } from "@/api/useMovieGenresApi";
 import { onMounted, ref, computed } from "vue";
-import CustomInput from "../components/common/CustomInput.vue";
+import CustomInput from "@components/common/CustomInput.vue";
 import SearchIcon from "@assets/images/icons/magnifyIcon.svg?component";
-import MovieCard from "../components/common/MovieCard.vue";
+import MovieCard from "@components/common/MovieCard.vue";
 import { useMovieStore } from "@/stores/movies";
 import { storeToRefs } from "pinia";
 export default {

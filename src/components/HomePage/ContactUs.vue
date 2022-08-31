@@ -8,7 +8,7 @@
 </template>
 <script>
 import SectionTitle from "@components/common/SectionTitle.vue";
-import ContactCard from "../common/ContactCard.vue";
+import ContactCard from "@components/common/ContactCard.vue";
 export default {
   components: { SectionTitle, ContactCard },
   setup() {},

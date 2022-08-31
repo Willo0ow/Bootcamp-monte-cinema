@@ -27,12 +27,12 @@
 </template>
 <script>
 import { ref, onMounted, computed } from "vue";
-import SelectDayFilter from "./SelectDayFilter.vue";
+import SelectDayFilter from "@components/HomePage/SelectDayFilter.vue";
 import { useWeekdays } from "@composables/useWeekdays";
 import { useSeanceStore } from "@/stores/seances";
 import SectionTitle from "@components/common/SectionTitle.vue";
 import MovieList from "@components/common/MovieList.vue";
-import CustomSelect from "../common/CustomSelect.vue";
+import CustomSelect from "@components/common/CustomSelect.vue";
 import { storeToRefs } from "pinia";
 
 export default {
