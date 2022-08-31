@@ -2,9 +2,13 @@
   <nav class="nav">
     <Logo />
     <div class="nav__headers">
-      <TabHeader v-for="tab in tabs" :to="tab.path" :key="tab.label">{{
-        tab.label
-      }}</TabHeader>
+      <TabHeader
+        :to="tab.path"
+        v-for="tab in tabs"
+        :key="tab.label"
+        :active="isCurrentPath(tab.path.name)"
+        >{{ tab.label }}</TabHeader
+      >
     </div>
     <div class="nav__buttons">
       <CustomButton text>Register</CustomButton>
@@ -19,17 +23,23 @@
 import Logo from "@assets/images/logo.svg?component";
 import CustomButton from "./CustomButton.vue";
 import TabHeader from "./TabHeader.vue";
+import { useRouter } from "vue-router";
 import CustomMenu from "./CustomMenu.vue";
 export default {
   components: { Logo, TabHeader, CustomButton, CustomMenu },
   setup() {
     const tabs = [
-      { label: "Movies", path: "/" },
-      { label: "Screenings", path: "/" },
-      { label: "Contact Us", path: "/" },
+      { label: "Movies", path: { name: "Movies" } },
+      { label: "Screenings", path: { name: "Screenings" } },
+      { label: "Contact Us", path: { name: "ContactUs" } },
     ];
+    const router = useRouter();
+    function isCurrentPath(pathName) {
+      return router.currentRoute.value.name === pathName;
+    }
     return {
       tabs,
+      isCurrentPath,
     };
   },
 };
@@ -54,7 +64,17 @@ export default {
   &__headers {
     display: none;
     @include md-plus {
-      display: block;
+      @include flex(false, false, center);
+      height: 100%;
+      & :deep(.tab-header) {
+        @include flex(false, center, center);
+        height: 100%;
+        line-height: 100%;
+        text-align: center;
+        &[active="true"] {
+          box-shadow: inset 0px -4px 0px #ec1115;
+        }
+      }
     }
   }
   &__menu {

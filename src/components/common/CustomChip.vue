@@ -10,7 +10,7 @@ export default {};
 .chip {
   padding: 8px 16px;
   border-radius: 24px;
-  background: $wisp-pink;
+  background: $pink-wisp;
   @include font-roboto(14px, 700, 16px, $red-bittersweet);
   display: inline-block;
 }

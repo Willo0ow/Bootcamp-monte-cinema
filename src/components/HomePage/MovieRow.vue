@@ -76,6 +76,7 @@ export default {
     margin-right: 40px;
   }
 }
+
 .desktop-only {
   display: none;
   @include lg {

@@ -43,7 +43,7 @@ export default {
 .welcome {
   width: 100%;
   @include flex(row, space-between);
-  background: $wisp-pink;
+  background: $pink-wisp;
   &__text {
     margin: 40px 32px;
     @include flex(column, false, start);

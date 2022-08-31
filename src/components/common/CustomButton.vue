@@ -7,6 +7,7 @@
     class="custom-button"
     :href="href"
     :class="class"
+    :to="to"
     ><slot
   /></component>
 </template>
@@ -16,12 +17,17 @@ export default {
   props: {
     color: { type: String, default: "red" },
     href: { type: String, default: "" },
+    to: { type: [Object, String], default: "" },
     size: { type: String, default: "40" },
     class: { type: [String, Array, Object], default: "" },
   },
   emits: ["click"],
   setup(props) {
-    const element = computed(() => (props.href ? "a" : "button"));
+    const element = computed(() => {
+      if (props.href) return "a";
+      if (props.to) return "router-link";
+      return "button";
+    });
     return { element };
   },
 };
@@ -141,6 +147,12 @@ export default {
         color: white;
         & :deep(.icon *) {
           stroke: white;
+        }
+      }
+      &[sm-text] {
+        border-style: none;
+        @include lg {
+          border-style: solid;
         }
       }
     }

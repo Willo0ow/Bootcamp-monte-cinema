@@ -9,7 +9,7 @@ export const useSeanceStore = defineStore({
     dateSeances: [],
   }),
   getters: {
-    deateMovieSeances() {
+    dateMovieSeances() {
       const movieStore = useMovieStore();
       return this.dateSeances.reduce((movies, seance) => {
         const { date, time, id } = seance;

@@ -1,11 +1,18 @@
 <template>
-  <router-link class="tab-header" :to="to">
+  <component :is="element" class="tab-header" :to="to">
     <slot />
-  </router-link>
+  </component>
 </template>
 <script>
+import { computed } from "vue";
 export default {
-  props: { to: { type: [String, Object], default: "/" } },
+  props: {
+    to: { type: [String, Object], default: "" },
+  },
+  setup(props) {
+    const element = computed(() => (props.to ? "router-link" : "a"));
+    return { element };
+  },
 };
 </script>
 <style lang="scss" scoped>

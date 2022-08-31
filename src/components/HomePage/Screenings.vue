@@ -15,11 +15,12 @@
           label="Movie"
           v-model="selectedFilter"
           :options="filters"
-        />
+          :clear-value="0"
+        ></CustomSelect>
       </div>
     </div>
     <MovieList
-      v-if="deateMovieSeances && deateMovieSeances.length"
+      v-if="dateMovieSeances && dateMovieSeances.length"
       :movies="filteredMovieSeances"
     />
   </div>
@@ -37,7 +38,7 @@ import { storeToRefs } from "pinia";
 export default {
   components: { SectionTitle, MovieList, CustomSelect, SelectDayFilter },
   setup() {
-    const selectedFilter = ref(null);
+    const selectedFilter = ref(0);
     const weekdays = useWeekdays();
     const currentDate = ref(new Date());
 
@@ -58,27 +59,27 @@ export default {
     onMounted(async () => {
       await seanceStore.getDateSeances(currentDate.value);
     });
-    const { deateMovieSeances } = storeToRefs(seanceStore);
+    const { dateMovieSeances } = storeToRefs(seanceStore);
     const filters = computed(() => {
-      const movieFilters = deateMovieSeances.value.map((item) => {
+      const movieFilters = dateMovieSeances.value.map((item) => {
         const { id, title } = item;
         return { value: id, label: title };
       });
-      return [{ label: "All", value: null }, ...movieFilters];
+      return [{ label: "All", value: 0 }, ...movieFilters];
     });
     const filteredMovieSeances = computed(() => {
       if (selectedFilter.value) {
-        return deateMovieSeances.value.filter(
+        return dateMovieSeances.value.filter(
           (movie) => movie.id === selectedFilter.value
         );
       }
-      return deateMovieSeances.value;
+      return dateMovieSeances.value;
     });
     return {
       dateString,
       selectedFilter,
       filters,
-      deateMovieSeances,
+      dateMovieSeances,
       updateCurrentDate,
       filteredMovieSeances,
     };
@@ -101,6 +102,7 @@ export default {
     width: 100%;
     margin-top: 10px;
     @include lg {
+      margin-top: 0;
       min-width: 325px;
       width: 31%;
     }
