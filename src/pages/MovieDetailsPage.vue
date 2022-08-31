@@ -37,7 +37,7 @@
 <script>
 import BreadCrumbs from "@components/common/BreadCrumbs.vue";
 import { useRoute } from "vue-router";
-import { retrieveMovies } from "@/api/useMoviesApi";
+import { retrieveMovie } from "@/api/useMoviesApi";
 import { computed, onBeforeMount, ref } from "vue";
 import SectionTitle from "@components/common/SectionTitle.vue";
 import CustomChip from "@components/common/CustomChip.vue";
@@ -81,7 +81,7 @@ export default {
     }
 
     onBeforeMount(async () => {
-      movie.value = await retrieveMovies(route.params.id);
+      movie.value = await retrieveMovie(route.params.id);
       movie.value.length = formatMovieLength(movie.value.length);
       await getSeances();
     });
