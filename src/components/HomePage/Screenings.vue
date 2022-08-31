@@ -28,7 +28,7 @@
 <script>
 import { ref, onMounted, computed } from "vue";
 import SelectDayFilter from "@components/HomePage/SelectDayFilter.vue";
-import { useWeekdays } from "@composables/useWeekdays";
+import { useWeekdays } from "@helpers/useWeekdays";
 import { useSeanceStore } from "@/stores/seances";
 import SectionTitle from "@components/common/SectionTitle.vue";
 import MovieList from "@components/common/MovieList.vue";

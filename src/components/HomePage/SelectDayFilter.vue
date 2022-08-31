@@ -37,7 +37,7 @@
 <script>
 import { DatePicker } from "v-calendar";
 import CalendarIcon from "@icons/CalendarIcon.vue";
-import { useWeekdays } from "@composables/useWeekdays";
+import { useWeekdays } from "@helpers/useWeekdays";
 import { ref } from "vue";
 import CustomLabel from "@components/common/CustomLabel.vue";
 import CustomButton from "@components/common/CustomButton.vue";

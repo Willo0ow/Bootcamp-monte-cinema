@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
 import { retrieveMovies } from "@/api/useMoviesApi.js";
-import { formatMovieLength } from "@composables/useFormatMovieLength.js";
+import { formatMovieLength } from "@helpers/useFormatMovieLength.js";
 
 export const useMovieStore = defineStore({
   id: "movies",
