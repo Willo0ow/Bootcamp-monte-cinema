@@ -2,8 +2,8 @@ import { createApp } from "vue";
 import { createPinia } from "pinia";
 import { SetupCalendar } from "v-calendar";
 import SDropdown from "@storinka/dropdown";
-import router from "./router";
-import App from "./App.vue";
+import router from "@/router";
+import App from "@/App.vue";
 
 import "@assets/styles/common/index.scss";
 

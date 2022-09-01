@@ -1,16 +1,16 @@
 <template>
   <div class="screenings">
-    <div class="screenings__header mx-sm-24">
-      <SectionTitle :font-size="titleSize">Screenings:</SectionTitle>
-      <SectionTitle :font-size="titleSize" color="bombay" class="mb-32">{{
+    <div class="screenings__header">
+      <SectionTitle variation="48-64">Screenings:</SectionTitle>
+      <SectionTitle variation="48-64" color="bombay">{{
         dateString
       }}</SectionTitle>
     </div>
-    <div class="screenings__filters mb-64 mx-sm-24">
-      <div class="filter__day">
+    <div class="screenings__filters">
+      <div class="screenings__filters-day">
         <SelectDayFilter @updateCurrentDate="updateCurrentDate" />
       </div>
-      <div class="filter__movie">
+      <div class="screenings__filters-movie">
         <CustomSelect
           label="Movie"
           v-model="selectedFilter"
@@ -20,19 +20,19 @@
       </div>
     </div>
     <MovieList
-      v-if="deateMovieSeances && deateMovieSeances.length"
+      v-if="dateMovieSeances && dateMovieSeances.length"
       :movies="filteredMovieSeances"
     />
   </div>
 </template>
 <script>
 import { ref, onMounted, computed } from "vue";
-import SelectDayFilter from "./SelectDayFilter.vue";
-import { useWeekdays } from "@composables/useWeekdays";
+import SelectDayFilter from "@components/HomePage/SelectDayFilter.vue";
+import { useWeekdays } from "@helpers/useWeekdays";
 import { useSeanceStore } from "@/stores/seances";
 import SectionTitle from "@components/common/SectionTitle.vue";
 import MovieList from "@components/common/MovieList.vue";
-import CustomSelect from "../common/CustomSelect.vue";
+import CustomSelect from "@components/common/CustomSelect.vue";
 import { storeToRefs } from "pinia";
 
 export default {
@@ -65,9 +65,9 @@ export default {
     onMounted(async () => {
       await seanceStore.getDateSeances(currentDate.value);
     });
-    const { deateMovieSeances } = storeToRefs(seanceStore);
+    const { dateMovieSeances } = storeToRefs(seanceStore);
     const filters = computed(() => {
-      const movieFilters = deateMovieSeances.value.map((item) => {
+      const movieFilters = dateMovieSeances.value.map((item) => {
         const { id, title } = item;
         return { value: id, label: title };
       });
@@ -75,17 +75,17 @@ export default {
     });
     const filteredMovieSeances = computed(() => {
       if (selectedFilter.value) {
-        return deateMovieSeances.value.filter(
+        return dateMovieSeances.value.filter(
           (movie) => movie.id === selectedFilter.value
         );
       }
-      return deateMovieSeances.value;
+      return dateMovieSeances.value;
     });
     return {
       dateString,
       selectedFilter,
       filters,
-      deateMovieSeances,
+      dateMovieSeances,
       updateCurrentDate,
       filteredMovieSeances,
     };
@@ -93,24 +93,33 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-.screenings__filters {
-  @include flex(column, false, start);
-  @include lg {
-    @include flex(row, space-between);
+.screenings {
+  &__header {
+    @include mx-screen-sm-only(24px);
+    margin-bottom: 32px;
   }
-}
-.filter__movie {
-  width: 100%;
-  margin-top: 10px;
-  @include lg {
-    min-width: 325px;
-    width: 31%;
-  }
-}
-.filter__day {
-  width: 100%;
-  @include lg {
-    width: 79%;
+  &__filters {
+    @include mx-screen-sm-only(24px);
+    margin-bottom: 64px;
+    @include flex(column, false, start);
+    @include breakpoint-lg {
+      @include flex(row, space-between);
+    }
+    &-day {
+      width: 100%;
+      @include breakpoint-lg {
+        width: 79%;
+      }
+    }
+    &-movie {
+      width: 100%;
+      margin-top: 10px;
+      @include breakpoint-lg {
+        margin-top: 0;
+        min-width: 325px;
+        width: 31%;
+      }
+    }
   }
 }
 </style>

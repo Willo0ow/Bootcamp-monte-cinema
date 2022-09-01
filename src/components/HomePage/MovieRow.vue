@@ -1,12 +1,12 @@
 <template>
-  <div class="mb-64 mx-sm-24 movie-row">
-    <div class="row__actions">
+  <div class="movie-row">
+    <div class="movie-row__actions">
       <CapitalLink color="dark-grey"
         >Soon <span class="desktop-only">in the cinema</span></CapitalLink
       >
       <CapitalLink color="red" href="#">See all</CapitalLink>
     </div>
-    <div class="row__movies">
+    <div class="movie-row__movies">
       <MovieCard
         v-for="(movie, index) in reducedMovies"
         :key="movie.id"
@@ -14,7 +14,7 @@
         :class="{
           'not-last-card': index != reducedMovies.length - 1,
         }"
-        class="movie__card"
+        class="movie-row__card"
       />
     </div>
   </div>
@@ -22,7 +22,7 @@
 <script>
 import CapitalLink from "@components/common/CapitalLink.vue";
 import MovieCard from "@components/common/MovieCard.vue";
-import { useMovieStore } from "../../stores/movies";
+import { useMovieStore } from "@/stores/movies";
 import { storeToRefs } from "pinia";
 import { computed } from "vue";
 
@@ -41,39 +41,48 @@ export default {
 </script>
 <style lang="scss">
 .movie-row {
-  .row__actions {
+  @include mx-screen-sm-only(24px);
+  margin-bottom: 64px;
+  &__actions {
     @include flex(row, space-between);
     margin-bottom: 24px;
   }
-  .row__movies {
+  &__movies {
     @include flex(column, start);
-    @include md {
+    @include breakpoint-md {
       @include flex(row, space-between);
+    }
+  }
+  &__card {
+    margin-bottom: 24px;
+    &:nth-child(3) {
+      display: none;
+    }
+    &:nth-child(2) {
+      margin-right: 0;
+    }
+    @include breakpoint-xl {
+      &:nth-child(3) {
+        display: flex;
+      }
+      &:nth-child(2) {
+        margin-right: 40px;
+      }
     }
   }
 }
 
 .not-last-card {
   margin-right: 0;
-  @include md {
+  @include breakpoint-md {
     margin-right: 40px;
   }
 }
-.movie__card {
-  margin-bottom: 24px;
-  &:nth-child(3) {
-    display: none;
-  }
-  &:nth-child(2) {
-    margin-right: 0;
-  }
-  @include xl {
-    &:nth-child(3) {
-      display: flex;
-    }
-    &:nth-child(2) {
-      margin-right: 40px;
-    }
+
+.desktop-only {
+  display: none;
+  @include breakpoint-lg {
+    display: inline-block;
   }
 }
 </style>

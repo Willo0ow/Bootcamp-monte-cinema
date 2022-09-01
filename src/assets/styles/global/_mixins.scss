@@ -10,3 +10,11 @@
     align-items: $align;
   }
 }
+@mixin mx-screen-sm-only($value){
+  margin-right: $value;
+  margin-left: $value;
+  @include breakpoint-md {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}

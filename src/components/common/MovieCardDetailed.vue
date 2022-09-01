@@ -7,8 +7,8 @@
       <div class="card__details">
         <div>
           <CardTitle size="24" nowrap>{{ movie.title }}</CardTitle>
-          <div class="details__basics">
-            <div class="details__tags">
+          <div class="card__basics">
+            <div class="card__tags">
               <CustomChip v-for="tag in [movie.genre?.name]" :key="tag">{{
                 tag
               }}</CustomChip>
@@ -16,9 +16,9 @@
             <CardSubtitle>{{ movie.length }}</CardSubtitle>
           </div>
         </div>
-        <div class="details__actions--desktop">
+        <div class="card__actions-desktop">
           <CustomButton
-            class="mr-8"
+            class="card__actions-btn"
             v-for="seance in movie.seances"
             :key="seance.id"
             outlined
@@ -29,10 +29,10 @@
         </div>
       </div>
     </div>
-    <div class="details__actions--mobile">
+    <div class="card__actions-mobile">
       <CustomButton
         size="24"
-        class="mr-8"
+        class="card__actions-btn"
         v-for="seance in movie.seances"
         :key="seance.id"
         outlined
@@ -44,18 +44,17 @@
   </div>
 </template>
 <script>
-import CustomButton from "./CustomButton.vue";
-import CardTitle from "./CardTitle.vue";
-import CardSubtitle from "./CardSubtitle.vue";
-import CustomChip from "./CustomChip.vue";
+import CustomButton from "@components/common/CustomButton.vue";
+import CardTitle from "@components/common/CardTitle.vue";
+import CardSubtitle from "@components/common/CardSubtitle.vue";
+import CustomChip from "@components/common/CustomChip.vue";
 import { ref } from "vue";
 export default {
   components: { CardTitle, CardSubtitle, CustomChip, CustomButton },
   props: {
     movie: { type: Object, required: true },
   },
-  setup(props) {
-
+  setup() {
     const selectedScreening = ref("");
 
     function selectScreening(seance) {
@@ -76,55 +75,60 @@ export default {
   box-shadow: inset 0px -1px 0px #eaeaea;
   padding: 32px 16px;
   border-radius: 0;
-  @include md {
+  @include breakpoint-md {
     padding: 40px;
     box-shadow: 0px 24px 78px rgba(0, 0, 0, 0.08),
       0px 5.36071px 17.4223px rgba(0, 0, 0, 0.0238443),
       0px 1.59602px 5.18708px rgba(0, 0, 0, 0.0161557);
     border-radius: 8px;
   }
-}
-.card__container {
-  @include flex();
-}
-.card__image {
-  margin-right: 16px;
-  @include md {
-    margin-right: 40px;
-  }
-}
-img {
-  width: 68px;
-  height: 68px;
-  object-fit: cover;
-  object-position: 20% 10%;
-  @include md {
-    height: 132px;
-    width: 98px;
-  }
-}
-.details__tags {
-  font-size: 22px;
-  display: inline-block;
-  margin-right: 16px;
-}
-.details__basics {
-  @include flex(row, false, center);
-}
-.details__actions--desktop {
-  display: none;
-  @include md {
+  &__container {
     @include flex();
   }
-}
-.details__actions--mobile {
-  margin-top: 21px;
-  @include flex();
-  @include md {
-    display: none;
+  &__image {
+    margin-right: 16px;
+    @include breakpoint-md {
+      margin-right: 40px;
+    }
+    & img {
+      width: 68px;
+      height: 68px;
+      object-fit: cover;
+      object-position: 20% 10%;
+      @include breakpoint-md {
+        height: 132px;
+        width: 98px;
+      }
+    }
   }
-}
-.card__details {
-  @include flex(column, space-between);
+  &__tags {
+    font-size: 22px;
+    display: inline-block;
+    margin-right: 16px;
+  }
+  &__basics {
+    @include flex(row, false, center);
+  }
+  &__actions {
+    &-btn {
+      margin-right: 8px;
+    }
+    &-desktop {
+      display: none;
+      @include breakpoint-md {
+        @include flex();
+      }
+    }
+    &-mobile {
+      margin-top: 21px;
+      @include flex();
+      @include breakpoint-md {
+        display: none;
+      }
+    }
+  }
+  &__details {
+    @include flex(column, space-between);
+  }
 }
 </style>

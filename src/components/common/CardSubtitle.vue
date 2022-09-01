@@ -1,5 +1,5 @@
 <template>
-  <div class="card__subtitle">
+  <div class="card-subtitle">
     <slot />
   </div>
 </template>
@@ -7,7 +7,7 @@
 export default {};
 </script>
 <style lang="scss">
-.card__subtitle {
+.card-subtitle {
   @include font-roboto(14px, 700, 16px, $gray-jumbo);
 }
 </style>

@@ -4,6 +4,7 @@
     <input
       v-bind="$attrs"
       :name="label"
+      :id="label"
       class="input__base"
       :value="value"
       @input="updateValue($event)"
@@ -15,7 +16,7 @@
   </div>
 </template>
 <script>
-import CustomLabel from "./CustomLabel.vue";
+import CustomLabel from "@components/common/CustomLabel.vue";
 import { ref } from "vue";
 export default {
   components: { CustomLabel },

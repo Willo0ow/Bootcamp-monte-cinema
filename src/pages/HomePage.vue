@@ -1,14 +1,14 @@
 <template>
-  <WelcomeSection class="mb-64" />
+  <WelcomeSection class="home__welcome" />
   <MovieRow />
   <Screenings />
   <ContactUs />
 </template>
 <script>
-import ContactUs from "../components/HomePage/ContactUs.vue";
-import Screenings from "../components/HomePage/Screenings.vue";
-import MovieRow from "../components/HomePage/MovieRow.vue";
-import WelcomeSection from "../components/HomePage/WelcomeSection.vue";
+import ContactUs from "@components/HomePage/ContactUs.vue";
+import Screenings from "@components/HomePage/Screenings.vue";
+import MovieRow from "@components/HomePage/MovieRow.vue";
+import WelcomeSection from "@components/HomePage/WelcomeSection.vue";
 import { onMounted } from "vue";
 import { useMovieStore } from "@/stores/movies";
 export default {
@@ -27,4 +27,10 @@ export default {
   },
 };
 </script>
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.home {
+  &__welcome {
+    margin-bottom: 64px;
+  }
+}
+</style>

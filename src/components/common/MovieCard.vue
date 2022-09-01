@@ -15,9 +15,9 @@
   </component>
 </template>
 <script>
-import CardTitle from "./CardTitle.vue";
-import CardSubtitle from "./CardSubtitle.vue";
-import CustomChip from "./CustomChip.vue";
+import CardTitle from "@components/common/CardTitle.vue";
+import CardSubtitle from "@components/common/CardSubtitle.vue";
+import CustomChip from "@components/common/CustomChip.vue";
 export default {
   components: { CardTitle, CardSubtitle, CustomChip },
   props: {
@@ -36,20 +36,20 @@ export default {
   border-radius: 8px;
   flex: 1;
   @include flex(column, space-between);
-  @include md {
+  @include breakpoint-md {
     padding: 40px;
   }
-}
-.card__image {
-  margin: 18px 0;
-}
-img {
-  width: 100%;
-  height: 191px;
-  object-fit: cover;
-  object-position: 20% 10%;
-}
-.card__tags {
-  font-size: 22px;
+  &__image {
+    margin: 18px 0;
+    & img {
+      width: 100%;
+      height: 191px;
+      object-fit: cover;
+      object-position: 20% 10%;
+    }
+  }
+  &__tags {
+    font-size: 22px;
+  }
 }
 </style>

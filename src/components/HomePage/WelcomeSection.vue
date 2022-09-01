@@ -1,18 +1,18 @@
 <template>
   <div class="welcome">
     <div class="welcome__text">
-      <SectionTitle class="mb-40 text__title"
+      <SectionTitle class="welcome__title"
         >Welcome to the best cinema in Monterail</SectionTitle
       >
-      <div class="text__subtitles">
-        <SectionSubtitle
+      <div class="welcome__subtitles">
+        <SectionSubtitle class="welcome__subtitle"
           >Best movies, best experiences, best people.</SectionSubtitle
         >
-        <SectionSubtitle class="mb-40"
+        <SectionSubtitle class="welcome__subtitle"
           >And all that doesn't exist. Yikes.</SectionSubtitle
         >
       </div>
-      <CustomButton class="button--book" href="/book" size="56"
+      <CustomButton class="welcome__book-button" href="/book" size="56"
         >Book a ticket</CustomButton
       >
     </div>
@@ -44,35 +44,41 @@ export default {
   width: 100%;
   @include flex(row, space-between);
   background: $pink-wisp;
-}
-.welcome__text {
-  margin: 40px 32px;
-  @include flex(column, false, start);
-  @include md {
-    margin: 80px;
+  &__text {
+    margin: 40px 32px;
+    @include flex(column, false, start);
+    @include breakpoint-md {
+      margin: 80px;
+    }
   }
-}
-.text__subtitles {
-  width: 100%;
-}
-.text__title {
-  max-width: 710px;
-  @include xs {
-    text-align: center;
+  &__title {
+    max-width: 710px;
+    margin-bottom: 40px;
+    @include breakpoint-xs {
+      text-align: center;
+    }
   }
-}
-
-.welcome__image {
-  display: none;
-  @media (min-width: 1300px) {
-    display: block;
-    min-width: 457px;
+  &__subtitles {
+    width: 100%;
+    margin-bottom: 40px;
   }
-}
-.button--book {
-  width: 100%;
-  @include sm {
-    width: fit-content;
+  &__subtitle {
+    @include breakpoint-xs {
+      text-align: center;
+    }
+  }
+  &__image {
+    display: none;
+    @media (min-width: 1300px) {
+      display: block;
+      min-width: 457px;
+    }
+  }
+  &__book-button {
+    width: 100%;
+    @include breakpoint-sm {
+      width: fit-content;
+    }
   }
 }
 </style>

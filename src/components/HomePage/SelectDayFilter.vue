@@ -1,6 +1,6 @@
 <template>
   <CustomLabel v-if="!noLabel">Day</CustomLabel>
-  <div class="filter-days">
+  <div class="select-day__buttons">
     <CustomButton
       size="56"
       v-for="day in days"
@@ -8,7 +8,7 @@
       outlined
       color="gray"
       @click="selectDay(day.date)"
-      class="mr-8 hide-day"
+      class="select-day__button"
       :class="{ selected: selectedDay === day.date }"
       sm-size
       >{{ day.label }}</CustomButton
@@ -24,7 +24,6 @@
           outlined
           rounded
           color="gray"
-          class="mr-8"
           sm-size
           @click="togglePopover()"
         >
@@ -37,7 +36,7 @@
 <script>
 import { DatePicker } from "v-calendar";
 import CalendarIcon from "@icons/CalendarIcon.vue";
-import { useWeekdays } from "@composables/useWeekdays";
+import { useWeekdays } from "@helpers/useWeekdays";
 import { ref } from "vue";
 import CustomLabel from "@components/common/CustomLabel.vue";
 import CustomButton from "@components/common/CustomButton.vue";
@@ -80,28 +79,37 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-.filter-days {
-  padding-bottom: 10px;
-  @include flex();
-  overflow-x: scroll;
-  @include lg {
-    padding-bottom: 0;
-  }
-}
-.filter-days button {
-  align-self: center;
-}
-.hide-day {
-  @include md {
-    &:nth-last-child(3),
-    &:nth-last-child(2) {
-      display: none;
+.select-day {
+  &__buttons {
+    padding-bottom: 10px;
+    @include flex();
+    overflow-x: scroll;
+    @include breakpoint-lg {
+      padding-bottom: 0;
     }
   }
-  @include lg {
-    &:nth-last-child(3),
-    &:nth-last-child(2) {
-      display: none;
+  & button {
+    align-self: center;
+  }
+  &__button {
+    margin-right: 8px;
+    @include breakpoint-md {
+      &:nth-last-child(3),
+      &:nth-last-child(2) {
+        display: none;
+      }
+    }
+    @include breakpoint-lg {
+      &:nth-last-child(3),
+      &:nth-last-child(2) {
+        display: none;
+      }
+    }
+    @include breakpoint-xl {
+      &:nth-last-child(3),
+      &:nth-last-child(2) {
+        @include flex();
+      }
     }
   }
   @include xl {

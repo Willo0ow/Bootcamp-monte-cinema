@@ -1,9 +1,7 @@
 import { defineStore } from "pinia";
-import { useMovieStore } from "./movies";
-import useSeancesApi from "@/api/useSeancesApi.js";
-import useAddDateAndTimeToSeances from "@composables/useAddDateAndTimeToSeances.js";
-const { retrieveSeances } = useSeancesApi();
-const { addDateAndTimeToSeances } = useAddDateAndTimeToSeances();
+import { useMovieStore } from "@/stores/movies";
+import { retrieveSeances } from "@/api/useSeancesApi.js";
+import { addDateAndTimeToSeances } from "@helpers/useAddDateAndTimeToSeances.js";
 
 export const useSeanceStore = defineStore({
   id: "seances",
@@ -11,7 +9,7 @@ export const useSeanceStore = defineStore({
     dateSeances: [],
   }),
   getters: {
-    deateMovieSeances() {
+    dateMovieSeances() {
       const movieStore = useMovieStore();
       return this.dateSeances.reduce((movies, seance) => {
         const { date, time, id } = seance;

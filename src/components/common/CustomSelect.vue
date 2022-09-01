@@ -11,7 +11,7 @@
 </template>
 <script>
 import VSelect from "vue-select";
-import CustomLabel from "./CustomLabel.vue";
+import CustomLabel from "@components/common/CustomLabel.vue";
 import { ref } from "vue";
 export default {
   components: { VSelect, CustomLabel },
@@ -47,23 +47,11 @@ export default {
   font-weight: 400 !important;
   text-overflow: ellipsis;
   white-space: nowrap;
-// <<<<<<< HEAD
-// }
-// .custom-select .vs__dropdown-toggle {
-//   background: $gray-athens !important;
-//   border-radius: 8px !important;
-//   border: none !important;
-//   padding: 11.2px 12px;
-// }
-// .custom-select .vs__selected-options {
-//   flex-wrap: nowrap;
-//   max-width: calc(100% - 40px);
-// =======
   & .vs__dropdown-toggle {
     background: $gray-athens !important;
     border-radius: 8px !important;
     border: none !important;
-    padding: 18px 12px;
+    padding: 13px 12px;
   }
   & .vs__selected-options {
     flex-wrap: nowrap;
