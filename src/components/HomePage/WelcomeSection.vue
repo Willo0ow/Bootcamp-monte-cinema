@@ -1,14 +1,14 @@
 <template>
   <div class="welcome">
     <div class="welcome__text">
-      <SectionTitle class="mb-40 welcome__title"
+      <SectionTitle class="welcome__title"
         >Welcome to the best cinema in Monterail</SectionTitle
       >
       <div class="welcome__subtitles">
-        <SectionSubtitle
+        <SectionSubtitle class="welcome__subtitle"
           >Best movies, best experiences, best people.</SectionSubtitle
         >
-        <SectionSubtitle class="mb-40"
+        <SectionSubtitle class="welcome__subtitle"
           >And all that doesn't exist. Yikes.</SectionSubtitle
         >
       </div>
@@ -47,18 +47,25 @@ export default {
   &__text {
     margin: 40px 32px;
     @include flex(column, false, start);
-    @include md {
+    @include breakpoint-md {
       margin: 80px;
     }
   }
   &__title {
     max-width: 710px;
-    @include xs {
+    margin-bottom: 40px;
+    @include breakpoint-xs {
       text-align: center;
     }
   }
   &__subtitles {
     width: 100%;
+    margin-bottom: 40px;
+  }
+  &__subtitle {
+    @include breakpoint-xs {
+      text-align: center;
+    }
   }
   &__image {
     display: none;
@@ -69,7 +76,7 @@ export default {
   }
   &__book-button {
     width: 100%;
-    @include sm {
+    @include breakpoint-sm {
       width: fit-content;
     }
   }

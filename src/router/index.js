@@ -14,6 +14,11 @@ const router = createRouter({
       name: "Movies",
     },
     {
+      path: "/movie/:id",
+      component: () => import("@/pages/MovieDetailsPage.vue"),
+      name: "MovieDetails",
+    },
+    {
       path: "/screenings",
       component: () => import("@/pages/MoviesPage.vue"),
       name: "Screenings",

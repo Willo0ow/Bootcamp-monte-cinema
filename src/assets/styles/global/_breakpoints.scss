@@ -1,29 +1,29 @@
-@mixin xs {
+@mixin breakpoint-xs {
   @media (max-width: 479px) {
     @content;
   }
 }
-@mixin sm {
+@mixin breakpoint-sm {
   @media (min-width: 480px) {
     @content;
   }
 }
-@mixin md {
+@mixin breakpoint-md {
   @media (min-width: 700px) {
     @content;
   }
 }
-@mixin md-plus {
+@mixin breakpoint-md-plus {
   @media (min-width: 960px) {
     @content;
   }
 }
-@mixin lg {
+@mixin breakpoint-lg {
   @media (min-width: 1024px) {
     @content;
   }
 }
-@mixin xl {
+@mixin breakpoint-xl {
   @media (min-width: 1440px) {
     @content;
   }

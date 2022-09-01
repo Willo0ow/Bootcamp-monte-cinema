@@ -1,5 +1,5 @@
 <template>
-  <div class="mb-64 mx-sm-24 movie-row">
+  <div class="movie-row">
     <div class="movie-row__actions">
       <CapitalLink color="dark-grey"
         >Soon <span class="desktop-only">in the cinema</span></CapitalLink
@@ -22,7 +22,7 @@
 <script>
 import CapitalLink from "@components/common/CapitalLink.vue";
 import MovieCard from "@components/common/MovieCard.vue";
-import { useMovieStore } from "../../stores/movies";
+import { useMovieStore } from "@/stores/movies";
 import { storeToRefs } from "pinia";
 import { computed } from "vue";
 
@@ -41,13 +41,15 @@ export default {
 </script>
 <style lang="scss">
 .movie-row {
+  @include mx-screen-sm-only(24px);
+  margin-bottom: 64px;
   &__actions {
     @include flex(row, space-between);
     margin-bottom: 24px;
   }
   &__movies {
     @include flex(column, start);
-    @include md {
+    @include breakpoint-md {
       @include flex(row, space-between);
     }
   }
@@ -59,7 +61,7 @@ export default {
     &:nth-child(2) {
       margin-right: 0;
     }
-    @include xl {
+    @include breakpoint-xl {
       &:nth-child(3) {
         display: flex;
       }
@@ -72,14 +74,14 @@ export default {
 
 .not-last-card {
   margin-right: 0;
-  @include md {
+  @include breakpoint-md {
     margin-right: 40px;
   }
 }
 
 .desktop-only {
   display: none;
-  @include lg {
+  @include breakpoint-lg {
     display: inline-block;
   }
 }

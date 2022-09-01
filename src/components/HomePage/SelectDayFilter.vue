@@ -1,5 +1,5 @@
 <template>
-  <CustomLabel>Day</CustomLabel>
+  <CustomLabel v-if="!noLabel">Day</CustomLabel>
   <div class="select-day__buttons">
     <CustomButton
       size="56"
@@ -8,7 +8,7 @@
       outlined
       color="gray"
       @click="selectDay(day.date)"
-      class="mr-8 select-day__button"
+      class="select-day__button"
       :class="{ selected: selectedDay === day.date }"
       sm-size
       >{{ day.label }}</CustomButton
@@ -24,7 +24,6 @@
           outlined
           rounded
           color="gray"
-          class="mr-8"
           sm-size
           @click="togglePopover()"
         >
@@ -37,7 +36,7 @@
 <script>
 import { DatePicker } from "v-calendar";
 import CalendarIcon from "@icons/CalendarIcon.vue";
-import { useWeekdays } from "@composables/useWeekdays";
+import { useWeekdays } from "@helpers/useWeekdays";
 import { ref } from "vue";
 import CustomLabel from "@components/common/CustomLabel.vue";
 import CustomButton from "@components/common/CustomButton.vue";
@@ -50,6 +49,9 @@ export default {
     DatePicker,
   },
   emits: ["updateCurrentDate"],
+  props: {
+    noLabel: { type: Boolean, default: false },
+  },
   setup(props, context) {
     const weekdays = useWeekdays();
     const today = new Date();
@@ -82,7 +84,7 @@ export default {
     padding-bottom: 10px;
     @include flex();
     overflow-x: scroll;
-    @include lg {
+    @include breakpoint-lg {
       padding-bottom: 0;
     }
   }
@@ -90,19 +92,20 @@ export default {
     align-self: center;
   }
   &__button {
-    @include md {
+    margin-right: 8px;
+    @include breakpoint-md {
       &:nth-last-child(3),
       &:nth-last-child(2) {
         display: none;
       }
     }
-    @include lg {
+    @include breakpoint-lg {
       &:nth-last-child(3),
       &:nth-last-child(2) {
         display: none;
       }
     }
-    @include xl {
+    @include breakpoint-xl {
       &:nth-last-child(3),
       &:nth-last-child(2) {
         @include flex();

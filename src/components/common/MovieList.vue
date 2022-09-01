@@ -9,7 +9,7 @@
   </div>
 </template>
 <script>
-import MovieCardDetailed from "./MovieCardDetailed.vue";
+import MovieCardDetailed from "@components/common/MovieCardDetailed.vue";
 export default {
   props: { movies: { type: Array, required: true } },
   components: { MovieCardDetailed },
@@ -22,7 +22,7 @@ export default {
 .movie-list {
   &__item {
     margin-bottom: 0;
-    @include md {
+    @include breakpoint-md {
       margin-bottom: 40px;
     }
   }

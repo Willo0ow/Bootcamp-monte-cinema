@@ -16,7 +16,7 @@
   </div>
 </template>
 <script>
-import CustomLabel from "./CustomLabel.vue";
+import CustomLabel from "@components/common/CustomLabel.vue";
 import { ref } from "vue";
 export default {
   components: { CustomLabel },

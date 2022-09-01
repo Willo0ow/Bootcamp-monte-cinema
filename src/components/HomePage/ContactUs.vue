@@ -1,6 +1,6 @@
 <template>
   <div class="contact">
-    <SectionTitle variation="40-64" class="mb-48 text-center">
+    <SectionTitle variation="40-64" class="contact__title">
       Contact Us
     </SectionTitle>
     <ContactCard />
@@ -8,7 +8,7 @@
 </template>
 <script>
 import SectionTitle from "@components/common/SectionTitle.vue";
-import ContactCard from "../common/ContactCard.vue";
+import ContactCard from "@components/common/ContactCard.vue";
 export default {
   components: { SectionTitle, ContactCard },
   setup() {},
@@ -19,8 +19,12 @@ export default {
   width: fit-content;
   margin-top: 144px;
   width: 100%;
-  @include md {
+  @include breakpoint-md {
     margin-top: 188px;
+  }
+  &__title {
+    margin-bottom: 48px;
+    text-align: center;
   }
 }
 </style>

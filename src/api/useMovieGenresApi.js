@@ -1,18 +1,12 @@
-import axios from "../axios";
-import { MOVIE_GENRES } from "./endpoints.js";
+import axios from "@/axios";
+import { MOVIE_GENRES } from "@/api/endpoints.js";
 
-function useMovieGenresApi() {
-  async function retrieveMovieGenres() {
-    try {
-      const res = await axios.get(`/${MOVIE_GENRES}`);
-      return res.data;
-    } catch (error) {
-      console.log(error);
-      return [];
-    }
+export const retrieveMovieGenres = async () => {
+  try {
+    const res = await axios.get(`/${MOVIE_GENRES}`);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+    return [];
   }
-  return {
-    retrieveMovieGenres,
-  };
-}
-export default useMovieGenresApi;
+};

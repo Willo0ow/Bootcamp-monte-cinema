@@ -1,18 +1,21 @@
-import axios from "../axios";
-import { MOVIES } from "./endpoints.js";
+import axios from "@/axios";
+import { MOVIES } from "@/api/endpoints.js";
 
-function useMoviesApi() {
-  async function retrieveMovies() {
-    try {
-      const res = await axios.get(`/${MOVIES}`);
-      return res.data;
-    } catch (error) {
-      console.log(error);
-      return [];
-    }
+export const retrieveMovies = async () => {
+  try {
+    const res = await axios.get(`/${MOVIES}`);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+    return [];
   }
-  return {
-    retrieveMovies,
-  };
-}
-export default useMoviesApi;
+};
+export const retrieveMovie = async (movieId) => {
+  try {
+    const res = await axios.get(`/${MOVIES}/${movieId}`);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};

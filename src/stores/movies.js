@@ -1,6 +1,6 @@
 import { defineStore } from "pinia";
-import useMoviesApi from "@/api/useMoviesApi.js";
-const { retrieveMovies } = useMoviesApi();
+import { retrieveMovies } from "@/api/useMoviesApi.js";
+import { formatMovieLength } from "@helpers/useFormatMovieLength.js";
 
 export const useMovieStore = defineStore({
   id: "movies",
@@ -12,15 +12,10 @@ export const useMovieStore = defineStore({
     async getMovies() {
       const res = await retrieveMovies();
       this.movies = res.map((movie) => {
-        const { length, genre, poster_url } = movie;
-        const hours = Math.floor(length / 60);
-        const minutes = `0${length % 60}`.slice(-2);
-        const lengthInString = `${hours}h ${minutes}min`;
+        const lengthInString = formatMovieLength(movie.length);
         return {
           ...movie,
           length: lengthInString,
-          image: poster_url,
-          tag: genre.name,
         };
       });
     },

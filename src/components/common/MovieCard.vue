@@ -1,27 +1,28 @@
 <template>
-  <div class="card">
+  <component :is="to ? 'router-link' : 'div'" :to="to" class="card">
     <div>
       <CardTitle size="36">{{ movie.title }}</CardTitle>
     </div>
     <div>
       <CardSubtitle>{{ movie.length }}</CardSubtitle>
       <div class="card__image">
-        <img :src="movie.image" />
+        <img :src="movie.poster_url" />
       </div>
       <div class="card__tags">
-        <CustomChip>{{ movie.tag }}</CustomChip>
+        <CustomChip>{{ movie.genre?.name }}</CustomChip>
       </div>
     </div>
-  </div>
+  </component>
 </template>
 <script>
-import CardTitle from "./CardTitle.vue";
-import CardSubtitle from "./CardSubtitle.vue";
-import CustomChip from "./CustomChip.vue";
+import CardTitle from "@components/common/CardTitle.vue";
+import CardSubtitle from "@components/common/CardSubtitle.vue";
+import CustomChip from "@components/common/CustomChip.vue";
 export default {
   components: { CardTitle, CardSubtitle, CustomChip },
   props: {
     movie: { type: Object, required: true },
+    to: { type: [Object, String], default: "" },
   },
 };
 </script>
@@ -35,7 +36,7 @@ export default {
   border-radius: 8px;
   flex: 1;
   @include flex(column, space-between);
-  @include md {
+  @include breakpoint-md {
     padding: 40px;
   }
   &__image {
