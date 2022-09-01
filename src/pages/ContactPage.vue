@@ -74,26 +74,45 @@ export default {
   &__card {
     width: 100%;
     display: grid;
-    grid-template-columns: 1fr 1fr 80px;
     border-radius: 8px;
+    grid-template-columns: 1fr;
+    @include lg {
+      grid-template-columns: 1fr 1fr 80px;
+    }
   }
   &__image {
     & svg {
       width: 100%;
-      border-radius: 8px 0 0 8px;
+      border-radius: 8px 8px 0 0;
+      height: 284px;
+      @include lg {
+        height: 100%;
+        border-radius: 8px 0 0 8px;
+      }
     }
   }
   &__details {
     background-color: $gray-athens;
   }
   &__icons {
-    @include flex(column, space-around);
+    @include flex(row, center);
     background-color: $gray-athens;
-    border-radius: 0 8px 8px 0;
+    padding-bottom: 24px;
+    padding-top: 24px;
+    border-radius: 0 0 8px 8px;
+    border-top: 2px white solid;
+    @include lg {
+      border-radius: 0 8px 8px 0;
+      @include flex(column, space-around);
+    }
   }
   &__icon {
-    margin-right: 24px;
-    margin-left: 24px;
+    margin-right: 8px;
+    margin-left: 8px;
+    @include lg {
+      margin-right: 24px;
+      margin-left: 24px;
+    }
   }
 }
 </style>
