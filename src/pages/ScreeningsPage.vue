@@ -1,8 +1,8 @@
 <template>
   <div class="movies">
-    <BreadCrumbs :steps="steps" :back-route="{ name: 'Home' }" class="mb-64" />
-    <div class="movie__screenings">
-      <Screenings :titleSize="{ default: '80px', small: '48px' }" />
+    <BreadCrumbs :steps="steps" :back-route="{ name: 'Home' }" />
+    <div class="movies__screenings">
+      <Screenings title-variation="default" />
     </div>
   </div>
 </template>
@@ -30,4 +30,10 @@ export default {
   },
 };
 </script>
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.movies {
+  &__screenings {
+    margin-top: 64px;
+  }
+}
+</style>
