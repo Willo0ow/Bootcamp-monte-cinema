@@ -36,7 +36,7 @@ export default {
   border-radius: 8px;
   flex: 1;
   @include flex(column, space-between);
-  @include md {
+  @include breakpoint-md {
     padding: 40px;
   }
   &__image {

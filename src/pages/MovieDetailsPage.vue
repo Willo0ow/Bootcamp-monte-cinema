@@ -135,14 +135,14 @@ export default {
 <style lang="scss" scoped>
 .movie {
   &__details {
-    @include mx-mobile-only(24px);
+    @include mx-screen-sm-only(24px);
     margin-top: 64px;
     margin-bottom: 64px;
-    @include md-plus {
+    @include breakpoint-md-plus {
       display: flex;
     }
     &-wrapper {
-      @include md-plus {
+      @include breakpoint-md-plus {
         margin-right: 32px;
         max-width: 600px;
       }
@@ -167,13 +167,13 @@ export default {
       object-fit: cover;
       object-position: 20% 10%;
       box-sizing: border-box;
-      @include md {
+      @include breakpoint-md {
         height: 400px;
       }
     }
   }
   &__screenings {
-    @include mx-mobile-only(24px);
+    @include mx-screen-sm-only(24px);
     &-title {
       &:nth-child(2) {
         margin-bottom: 32px;

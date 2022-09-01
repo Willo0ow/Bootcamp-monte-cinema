@@ -52,18 +52,18 @@ export default {
   @include flex(row, space-between, center);
   padding: 0 48px;
   max-width: 1440px;
-  @include xl {
+  @include breakpoint-xl {
     margin: 0 auto;
   }
   &__buttons {
     display: none;
-    @include md-plus {
+    @include breakpoint-md-plus {
       @include flex();
     }
   }
   &__headers {
     display: none;
-    @include md-plus {
+    @include breakpoint-md-plus {
       @include flex(false, false, center);
       height: 100%;
       & :deep(.tab-header) {
@@ -78,7 +78,7 @@ export default {
     }
   }
   &__menu {
-    @include md-plus {
+    @include breakpoint-md-plus {
       display: none;
     }
   }

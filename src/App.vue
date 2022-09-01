@@ -22,10 +22,10 @@ main {
   max-width: 1440px;
   box-sizing: border-box;
   margin: 0;
-  @include md {
+  @include breakpoint-md {
     margin: 0 48px 48px;
   }
-  @include xl {
+  @include breakpoint-xl {
     width: calc(1440px - 2 * 48px);
     margin: 0 auto;
   }

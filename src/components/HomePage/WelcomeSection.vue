@@ -47,14 +47,14 @@ export default {
   &__text {
     margin: 40px 32px;
     @include flex(column, false, start);
-    @include md {
+    @include breakpoint-md {
       margin: 80px;
     }
   }
   &__title {
     max-width: 710px;
     margin-bottom: 40px;
-    @include xs {
+    @include breakpoint-xs {
       text-align: center;
     }
   }
@@ -63,7 +63,7 @@ export default {
     margin-bottom: 40px;
   }
   &__subtitle {
-    @include xs {
+    @include breakpoint-xs {
       text-align: center;
     }
   }
@@ -76,7 +76,7 @@ export default {
   }
   &__book-button {
     width: 100%;
-    @include sm {
+    @include breakpoint-sm {
       width: fit-content;
     }
   }

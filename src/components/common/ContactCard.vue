@@ -38,7 +38,7 @@ export default {
   width: 50%;
   min-width: 315px;
   max-width: 600px;
-  @include sm {
+  @include breakpoint-sm {
     padding: 64px;
   }
   &__info {

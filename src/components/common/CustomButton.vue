@@ -151,7 +151,7 @@ export default {
       }
       &[sm-text] {
         border-style: none;
-        @include lg {
+        @include breakpoint-lg {
           border-style: solid;
         }
       }
