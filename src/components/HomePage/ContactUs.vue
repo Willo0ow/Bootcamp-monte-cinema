@@ -1,6 +1,6 @@
 <template>
   <div class="contact">
-    <SectionTitle variation="40-64" class="mb-48 text-center">
+    <SectionTitle variation="40-64" class="contact__title">
       Contact Us
     </SectionTitle>
     <ContactCard />
@@ -21,6 +21,10 @@ export default {
   width: 100%;
   @include md {
     margin-top: 188px;
+  }
+  &__title {
+    margin-bottom: 48px;
+    text-align: center;
   }
 }
 </style>

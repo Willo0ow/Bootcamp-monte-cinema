@@ -18,7 +18,7 @@
         </div>
         <div class="card__actions-desktop">
           <CustomButton
-            class="mr-8"
+            class="card__actions-btn"
             v-for="seance in movie.seances"
             :key="seance.id"
             outlined
@@ -32,7 +32,7 @@
     <div class="card__actions-mobile">
       <CustomButton
         size="24"
-        class="mr-8"
+        class="card__actions-btn"
         v-for="seance in movie.seances"
         :key="seance.id"
         outlined
@@ -109,17 +109,22 @@ export default {
   &__basics {
     @include flex(row, false, center);
   }
-  &__actions-desktop {
-    display: none;
-    @include md {
-      @include flex();
+  &__actions {
+    &-btn {
+      margin-right: 8px;
     }
-  }
-  &__actions-mobile {
-    margin-top: 21px;
-    @include flex();
-    @include md {
+    &-desktop {
       display: none;
+      @include md {
+        @include flex();
+      }
+    }
+    &-mobile {
+      margin-top: 21px;
+      @include flex();
+      @include md {
+        display: none;
+      }
     }
   }
   &__details {

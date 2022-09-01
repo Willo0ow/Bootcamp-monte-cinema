@@ -1,15 +1,13 @@
 <template>
   <div class="movie">
-    <BreadCrumbs
-      :steps="steps"
-      :back-route="{ name: 'Movies' }"
-      class="mb-64"
-    />
-    <div class="movie__details mx-sm-24 mb-64">
+    <BreadCrumbs :steps="steps" :back-route="{ name: 'Movies' }" />
+    <div class="movie__details">
       <div class="movie__details-wrapper">
-        <SectionTitle class="mb-32">{{ movie?.title }}</SectionTitle>
+        <SectionTitle>{{ movie?.title }}</SectionTitle>
         <div class="movie__details-basics">
-          <CustomChip class="mr-16">{{ movie?.genre.name }}</CustomChip>
+          <CustomChip class="movie__details-chip">{{
+            movie?.genre.name
+          }}</CustomChip>
           <span class="movie__details-text">{{ releaseYear }}</span>
           <EllipseIcon class="dot-divider" />
           <span class="movie__details-text">{{ movie?.length }}</span>
@@ -20,16 +18,25 @@
       </div>
       <img class="movie__details-image" :src="movie?.poster_url" />
     </div>
-    <div class="movie__screenings mx-sm-24">
-      <SectionTitle variation="32-32">Screenings:</SectionTitle>
-      <SectionTitle variation="32-32" color="bombay" class="mb-32">{{
-        dateString
-      }}</SectionTitle>
+    <div class="movie__screenings">
+      <SectionTitle class="movie__screenings-title" variation="32-32"
+        >Screenings:</SectionTitle
+      >
+      <SectionTitle
+        class="movie__screenings-title"
+        variation="32-32"
+        color="bombay"
+        >{{ dateString }}</SectionTitle
+      >
       <SelectDayFilter
         :noLabel="true"
         @updateCurrentDate="updateCurrentDate"
       ></SelectDayFilter>
-      <MovieCardDetailed v-if="!!movie" :movie="movieData" class="mt-64" />
+      <MovieCardDetailed
+        v-if="!!movie"
+        :movie="movieData"
+        class="movie__screenings-card"
+      />
     </div>
   </div>
 </template>
@@ -128,7 +135,9 @@ export default {
 <style lang="scss" scoped>
 .movie {
   &__details {
-    margin-top: 24px;
+    @include mx-mobile-only(24px);
+    margin-top: 64px;
+    margin-bottom: 64px;
     @include md-plus {
       display: flex;
     }
@@ -139,8 +148,12 @@ export default {
       }
     }
     &-basics {
+      margin-top: 32px;
       margin-bottom: 24px;
       @include flex(row, start, center);
+    }
+    &-chip {
+      margin-right: 16px;
     }
     &-text {
       @include font-roboto(14px, 700, 16px, $gray-jumbo);
@@ -157,6 +170,17 @@ export default {
       @include md {
         height: 400px;
       }
+    }
+  }
+  &__screenings {
+    @include mx-mobile-only(24px);
+    &-title {
+      &:nth-child(2) {
+        margin-bottom: 32px;
+      }
+    }
+    &-card {
+      margin-top: 64px;
     }
   }
 }

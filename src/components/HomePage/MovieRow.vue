@@ -1,5 +1,5 @@
 <template>
-  <div class="mb-64 mx-sm-24 movie-row">
+  <div class="movie-row">
     <div class="movie-row__actions">
       <CapitalLink color="dark-grey"
         >Soon <span class="desktop-only">in the cinema</span></CapitalLink
@@ -41,6 +41,8 @@ export default {
 </script>
 <style lang="scss">
 .movie-row {
+  @include mx-mobile-only(24px);
+  margin-bottom: 64px;
   &__actions {
     @include flex(row, space-between);
     margin-bottom: 24px;

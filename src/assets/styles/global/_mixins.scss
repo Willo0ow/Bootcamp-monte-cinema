@@ -10,3 +10,11 @@
     align-items: $align;
   }
 }
+@mixin mx-mobile-only($value){
+  margin-right: $value;
+  margin-left: $value;
+  @include md {
+    margin-left: 0;
+    margin-right: 0;
+  }
+}

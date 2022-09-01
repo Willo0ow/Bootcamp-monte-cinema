@@ -1,8 +1,8 @@
 <template>
   <div class="movies">
-    <BreadCrumbs :steps="steps" :back-route="{ name: 'Home' }" class="mb-64" />
-    <SectionTitle class="mb-32 mx-sm-24">All the movies</SectionTitle>
-    <div class="movie__gallery mb-64 mx-sm-24">
+    <BreadCrumbs :steps="steps" :back-route="{ name: 'Home' }" />
+    <SectionTitle class="movies__title">All the movies</SectionTitle>
+    <div class="movies__gallery">
       <div class="gallery__search">
         <CustomInput
           v-model="search"
@@ -90,6 +90,25 @@ export default {
 };
 </script>
 <style scoped lang="scss">
+.movies {
+  &__title {
+    @include mx-mobile-only(24px);
+    margin-top: 64px;
+    margin-bottom: 32px;
+  }
+  &__gallery {
+    @include mx-mobile-only(24px);
+    margin-bottom: 64px;
+    @include md {
+      gap: 40px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    }
+    @include lg {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+}
 .gallery__card {
   margin-bottom: 24px;
   @include md {
@@ -99,16 +118,6 @@ export default {
   @include lg {
     grid-area: span 1 / span 1;
     margin-bottom: 0;
-  }
-}
-.movie__gallery {
-  @include md {
-    gap: 40px;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-  }
-  @include lg {
-    grid-template-columns: 1fr 1fr 1fr;
   }
 }
 .gallery__search {

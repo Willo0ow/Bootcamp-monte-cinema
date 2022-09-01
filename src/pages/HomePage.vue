@@ -1,5 +1,5 @@
 <template>
-  <WelcomeSection class="mb-64" />
+  <WelcomeSection class="home__welcome" />
   <MovieRow />
   <Screenings />
   <ContactUs />
@@ -27,4 +27,10 @@ export default {
   },
 };
 </script>
-<style scoped lang="scss"></style>
+<style scoped lang="scss">
+.home {
+  &__welcome {
+    margin-bottom: 64px;
+  }
+}
+</style>

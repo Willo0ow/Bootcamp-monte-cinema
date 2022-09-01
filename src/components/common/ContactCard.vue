@@ -1,7 +1,7 @@
 <template>
   <div class="contact-card">
-    <div class="mb-40 contact-card__info">
-      <LocationIcon class="mr-16" />
+    <div class="contact-card__info">
+      <LocationIcon class="contact-card__info-icon" />
       <div class="contact-card__info--long">
         Monterail Sp. z o.o.<br />
         ul. Oławska 27-29<br />
@@ -9,12 +9,12 @@
         Poland
       </div>
     </div>
-    <div class="mb-40 contact-card__info">
-      <EmailIcon class="mr-16" />
+    <div class="contact-card__info">
+      <EmailIcon class="contact-card__info-icon" />
       <div>hello@monterail.com</div>
     </div>
     <div class="contact-card__info">
-      <PhoneIcon class="mr-16" />
+      <PhoneIcon class="contact-card__info-icon" />
       <div>+48 533 600 136</div>
     </div>
   </div>
@@ -43,6 +43,12 @@ export default {
   }
   &__info {
     @include flex();
+    &:not(:last-child) {
+      margin-bottom: 40px;
+    }
+    &-icon {
+      margin-right: 16px;
+    }
   }
   &__info--long {
     display: inline-block;

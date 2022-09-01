@@ -1,12 +1,12 @@
 <template>
   <div class="screenings">
-    <div class="screenings__header mx-sm-24">
+    <div class="screenings__header">
       <SectionTitle variation="48-64">Screenings:</SectionTitle>
-      <SectionTitle variation="48-64" color="bombay" class="mb-32">{{
+      <SectionTitle variation="48-64" color="bombay">{{
         dateString
       }}</SectionTitle>
     </div>
-    <div class="screenings__filters mb-64 mx-sm-24">
+    <div class="screenings__filters">
       <div class="screenings__filters-day">
         <SelectDayFilter @updateCurrentDate="updateCurrentDate" />
       </div>
@@ -87,24 +87,32 @@ export default {
 };
 </script>
 <style scoped lang="scss">
-.screenings__filters {
-  @include flex(column, false, start);
-  @include lg {
-    @include flex(row, space-between);
+.screenings {
+  &__header {
+    @include mx-mobile-only(24px);
+    margin-bottom: 32px;
   }
-  &-day {
-    width: 100%;
+  &__filters {
+    @include mx-mobile-only(24px);
+    margin-bottom: 64px;
+    @include flex(column, false, start);
     @include lg {
-      width: 79%;
+      @include flex(row, space-between);
     }
-  }
-  &-movie {
-    width: 100%;
-    margin-top: 10px;
-    @include lg {
-      margin-top: 0;
-      min-width: 325px;
-      width: 31%;
+    &-day {
+      width: 100%;
+      @include lg {
+        width: 79%;
+      }
+    }
+    &-movie {
+      width: 100%;
+      margin-top: 10px;
+      @include lg {
+        margin-top: 0;
+        min-width: 325px;
+        width: 31%;
+      }
     }
   }
 }

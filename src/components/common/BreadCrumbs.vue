@@ -5,20 +5,20 @@
       sm-text
       color="gray"
       :to="backRoute"
-      class="back__btn"
+      class="breadcrumbs__back-btn"
     >
-      <ArrowLeftIcon class="btn__icon" />
+      <ArrowLeftIcon class="breadcrumbs__back-btn-icon" />
       <span class="desktop-only">Back</span>
     </CustomButton>
     <template v-for="(step, index) in steps" :key="step.text">
       <component
-        class="step mr-8"
+        class="breadcrumbs__step"
         :is="step.isLink ? 'router-link' : 'span'"
         :color="step.isLink ? 'red' : 'gray'"
         :to="step.isLink ? step.path : ''"
         >{{ step.text }}</component
       >
-      <ChevronRightIcon class="mr-8" v-if="isNotLast(index)" />
+      <ChevronRightIcon class="breadcrumbs__icon" v-if="isNotLast(index)" />
     </template>
   </div>
 </template>
@@ -41,27 +41,37 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.step {
-  @include font-roboto-mono(16px, 500, 100%, $gray-tuna);
-  letter-spacing: 1.5;
-  &[color="red"] {
-    color: $cherry-red;
-  }
-}
 .breadcrumbs {
   @include flex(false, start, center);
   padding: 20px 24px;
   background-color: $pink-wisp;
-}
-.btn__icon {
-  @include lg {
-    margin-right: 16px;
+  &__back-btn {
+    margin-right: 12px;
+    @include lg {
+      margin-right: 32px;
+    }
+    &-icon {
+      @include lg {
+        margin-right: 16px;
+      }
+    }
+  }
+  &__step {
+    margin-right: 8px;
+    @include font-roboto-mono(16px, 500, 100%, $gray-tuna);
+    letter-spacing: 1.5;
+    &[color="red"] {
+      color: $cherry-red;
+    }
+  }
+  &__icon {
+    margin-right: 8px;
   }
 }
-.back__btn {
-  margin-right: 12px;
+.desktop-only {
+  display: none;
   @include lg {
-    margin-right: 32px;
+    display: inline-block;
   }
 }
 </style>

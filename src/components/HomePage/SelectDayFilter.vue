@@ -8,7 +8,7 @@
       outlined
       color="gray"
       @click="selectDay(day.date)"
-      class="mr-8 select-day__button"
+      class="select-day__button"
       :class="{ selected: selectedDay === day.date }"
       sm-size
       >{{ day.label }}</CustomButton
@@ -24,7 +24,6 @@
           outlined
           rounded
           color="gray"
-          class="mr-8"
           sm-size
           @click="togglePopover()"
         >
@@ -93,6 +92,7 @@ export default {
     align-self: center;
   }
   &__button {
+    margin-right: 8px;
     @include md {
       &:nth-last-child(3),
       &:nth-last-child(2) {
