@@ -22,7 +22,7 @@ export default {
 .movie-list {
   &__item {
     margin-bottom: 0;
-    @include md {
+    @include breakpoint-md {
       margin-bottom: 40px;
     }
   }

@@ -1,8 +1,8 @@
 <template>
   <div class="screenings">
     <div class="screenings__header">
-      <SectionTitle variation="48-64">Screenings:</SectionTitle>
-      <SectionTitle variation="48-64" color="bombay">{{
+      <SectionTitle :variation="titleVariation">Screenings:</SectionTitle>
+      <SectionTitle :variation="titleVariation" color="bombay">{{
         dateString
       }}</SectionTitle>
     </div>
@@ -37,6 +37,12 @@ import { storeToRefs } from "pinia";
 
 export default {
   components: { SectionTitle, MovieList, CustomSelect, SelectDayFilter },
+  props: {
+    titleVariation: {
+      type: String,
+      default: "default",
+    },
+  },
   setup() {
     const selectedFilter = ref(0);
     const weekdays = useWeekdays();
@@ -89,26 +95,26 @@ export default {
 <style scoped lang="scss">
 .screenings {
   &__header {
-    @include mx-mobile-only(24px);
+    @include mx-screen-sm-only(24px);
     margin-bottom: 32px;
   }
   &__filters {
-    @include mx-mobile-only(24px);
+    @include mx-screen-sm-only(24px);
     margin-bottom: 64px;
     @include flex(column, false, start);
-    @include lg {
+    @include breakpoint-lg {
       @include flex(row, space-between);
     }
     &-day {
       width: 100%;
-      @include lg {
+      @include breakpoint-lg {
         width: 79%;
       }
     }
     &-movie {
       width: 100%;
       margin-top: 10px;
-      @include lg {
+      @include breakpoint-lg {
         margin-top: 0;
         min-width: 325px;
         width: 31%;

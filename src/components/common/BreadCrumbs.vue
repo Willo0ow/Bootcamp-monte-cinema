@@ -47,11 +47,11 @@ export default {
   background-color: $pink-wisp;
   &__back-btn {
     margin-right: 12px;
-    @include lg {
+    @include breakpoint-lg {
       margin-right: 32px;
     }
     &-icon {
-      @include lg {
+      @include breakpoint-lg {
         margin-right: 16px;
       }
     }
@@ -70,7 +70,7 @@ export default {
 }
 .desktop-only {
   display: none;
-  @include lg {
+  @include breakpoint-lg {
     display: inline-block;
   }
 }

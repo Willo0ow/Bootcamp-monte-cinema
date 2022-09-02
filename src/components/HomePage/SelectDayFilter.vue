@@ -84,7 +84,7 @@ export default {
     padding-bottom: 10px;
     @include flex();
     overflow-x: scroll;
-    @include lg {
+    @include breakpoint-lg {
       padding-bottom: 0;
     }
   }
@@ -93,23 +93,29 @@ export default {
   }
   &__button {
     margin-right: 8px;
-    @include md {
+    @include breakpoint-md {
       &:nth-last-child(3),
       &:nth-last-child(2) {
         display: none;
       }
     }
-    @include lg {
+    @include breakpoint-lg {
       &:nth-last-child(3),
       &:nth-last-child(2) {
         display: none;
       }
     }
-    @include xl {
+    @include breakpoint-xl {
       &:nth-last-child(3),
       &:nth-last-child(2) {
         @include flex();
       }
+    }
+  }
+  @include breakpoint-xl {
+    &:nth-last-child(3),
+    &:nth-last-child(2) {
+      @include flex();
     }
   }
 }

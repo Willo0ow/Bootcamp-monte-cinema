@@ -41,7 +41,7 @@ export default {
 </script>
 <style lang="scss">
 .movie-row {
-  @include mx-mobile-only(24px);
+  @include mx-screen-sm-only(24px);
   margin-bottom: 64px;
   &__actions {
     @include flex(row, space-between);
@@ -49,7 +49,7 @@ export default {
   }
   &__movies {
     @include flex(column, start);
-    @include md {
+    @include breakpoint-md {
       @include flex(row, space-between);
     }
   }
@@ -61,7 +61,7 @@ export default {
     &:nth-child(2) {
       margin-right: 0;
     }
-    @include xl {
+    @include breakpoint-xl {
       &:nth-child(3) {
         display: flex;
       }
@@ -74,14 +74,14 @@ export default {
 
 .not-last-card {
   margin-right: 0;
-  @include md {
+  @include breakpoint-md {
     margin-right: 40px;
   }
 }
 
 .desktop-only {
   display: none;
-  @include lg {
+  @include breakpoint-lg {
     display: inline-block;
   }
 }

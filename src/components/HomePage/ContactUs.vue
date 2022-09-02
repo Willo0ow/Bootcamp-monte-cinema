@@ -19,7 +19,7 @@ export default {
   width: fit-content;
   margin-top: 144px;
   width: 100%;
-  @include md {
+  @include breakpoint-md {
     margin-top: 188px;
   }
   &__title {

@@ -62,11 +62,12 @@ export default {
 
 <style lang="scss" scoped>
 .contact-page {
-  @include mx-mobile-only(24px);
+  @include mx-screen-sm-only(24px);
+  margin-bottom: 24px;
   &__title {
     margin-top: 40px;
     margin-bottom: 24px;
-    @include md {
+    @include breakpoint-md {
       margin-top: 64px;
       margin-bottom: 64px;
     }
@@ -76,7 +77,7 @@ export default {
     display: grid;
     border-radius: 8px;
     grid-template-columns: 1fr;
-    @include lg {
+    @include breakpoint-lg {
       grid-template-columns: 1fr 1fr 80px;
     }
   }
@@ -85,7 +86,7 @@ export default {
       width: 100%;
       border-radius: 8px 8px 0 0;
       height: 284px;
-      @include lg {
+      @include breakpoint-lg {
         height: 100%;
         border-radius: 8px 0 0 8px;
       }
@@ -101,7 +102,7 @@ export default {
     padding-top: 24px;
     border-radius: 0 0 8px 8px;
     border-top: 2px white solid;
-    @include lg {
+    @include breakpoint-lg {
       border-radius: 0 8px 8px 0;
       @include flex(column, space-around);
     }
@@ -109,7 +110,7 @@ export default {
   &__icon {
     margin-right: 8px;
     margin-left: 8px;
-    @include lg {
+    @include breakpoint-lg {
       margin-right: 24px;
       margin-left: 24px;
     }

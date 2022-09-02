@@ -69,7 +69,7 @@ export default {
 .icon {
   height: 20px;
   width: 20px;
-  @include md {
+  @include breakpoint-md {
     height: 32px;
     width: 32px;
   }

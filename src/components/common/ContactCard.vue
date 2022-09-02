@@ -33,7 +33,7 @@ export default {
   background: $gray-athens;
   @include font-roboto-mono(18px, 400, 32px, $gray-tuna);
   letter-spacing: 0.015em;
-  @include sm {
+  @include breakpoint-sm {
     padding: 64px;
   }
   &__info {

@@ -75,7 +75,7 @@ export default {
   box-shadow: inset 0px -1px 0px #eaeaea;
   padding: 32px 16px;
   border-radius: 0;
-  @include md {
+  @include breakpoint-md {
     padding: 40px;
     box-shadow: 0px 24px 78px rgba(0, 0, 0, 0.08),
       0px 5.36071px 17.4223px rgba(0, 0, 0, 0.0238443),
@@ -87,7 +87,7 @@ export default {
   }
   &__image {
     margin-right: 16px;
-    @include md {
+    @include breakpoint-md {
       margin-right: 40px;
     }
     & img {
@@ -95,7 +95,7 @@ export default {
       height: 68px;
       object-fit: cover;
       object-position: 20% 10%;
-      @include md {
+      @include breakpoint-md {
         height: 132px;
         width: 98px;
       }
@@ -115,14 +115,14 @@ export default {
     }
     &-desktop {
       display: none;
-      @include md {
+      @include breakpoint-md {
         @include flex();
       }
     }
     &-mobile {
       margin-top: 21px;
       @include flex();
-      @include md {
+      @include breakpoint-md {
         display: none;
       }
     }
