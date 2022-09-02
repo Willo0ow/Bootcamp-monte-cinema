@@ -7,8 +7,8 @@
   </div>
 </template>
 <script>
-import BreadCrumbs from "../components/common/BreadCrumbs.vue";
-import Screenings from "../components/HomePage/Screenings.vue";
+import BreadCrumbs from "@components/common/BreadCrumbs.vue";
+import Screenings from "@components/HomePage/Screenings.vue";
 import { useMovieStore } from "@/stores/movies";
 import { onMounted } from "vue";
 import { storeToRefs } from "pinia";

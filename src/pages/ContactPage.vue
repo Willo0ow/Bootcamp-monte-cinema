@@ -1,13 +1,13 @@
 <template>
   <div class="contact-page">
-    <BreadCrumbs :steps="steps" :back-route="{ name: 'Home' }" />
+    <BreadCrumbs :steps="breadcrumbSteps" :back-route="{ name: 'Home' }" />
     <SectionTitle class="contact-page__title">Contact Us</SectionTitle>
     <div class="contact-page__card">
       <div class="contact-page__image">
         <MapImage />
       </div>
       <ContactCard class="contact-page__details" />
-      <div class="contact-page__icons">
+      <div class="contact-page__icons-wrapper">
         <TweeterIcon class="contact-page__icon" />
         <FacebookIcon class="contact-page__icon" />
         <LinkedinIcon class="contact-page__icon" />
@@ -21,11 +21,11 @@
 </template>
 
 <script>
-import { reactive, toRefs } from "vue";
-import BreadCrumbs from "../components/common/BreadCrumbs.vue";
-import SectionTitle from "../components/common/SectionTitle.vue";
+import { ref } from "vue";
+import BreadCrumbs from "@components/common/BreadCrumbs.vue";
+import SectionTitle from "@components/common/SectionTitle.vue";
 import MapImage from "@assets/images/map.svg?component";
-import ContactCard from "../components/common/ContactCard.vue";
+import ContactCard from "@components/common/ContactCard.vue";
 
 import TweeterIcon from "@assets/images/icons/tweeter.svg?component";
 import FacebookIcon from "@assets/images/icons/facebook.svg?component";
@@ -37,11 +37,9 @@ import BasketballIcon from "@assets/images/icons/basketball.svg?component";
 
 export default {
   setup() {
-    const state = reactive({
-      steps: [{ text: "Contact us", isLink: false }],
-    });
+    const breadcrumbSteps = ref([{ text: "Contact us", isLink: false }]);
     return {
-      ...toRefs(state),
+      breadcrumbSteps,
     };
   },
   components: {
@@ -95,7 +93,7 @@ export default {
   &__details {
     background-color: $gray-athens;
   }
-  &__icons {
+  &__icons-wrapper {
     @include flex(row, center);
     background-color: $gray-athens;
     padding-bottom: 24px;
