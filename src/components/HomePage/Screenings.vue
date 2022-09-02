@@ -40,7 +40,7 @@ export default {
   props: {
     titleVariation: {
       type: String,
-      default: "",
+      default: "default",
     },
   },
   setup() {

@@ -1,8 +1,8 @@
 <template>
   <div class="movies">
-    <BreadCrumbs :steps="steps" :back-route="{ name: 'Home' }" />
+    <BreadCrumbs :steps="breadcrumbSteps" :back-route="{ name: 'Home' }" />
     <div class="movies__screenings">
-      <Screenings title-variation="default" />
+      <Screenings />
     </div>
   </div>
 </template>
@@ -18,7 +18,7 @@ export default {
     Screenings,
   },
   setup() {
-    const steps = [{ text: "Screenings", isLink: false }];
+    const breadcrumbSteps = [{ text: "Screenings", isLink: false }];
     const movieStore = useMovieStore();
     const { movies } = storeToRefs(movieStore);
     onMounted(async () => {
@@ -26,7 +26,7 @@ export default {
         await movieStore.getMovies();
       }
     });
-    return { steps };
+    return { breadcrumbSteps };
   },
 };
 </script>

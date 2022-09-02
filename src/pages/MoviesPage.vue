@@ -1,6 +1,6 @@
 <template>
   <div class="movies">
-    <BreadCrumbs :steps="steps" :back-route="{ name: 'Home' }" />
+    <BreadCrumbs :steps="breadcrumbSteps" :back-route="{ name: 'Home' }" />
     <SectionTitle class="movies__title">All the movies</SectionTitle>
     <div class="movies__gallery">
       <div class="gallery__search">
@@ -57,7 +57,7 @@ export default {
   setup() {
     const movieStore = useMovieStore();
     const { movies } = storeToRefs(movieStore);
-    const steps = [{ text: "Movies", isLink: false }];
+    const breadcrumbSteps = [{ text: "Movies", isLink: false }];
     const selectedCategory = ref();
     const categories = ref([]);
     onMounted(async () => {
@@ -85,7 +85,13 @@ export default {
           );
     });
 
-    return { steps, categories, selectedCategory, search, filteredMovies };
+    return {
+      breadcrumbSteps,
+      categories,
+      selectedCategory,
+      search,
+      filteredMovies,
+    };
   },
 };
 </script>
