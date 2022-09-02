@@ -1,49 +1,32 @@
 <template>
   <div class="register">
-    <div class="register__title">
-      <SectionTitle variation="40-60-80">Ahoy you!</SectionTitle>
-      <SectionTitle color="bombay" variation="40-60-80"
-        >Care to register?</SectionTitle
-      >
-    </div>
-    <FormCard class="register__card">
-      <form class="register__form">
-        <CustomInput
-          class="register__input"
-          v-model="email"
-          label="Email"
-          placeholder="Something ending with"
-        />
-        <CustomInput
-          class="register__input"
-          v-model="password"
-          label="Password"
-          placeholder="Enter your password"
-        />
-        <div class="register__buttons">
-          <CustomButton raw-text class="register__button"
-            >Log in instead</CustomButton
-          >
-          <CustomButton class="register__button">Next step</CustomButton>
-        </div>
-      </form>
-    </FormCard>
+    <router-view
+      @setRegisterProperty="setRegisterDataProperty"
+      @registerUser="registerUser"
+    ></router-view>
   </div>
 </template>
 
 <script>
-import FormCard from "../components/Register/FormCard.vue";
-import SectionTitle from "../components/common/SectionTitle.vue";
-import CustomInput from "../components/common/CustomInput.vue";
-import { ref } from "vue";
-import CustomButton from "../components/common/CustomButton.vue";
+import { reactive } from "vue";
 
 export default {
-  components: { FormCard, SectionTitle, CustomInput, CustomButton },
   setup() {
-    const email = ref("");
-    const password = ref("");
-    return { email, password };
+    const registerData = reactive({
+      email: "",
+      password: "",
+      firstName: "",
+      lastName: "",
+      dateOfBirth: null,
+      areTermsAccepted: false,
+    });
+    function setRegisterDataProperty(property, newValue) {
+      registerData[property] = newValue;
+    }
+    function registerUser() {
+      console.log("register");
+    }
+    return { registerData, setRegisterDataProperty, registerUser };
   },
 };
 </script>
@@ -58,36 +41,5 @@ export default {
   }
   margin: 0 auto;
   box-sizing: border-box;
-  &__title {
-    margin-bottom: 40px;
-    @include breakpoint-xs {
-      text-align: center;
-      margin-right: 24px;
-      margin-left: 24px;
-    }
-  }
-  &__card {
-    width: 100%;
-  }
-  &__form {
-    width: 100%;
-  }
-  &__input {
-    width: 100%;
-    margin-bottom: 24px;
-  }
-  &__buttons {
-    @include flex(column);
-    flex-flow: column-reverse;
-    width: 100%;
-    @include breakpoint-sm {
-      @include flex(row);
-    }
-    margin-top: 40px;
-  }
-  &__button {
-    width: 100%;
-    margin-bottom: 24px;
-  }
 }
 </style>
