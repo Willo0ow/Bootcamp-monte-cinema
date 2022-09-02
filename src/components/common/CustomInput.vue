@@ -1,17 +1,19 @@
 <template>
-  <CustomLabel :for="label">{{ label }}</CustomLabel>
-  <div class="input__container">
-    <input
-      v-bind="$attrs"
-      :name="label"
-      :id="label"
-      class="input__base"
-      :value="value"
-      @input="updateValue($event)"
-      :type="type"
-    />
-    <div class="input__icon--append">
-      <slot name="appendIcon" />
+  <div class="custom-input">
+    <CustomLabel :for="label">{{ label }}</CustomLabel>
+    <div class="custom-input__container">
+      <input
+        v-bind="$attrs"
+        :name="label"
+        :id="label"
+        class="custom-input__base"
+        :value="value"
+        @input="updateValue($event)"
+        :type="type"
+      />
+      <div class="custom-input__icon--append">
+        <slot name="appendIcon" />
+      </div>
     </div>
   </div>
 </template>
@@ -40,37 +42,38 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.input__base {
-  @include font-roboto(16px, 400, 100%, $gray-tuna);
-  background: $gray-athens;
-  border-radius: 8px;
-  border: none;
-  padding: 16px 24px;
-  width: 100%;
-  box-sizing: border-box;
-  &:hover {
-    background: $gray-some;
+.custom-input {
+  &__base {
+    @include font-roboto(16px, 400, 100%, $gray-tuna);
+    background: $gray-athens;
+    border-radius: 8px;
+    border: none;
+    padding: 16px 24px;
+    width: 100%;
+    box-sizing: border-box;
+    &:hover {
+      background: $gray-some;
+    }
+    &:active,
+    &:focus {
+      outline: 1px solid $blue-intense;
+      background: $blue-bg;
+    }
+    &:invalid {
+      outline: 1px solid $cherry-red;
+    }
   }
-  &:active,
-  &:focus {
-    outline: 1px solid $blue-intense;
-    background: $blue-bg;
+  &__container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
   }
-  &:invalid {
-    outline: 1px solid $cherry-red;
+  &__icon--append {
+    position: absolute;
+    right: 24px;
+    min-width: 18px;
+    text-align: center;
   }
-}
-
-.input__container {
-  position: relative;
-  width: 100%;
-  display: flex;
-  align-items: center;
-}
-.input__icon--append {
-  position: absolute;
-  right: 24px;
-  min-width: 18px;
-  text-align: center;
 }
 </style>
