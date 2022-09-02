@@ -1,6 +1,6 @@
 <template>
   <div class="movie">
-    <BreadCrumbs :steps="steps" :back-route="{ name: 'Movies' }" />
+    <BreadCrumbs :steps="breadcrumbSteps" :back-route="{ name: 'Movies' }" />
     <div class="movie__details">
       <div class="movie__details-wrapper">
         <SectionTitle>{{ movie?.title }}</SectionTitle>
@@ -102,7 +102,7 @@ export default {
         : null
     );
 
-    const steps = computed(() => [
+    const breadcrumbSteps = computed(() => [
       { text: "Movies", isLink: true, path: "Movies" },
       { text: movie.value?.title || "", isLink: false },
     ]);
@@ -110,7 +110,7 @@ export default {
     const dateString = computed(() => formatDateString(currentDate.value));
 
     return {
-      steps,
+      breadcrumbSteps,
       movie,
       releaseYear,
       updateCurrentDate,

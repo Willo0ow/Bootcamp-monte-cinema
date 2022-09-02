@@ -1,7 +1,7 @@
 <template>
   <WelcomeSection class="home__welcome" />
   <MovieRow />
-  <Screenings />
+  <Screenings title-variation="48-64" />
   <ContactUs />
 </template>
 <script>

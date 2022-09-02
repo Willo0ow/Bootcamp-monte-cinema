@@ -112,5 +112,11 @@ export default {
       }
     }
   }
+  @include breakpoint-xl {
+    &:nth-last-child(3),
+    &:nth-last-child(2) {
+      @include flex();
+    }
+  }
 }
 </style>

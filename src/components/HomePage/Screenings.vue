@@ -1,8 +1,8 @@
 <template>
   <div class="screenings">
     <div class="screenings__header">
-      <SectionTitle variation="48-64">Screenings:</SectionTitle>
-      <SectionTitle variation="48-64" color="bombay">{{
+      <SectionTitle :variation="titleVariation">Screenings:</SectionTitle>
+      <SectionTitle :variation="titleVariation" color="bombay">{{
         dateString
       }}</SectionTitle>
     </div>
@@ -37,6 +37,12 @@ import { storeToRefs } from "pinia";
 
 export default {
   components: { SectionTitle, MovieList, CustomSelect, SelectDayFilter },
+  props: {
+    titleVariation: {
+      type: String,
+      default: "default",
+    },
+  },
   setup() {
     const selectedFilter = ref(0);
     const weekdays = useWeekdays();
