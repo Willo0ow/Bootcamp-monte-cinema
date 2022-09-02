@@ -28,6 +28,12 @@ const router = createRouter({
       component: () => import("@/pages/MoviesPage.vue"),
       name: "ContactUs",
     },
+    {
+      path: "/register",
+      component: () => import("@/pages/RegisterPage.vue"),
+      name: "Register",
+      meta: { navVariant: "NavBarRegister" },
+    },
   ],
 });
 export default router;

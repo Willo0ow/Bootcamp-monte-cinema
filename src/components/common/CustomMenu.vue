@@ -11,7 +11,7 @@
           <router-link to="/">Login</router-link>
         </li>
         <li class="menu__option">
-          <router-link to="/">Register</router-link>
+          <router-link :to="{ name: 'Register' }">Register</router-link>
         </li>
       </ul>
     </SDropdown>

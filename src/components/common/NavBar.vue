@@ -11,7 +11,7 @@
       >
     </div>
     <div class="nav__buttons">
-      <CustomButton text>Register</CustomButton>
+      <CustomButton raw-text :to="{ name: 'Register' }">Register</CustomButton>
       <CustomButton>Login</CustomButton>
     </div>
     <div class="nav__menu">
@@ -50,10 +50,13 @@ export default {
   width: 100%;
   box-sizing: border-box;
   @include flex(row, space-between, center);
-  padding: 0 48px;
+  padding: 0 24px;
   max-width: 1440px;
   @include breakpoint-xl {
     margin: 0 auto;
+  }
+  @include breakpoint-sm {
+    padding: 0 48px;
   }
   &__buttons {
     display: none;
