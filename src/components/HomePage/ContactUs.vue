@@ -3,7 +3,7 @@
     <SectionTitle variation="40-64" class="contact__title">
       Contact Us
     </SectionTitle>
-    <ContactCard />
+    <ContactCard class="contact__details" />
   </div>
 </template>
 <script>
@@ -25,6 +25,13 @@ export default {
   &__title {
     margin-bottom: 48px;
     text-align: center;
+  }
+  &__details {
+    margin: 0 auto 124px;
+    border-radius: 24px;
+    width: 50%;
+    min-width: 315px;
+    max-width: 600px;
   }
 }
 </style>

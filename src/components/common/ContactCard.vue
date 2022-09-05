@@ -30,14 +30,9 @@ export default {
 <style lang="scss" scoped>
 .contact-card {
   padding: 24px 17px;
-  margin: 0 auto 124px;
   background: $gray-athens;
-  border-radius: 24px;
   @include font-roboto-mono(18px, 400, 32px, $gray-tuna);
   letter-spacing: 0.015em;
-  width: 50%;
-  min-width: 315px;
-  max-width: 600px;
   @include breakpoint-sm {
     padding: 64px;
   }

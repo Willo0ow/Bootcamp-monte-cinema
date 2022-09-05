@@ -25,7 +25,7 @@ const router = createRouter({
     },
     {
       path: "/contactUs",
-      component: () => import("@/pages/MoviesPage.vue"),
+      component: () => import("@/pages/ContactPage.vue"),
       name: "ContactUs",
     },
     {
