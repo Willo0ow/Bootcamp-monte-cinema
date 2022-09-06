@@ -5,30 +5,36 @@
       >Care to register?</SectionTitle
     >
   </div>
-  <FormCard>
+  <FormCard @onSubmit="(event) => onSubmit(event)">
     <template #inputs>
       <CustomInput
+        ref="emailInput"
         class="form-card__input"
         v-model="email.inputValue"
         label="Email"
         placeholder="Something ending with monterail"
         type="email"
         :rules="emailRules"
+        @confirmValidation="email.isValid = true"
       />
       <CustomInput
+        ref="passwordInput"
         class="form-card__input"
         v-model="password.inputValue"
         label="Password"
         placeholder="Enter your password"
         type="password"
         :rules="passwordRules"
+        @confirmValidation="password.isValid = true"
       />
     </template>
     <template #buttons>
-      <CustomButton class="form-card__button" raw-text
+      <CustomButton class="form-card__button" raw-text :to="{ name: 'Login' }"
         >Log in instead</CustomButton
       >
-      <CustomButton class="form-card__button">Next step</CustomButton>
+      <CustomButton class="form-card__button" type="submit"
+        >Next step</CustomButton
+      >
     </template>
   </FormCard>
 </template>
@@ -40,6 +46,7 @@ import CustomInput from "@components/common/CustomInput.vue";
 import CustomButton from "@components/common/CustomButton.vue";
 import { useRegisterStore } from "@/stores/register";
 import { storeToRefs } from "pinia";
+import { ref } from "vue";
 
 export default {
   emits: ["setRegisterDataProperty"],
@@ -63,7 +70,29 @@ export default {
         visible: false,
       },
     ];
-    return { email, password, emailRules, passwordRules };
+    const emailInput = ref(null);
+    const passwordInput = ref(null);
+
+    function validateForm() {
+      emailInput.value.validate();
+      passwordInput.value.validate();
+      return email.value.isValid && password.value.isValid;
+    }
+    function onSubmit(event) {
+      event.preventDefault();
+      if (validateForm()) {
+        console.log("nextStep");
+      }
+    }
+    return {
+      email,
+      password,
+      emailRules,
+      passwordRules,
+      onSubmit,
+      emailInput,
+      passwordInput,
+    };
   },
 };
 </script>

@@ -7,10 +7,11 @@
         :name="label"
         :id="label"
         class="custom-input__base"
+        :class="validationClasses"
         :value="value"
         @input="updateValue($event)"
         :type="type"
-        @blur="validate = true"
+        @blur="validate"
       />
       <div class="custom-input__icon--append">
         <slot name="appendIcon" />
@@ -30,7 +31,7 @@
 </template>
 <script>
 import CustomLabel from "@components/common/CustomLabel.vue";
-import { ref, computed } from "vue";
+import { ref, computed, watch } from "vue";
 export default {
   components: { CustomLabel },
   props: {
@@ -39,7 +40,7 @@ export default {
     type: { type: String, default: "text" },
     rules: { type: Array, default: () => [] },
   },
-  emits: ["update:modelValue"],
+  emits: ["update:modelValue", "confirmValidation"],
   setup(props, context) {
     const value = ref(props.modelValue);
 
@@ -48,10 +49,14 @@ export default {
       context.emit("update:modelValue", value.value);
     }
 
-    const validate = ref(false);
+    const applyValidation = ref(false);
+    function validate() {
+      applyValidation.value = true;
+    }
+
     const messages = computed(() => {
       if (props.rules.length) {
-        if (validate.value) {
+        if (applyValidation.value) {
           return props.rules.map((rule) => {
             const validationResult = rule.isValid(value.value);
             const message = { text: rule.message };
@@ -68,11 +73,36 @@ export default {
       }
       return [];
     });
+
+    const isInputValid = computed(() => {
+      if (
+        !messages.value.length ||
+        messages.value.every((message) => message.type === "success")
+      )
+        return true;
+      return false;
+    });
+
+    watch(isInputValid, (newValue) => {
+      if (newValue === true) {
+        context.emit("confirmValidation");
+      }
+    });
+
+    const validationClasses = computed(() => ({
+      "custom-input__base--error": !isInputValid.value && applyValidation.value,
+      "custom-input__base--success":
+        isInputValid.value && applyValidation.value,
+    }));
+
     return {
       value,
       updateValue,
       messages,
       validate,
+      isInputValid,
+      applyValidation,
+      validationClasses,
     };
   },
 };
@@ -87,6 +117,10 @@ export default {
     padding: 16px 24px;
     width: 100%;
     box-sizing: border-box;
+    &--error,
+    &--error:focus {
+      outline: $cherry-red 1px solid;
+    }
     &:hover {
       background: $gray-some;
     }
@@ -97,6 +131,9 @@ export default {
     }
     &:invalid {
       outline: 1px solid $cherry-red;
+    }
+    &--success {
+      outline: $green-success 1px solid;
     }
   }
   &__container {

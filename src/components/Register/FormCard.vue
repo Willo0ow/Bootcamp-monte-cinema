@@ -1,6 +1,10 @@
 <template>
   <div class="form-card">
-    <form class="form-card__form">
+    <form
+      class="form-card__form"
+      @submit="$emit('onSubmit', $event)"
+      novalidate
+    >
       <slot name="inputs" />
       <div class="form-card__buttons">
         <slot name="buttons" />
@@ -9,7 +13,9 @@
   </div>
 </template>
 <script>
-export default {};
+export default {
+  emits: ["onSubmit"],
+};
 </script>
 <style lang="scss" scoped>
 .form-card {
