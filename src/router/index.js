@@ -30,20 +30,9 @@ const router = createRouter({
     },
     {
       path: "/register",
-      meta: { navVariant: "NavBarRegister" },
       component: () => import("@/pages/RegisterPage.vue"),
-      children: [
-        {
-          path: "",
-          name: "Register",
-          component: () => import("@/components/Register/CredentialsSection.vue"),
-        },
-        {
-          path: "",
-          name: "RegisterDetails",
-          component: () => import("@/components/Register/CredentialsSection.vue"),
-        },
-      ],
+      name: "Register",
+      meta: { navVariant: "NavBarRegister" },
     },
   ],
 });

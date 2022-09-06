@@ -1,38 +1,15 @@
 <template>
   <div class="form-card">
     <form class="form-card__form">
-      <CustomInput
-        v-for="field of fields"
-        :key="field.id"
-        class="form-card__input"
-        v-model="field.value"
-        :label="field.label"
-        :placeholder="field.placeholder"
-      />
-      <slot name="additionalInputs" />
+      <slot name="inputs" />
       <div class="form-card__buttons">
-        <CustomButton
-          v-for="btn of formButtons"
-          :key="btn.id"
-          class="form-card__button"
-          v-bind="btn.attrs"
-          >{{ btn.label }}</CustomButton
-        >
+        <slot name="buttons" />
       </div>
     </form>
   </div>
 </template>
 <script>
-import CustomInput from "@components/common/CustomInput.vue";
-import CustomButton from "@components/common/CustomButton.vue";
-export default {
-  components: { CustomInput, CustomButton },
-  props: {
-    fields: { type: Array, required: true },
-    formButtons: { type: Array, required: true },
-  },
-  script(props) {},
-};
+export default {};
 </script>
 <style lang="scss" scoped>
 .form-card {
@@ -55,10 +32,6 @@ export default {
   &__form {
     width: 100%;
   }
-  &__input {
-    width: 100%;
-    margin-bottom: 24px;
-  }
   &__buttons {
     @include flex(column);
     flex-flow: column-reverse;
@@ -67,10 +40,6 @@ export default {
       @include flex(row);
     }
     margin-top: 40px;
-  }
-  &__button {
-    width: 100%;
-    margin-bottom: 24px;
   }
 }
 </style>

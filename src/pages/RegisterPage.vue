@@ -1,32 +1,18 @@
 <template>
   <div class="register">
-    <router-view
-      @setRegisterProperty="setRegisterDataProperty"
-      @registerUser="registerUser"
-    ></router-view>
+    <CredentialsSection
+
+    ></CredentialsSection>
   </div>
 </template>
 
 <script>
-import { reactive } from "vue";
+import CredentialsSection from "../components/Register/CredentialsSection.vue";
 
 export default {
+  components: { CredentialsSection },
   setup() {
-    const registerData = reactive({
-      email: "",
-      password: "",
-      firstName: "",
-      lastName: "",
-      dateOfBirth: null,
-      areTermsAccepted: false,
-    });
-    function setRegisterDataProperty(property, newValue) {
-      registerData[property] = newValue;
-    }
-    function registerUser() {
-      console.log("register");
-    }
-    return { registerData, setRegisterDataProperty, registerUser };
+    return {  };
   },
 };
 </script>
@@ -39,7 +25,7 @@ export default {
     max-width: 605px;
     padding-top: 120px;
   }
-  margin: 0 auto;
+  margin: 0 auto 64px;
   box-sizing: border-box;
 }
 </style>

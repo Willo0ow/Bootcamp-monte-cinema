@@ -10,33 +10,69 @@
         :value="value"
         @input="updateValue($event)"
         :type="type"
+        @blur="validate = true"
       />
       <div class="custom-input__icon--append">
         <slot name="appendIcon" />
+      </div>
+    </div>
+    <div class="custom-input__messages-wrapper">
+      <div
+        v-for="(message, index) in messages"
+        :key="index"
+        class="custom-input__message"
+        :class="`custom-input__message--${message.type}`"
+      >
+        {{ message.visible ? message.text : "" }}
       </div>
     </div>
   </div>
 </template>
 <script>
 import CustomLabel from "@components/common/CustomLabel.vue";
-import { ref } from "vue";
+import { ref, computed } from "vue";
 export default {
   components: { CustomLabel },
   props: {
     modelValue: { type: [Number, String], default: null },
     label: { type: String, default: "" },
     type: { type: String, default: "text" },
+    rules: { type: Array, default: () => [] },
   },
   emits: ["update:modelValue"],
   setup(props, context) {
     const value = ref(props.modelValue);
+
     function updateValue(event) {
       value.value = event.target.value;
       context.emit("update:modelValue", value.value);
     }
+
+    const validate = ref(false);
+    const messages = computed(() => {
+      if (props.rules.length) {
+        if (validate.value) {
+          return props.rules.map((rule) => {
+            const validationResult = rule.isValid(value.value);
+            const message = { text: rule.message };
+            message.type = validationResult ? "success" : "error";
+            message.visible = rule.visible === false ? false : true;
+            return message;
+          });
+        }
+        return props.rules.map((rule) => ({
+          type: "normal",
+          text: rule.message,
+          visible: rule.visible === false ? false : true,
+        }));
+      }
+      return [];
+    });
     return {
       value,
       updateValue,
+      messages,
+      validate,
     };
   },
 };
@@ -74,6 +110,22 @@ export default {
     right: 24px;
     min-width: 18px;
     text-align: center;
+  }
+  &__messages-wrapper {
+    margin-top: 8px;
+  }
+  &__message {
+    @include font-roboto(14px, 400, 24px);
+    letter-spacing: 0.04em;
+    &--normal {
+      color: $gray-tuna;
+    }
+    &--error {
+      color: $cherry-red;
+    }
+    &--success {
+      color: $green-success;
+    }
   }
 }
 </style>

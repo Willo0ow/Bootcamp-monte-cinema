@@ -5,36 +5,65 @@
       >Care to register?</SectionTitle
     >
   </div>
-  <FormCard :fields="fields" :formButtons="formButtons" />
+  <FormCard>
+    <template #inputs>
+      <CustomInput
+        class="form-card__input"
+        v-model="email.inputValue"
+        label="Email"
+        placeholder="Something ending with monterail"
+        type="email"
+        :rules="emailRules"
+      />
+      <CustomInput
+        class="form-card__input"
+        v-model="password.inputValue"
+        label="Password"
+        placeholder="Enter your password"
+        type="password"
+        :rules="passwordRules"
+      />
+    </template>
+    <template #buttons>
+      <CustomButton class="form-card__button" raw-text
+        >Log in instead</CustomButton
+      >
+      <CustomButton class="form-card__button">Next step</CustomButton>
+    </template>
+  </FormCard>
 </template>
 
 <script>
 import FormCard from "@components/Register/FormCard.vue";
 import SectionTitle from "@components/common/SectionTitle.vue";
+import CustomInput from "@components/common/CustomInput.vue";
+import CustomButton from "@components/common/CustomButton.vue";
+import { useRegisterStore } from "@/stores/register";
+import { storeToRefs } from "pinia";
 
 export default {
   emits: ["setRegisterDataProperty"],
-  components: { FormCard, SectionTitle },
+  components: { FormCard, SectionTitle, CustomInput, CustomButton },
   setup() {
-    const fields = [
+    const registerStore = useRegisterStore();
+    const { email, password } = storeToRefs(registerStore);
+
+    const passwordRules = [
+      { isValid: (val) => val.length >= 8, message: "At least 8 characters" },
       {
-        id: 1,
-        label: "Email",
-        placeholder: "Something ending with monterail",
-        value: "email",
+        isValid: (val) => /[a-zA-Z]/.test(val),
+        message: "At least one letter",
       },
+      { isValid: (val) => /\d/.test(val), message: "At least one digit" },
+    ];
+    const emailRules = [
       {
-        id: 2,
-        label: "Password",
-        placeholder: "Enter your password",
-        value: "password",
+        isValid: (val) => /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]+/.test(val),
+        message: "email error",
+        visible: false,
       },
     ];
-    const formButtons = [
-      { id: 1, label: "Log in instead", attrs: { "raw-text": true } },
-      { id: 2, label: "Next step", attrs: {} },
-    ];
-    return { fields, formButtons };
+    return { email, password, emailRules, passwordRules };
   },
 };
 </script>
@@ -48,6 +77,13 @@ export default {
       margin-right: 24px;
       margin-left: 24px;
     }
+  }
+}
+.form-card {
+  &__input,
+  &__button {
+    width: 100%;
+    margin-bottom: 24px;
   }
 }
 </style>
