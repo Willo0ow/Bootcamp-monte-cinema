@@ -16,7 +16,7 @@ import { ref } from "vue";
 export default {
   components: { CredentialsSection, AdditionalDetailsSection },
   setup() {
-    const currentPanel = ref("AdditionalDetailsSection");
+    const currentPanel = ref("CredentialsSection");
     function goToNextStep() {
       currentPanel.value = "AdditionalDetailsSection";
     }

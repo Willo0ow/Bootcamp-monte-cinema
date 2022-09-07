@@ -42,6 +42,7 @@
         name="termsCheckbox"
         ref="termsCheckbox"
         :required="true"
+        @confirmValidation="areTermsAccepted.isValid = true"
       >
         I accept <a href="#">Privacy Policy</a></CustomCheckbox
       >
@@ -102,34 +103,47 @@ export default {
     const firstNameInput = ref(null);
     const lastNameInput = ref(null);
     const dateOfBirthInput = ref(null);
+    const termsCheckbox = ref(null);
 
     function validateForm() {
       firstNameInput.value.validate();
       lastNameInput.value.validate();
       dateOfBirthInput.value.validate();
+      termsCheckbox.value.validate();
+      console.log(
+        firstName.value.isValid &&
+          lastName.value.isValid &&
+          dateOfBirth.value.isValid &&
+          areTermsAccepted.value.isValid,
+        "validate"
+      );
       return (
         firstName.value.isValid &&
         lastName.value.isValid &&
-        dateOfBirth.value.isValid
+        dateOfBirth.value.isValid &&
+        areTermsAccepted.value.isValid
       );
     }
-    function onSubmit(event) {
+    async function onSubmit(event) {
       event.preventDefault();
+      console.log("submit");
       if (validateForm()) {
         console.log("register");
+        await registerStore.registerUser();
       }
     }
     return {
       firstName,
       lastName,
       dateOfBirth,
+      areTermsAccepted,
       nameRules,
       dateOfBirthRules,
       onSubmit,
       firstNameInput,
       lastNameInput,
       dateOfBirthInput,
-      areTermsAccepted,
+      termsCheckbox,
     };
   },
 };
