@@ -49,9 +49,9 @@ import { storeToRefs } from "pinia";
 import { ref } from "vue";
 
 export default {
-  emits: ["setRegisterDataProperty"],
+  emits: ["goToNextStep"],
   components: { FormCard, SectionTitle, CustomInput, CustomButton },
-  setup() {
+  setup(props, context) {
     const registerStore = useRegisterStore();
     const { email, password } = storeToRefs(registerStore);
 
@@ -81,6 +81,7 @@ export default {
     function onSubmit(event) {
       event.preventDefault();
       if (validateForm()) {
+        context.emit("goToNextStep");
         console.log("nextStep");
       }
     }
@@ -113,6 +114,9 @@ export default {
   &__button {
     width: 100%;
     margin-bottom: 24px;
+    @include breakpoint-sm {
+      margin-bottom: 0;
+    }
   }
 }
 </style>

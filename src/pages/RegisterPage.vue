@@ -1,18 +1,26 @@
 <template>
   <div class="register">
     <CredentialsSection
-
+      v-if="currentPanel === 'CredentialsSection'"
+      @goToNextStep="goToNextStep"
     ></CredentialsSection>
+    <AdditionalDetailsSection v-else></AdditionalDetailsSection>
   </div>
 </template>
 
 <script>
 import CredentialsSection from "../components/Register/CredentialsSection.vue";
+import AdditionalDetailsSection from "../components/Register/AdditionalDetailsSection.vue";
+import { ref } from "vue";
 
 export default {
-  components: { CredentialsSection },
+  components: { CredentialsSection, AdditionalDetailsSection },
   setup() {
-    return {  };
+    const currentPanel = ref("AdditionalDetailsSection");
+    function goToNextStep() {
+      currentPanel.value = "AdditionalDetailsSection";
+    }
+    return { currentPanel, goToNextStep };
   },
 };
 </script>
