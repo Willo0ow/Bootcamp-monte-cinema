@@ -15,7 +15,7 @@
         placeholder="e.g. Jessica"
         type="text"
         :rules="nameRules"
-        @confirmValidation="firstName.isValid = true"
+        @updateValidation="(value) => (firstName.isValid = value)"
       />
       <CustomInput
         ref="lastNameInput"
@@ -25,7 +25,7 @@
         placeholder="e.g. Walton"
         type="text"
         :rules="nameRules"
-        @confirmValidation="lastName.isValid = true"
+        @updateValidation="(value) => (lastName.isValid = value)"
       />
       <CustomInput
         ref="dateOfBirthInput"
@@ -35,14 +35,14 @@
         placeholder="DD/MM/YYYY"
         type="date"
         :rules="dateOfBirthRules"
-        @confirmValidation="dateOfBirth.isValid = true"
+        @updateValidation="(value) => (dateOfBirth.isValid = value)"
       />
       <CustomCheckbox
         v-model="areTermsAccepted.inputValue"
         name="termsCheckbox"
         ref="termsCheckbox"
         :required="true"
-        @confirmValidation="areTermsAccepted.isValid = true"
+        @updateValidation="(value) => (areTermsAccepted.isValid = value)"
       >
         I accept <a href="#">Privacy Policy</a></CustomCheckbox
       >
@@ -92,7 +92,7 @@ export default {
       const selectedDate = new Date(value);
       let dateToCompare = new Date();
       dateToCompare.setFullYear(dateToCompare.getFullYear() - 18);
-      return selectedDate < dateToCompare;
+      return !!value && selectedDate < dateToCompare;
     }
     const dateOfBirthRules = [
       {
@@ -110,13 +110,6 @@ export default {
       lastNameInput.value.validate();
       dateOfBirthInput.value.validate();
       termsCheckbox.value.validate();
-      console.log(
-        firstName.value.isValid &&
-          lastName.value.isValid &&
-          dateOfBirth.value.isValid &&
-          areTermsAccepted.value.isValid,
-        "validate"
-      );
       return (
         firstName.value.isValid &&
         lastName.value.isValid &&
@@ -126,9 +119,7 @@ export default {
     }
     async function onSubmit(event) {
       event.preventDefault();
-      console.log("submit");
       if (validateForm()) {
-        console.log("register");
         await registerStore.registerUser();
       }
     }

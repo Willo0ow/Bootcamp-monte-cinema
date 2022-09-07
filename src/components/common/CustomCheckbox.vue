@@ -30,7 +30,7 @@
 <script>
 import { ref, computed } from "vue";
 export default {
-  emits: ["update:modelValue", "confirmValidation"],
+  emits: ["update:modelValue", "updateValidation"],
   props: {
     modelValue: { type: Boolean, default: false },
     name: { type: String, required: true },
@@ -42,7 +42,7 @@ export default {
       value.value = eventValue;
       context.emit("update:modelValue", value.value);
       if (value.value && props.required) {
-        context.emit("confirmValidation");
+        context.emit("updateValidation", value.value);
       }
     };
 

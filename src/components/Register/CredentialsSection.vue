@@ -15,7 +15,7 @@
         placeholder="Something ending with monterail"
         type="email"
         :rules="emailRules"
-        @confirmValidation="email.isValid = true"
+        @updateValidation="(value) => (email.isValid = value)"
       />
       <CustomInput
         ref="passwordInput"
@@ -25,7 +25,7 @@
         placeholder="Enter your password"
         type="password"
         :rules="passwordRules"
-        @confirmValidation="password.isValid = true"
+        @updateValidation="(value) => (password.isValid = value)"
       />
     </template>
     <template #buttons>

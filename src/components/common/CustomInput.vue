@@ -40,7 +40,7 @@ export default {
     type: { type: String, default: "text" },
     rules: { type: Array, default: () => [] },
   },
-  emits: ["update:modelValue", "confirmValidation"],
+  emits: ["update:modelValue", "updateValidation"],
   setup(props, context) {
     const value = ref(props.modelValue);
 
@@ -56,20 +56,17 @@ export default {
 
     const messages = computed(() => {
       if (props.rules.length) {
-        if (applyValidation.value) {
-          return props.rules.map((rule) => {
-            const validationResult = rule.isValid(value.value);
-            const message = { text: rule.message };
+        return props.rules.map((rule) => {
+          const validationResult = rule.isValid(value.value);
+          const message = { text: rule.message };
+          if (applyValidation.value) {
             message.type = validationResult ? "success" : "error";
-            message.visible = rule.visible === false ? false : true;
-            return message;
-          });
-        }
-        return props.rules.map((rule) => ({
-          type: "normal",
-          text: rule.message,
-          visible: rule.visible === false ? false : true,
-        }));
+          } else {
+            message.type = validationResult ? "success" : "normal";
+          }
+          message.visible = rule.visible === false ? false : true;
+          return message;
+        });
       }
       return [];
     });
@@ -83,9 +80,9 @@ export default {
       return false;
     });
 
-    watch(isInputValid, (newValue) => {
-      if (newValue === true) {
-        context.emit("confirmValidation");
+    watch(isInputValid, (newValue, oldValue) => {
+      if (newValue !== oldValue) {
+        context.emit("updateValidation", newValue);
       }
     });
 

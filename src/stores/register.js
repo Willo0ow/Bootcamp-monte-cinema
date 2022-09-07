@@ -21,8 +21,16 @@ export const useRegisterStore = defineStore({
         last_name: this.lastName.inputValue,
         date_of_birth: this.dateOfBirth.inputValue,
       };
-      const res = await saveRegisterUser({ user });
-      console.log(res.data);
+      const newUser = await saveRegisterUser({ user });
+      this.resetRegisterData();
+    },
+    resetRegisterData() {
+      this.email = { inputValue: "", isValid: false };
+      this.password = { inputValue: "", isValid: false };
+      this.firstName = { inputValue: "", isValid: false };
+      this.lastName = { inputValue: "", isValid: false };
+      this.dateOfBirth = { inputValue: null, isValid: false };
+      this.areTermsAccepted = { inputValue: false, isValid: false };
     },
   },
 });
