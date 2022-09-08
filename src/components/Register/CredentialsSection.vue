@@ -45,15 +45,14 @@ import SectionTitle from "@components/common/SectionTitle.vue";
 import CustomInput from "@components/common/CustomInput.vue";
 import CustomButton from "@components/common/CustomButton.vue";
 import { useRegisterStore } from "@/stores/register";
-import { storeToRefs } from "pinia";
-import { ref } from "vue";
+import { ref, reactive } from "vue";
 
 export default {
   emits: ["goToNextStep"],
   components: { FormCard, SectionTitle, CustomInput, CustomButton },
   setup(props, context) {
-    const registerStore = useRegisterStore();
-    const { email, password } = storeToRefs(registerStore);
+    const email = reactive({ inputValue: "", isValid: false });
+    const password = reactive({ inputValue: "", isValid: false });
 
     const passwordRules = [
       { isValid: (val) => val.length >= 8, message: "At least 8 characters" },
@@ -76,11 +75,16 @@ export default {
     function validateForm() {
       emailInput.value.validate();
       passwordInput.value.validate();
-      return email.value.isValid && password.value.isValid;
+      return email.isValid && password.isValid;
     }
+
+    const registerStore = useRegisterStore();
+
     function onSubmit(event) {
       event.preventDefault();
       if (validateForm()) {
+        registerStore.setFormProperty("email", email.inputValue);
+        registerStore.setFormProperty("password", password.inputValue);
         context.emit("goToNextStep");
       }
     }

@@ -65,8 +65,7 @@ import CustomInput from "@components/common/CustomInput.vue";
 import CustomButton from "@components/common/CustomButton.vue";
 import CustomCheckbox from "@components/common/CustomCheckbox.vue";
 import { useRegisterStore } from "@/stores/register";
-import { storeToRefs } from "pinia";
-import { ref } from "vue";
+import { ref, reactive } from "vue";
 
 export default {
   components: {
@@ -77,9 +76,10 @@ export default {
     CustomCheckbox,
   },
   setup() {
-    const registerStore = useRegisterStore();
-    const { firstName, lastName, dateOfBirth, areTermsAccepted } =
-      storeToRefs(registerStore);
+    const firstName = reactive({ inputValue: "", isValid: false });
+    const lastName = reactive({ inputValue: "", isValid: false });
+    const dateOfBirth = reactive({ inputValue: null, isValid: false });
+    const areTermsAccepted = reactive({ inputValue: false, isValid: false });
 
     const nameRules = [
       {
@@ -111,15 +111,21 @@ export default {
       dateOfBirthInput.value.validate();
       termsCheckbox.value.validate();
       return (
-        firstName.value.isValid &&
-        lastName.value.isValid &&
-        dateOfBirth.value.isValid &&
-        areTermsAccepted.value.isValid
+        firstName.isValid &&
+        lastName.isValid &&
+        dateOfBirth.isValid &&
+        areTermsAccepted.isValid
       );
     }
+
+    const registerStore = useRegisterStore();
+
     async function onSubmit(event) {
       event.preventDefault();
       if (validateForm()) {
+        registerStore.setFormProperty("firstName", firstName.inputValue);
+        registerStore.setFormProperty("lastName", lastName.inputValue);
+        registerStore.setFormProperty("dateOfBirth", dateOfBirth.inputValue);
         await registerStore.registerUser();
       }
     }

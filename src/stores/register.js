@@ -7,22 +7,28 @@ const authStore = useAuthStore();
 export const useRegisterStore = defineStore({
   id: "register",
   state: () => ({
-    email: { inputValue: "", isValid: false },
-    password: { inputValue: "", isValid: false },
-    firstName: { inputValue: "", isValid: false },
-    lastName: { inputValue: "", isValid: false },
-    dateOfBirth: { inputValue: null, isValid: false },
-    areTermsAccepted: { inputValue: false, isValid: false },
+    registerData: {
+      email: "",
+      password: "",
+      firstName: "",
+      lastName: "",
+      dateOfBirth: null,
+    },
   }),
   getters: {},
   actions: {
+    setFormProperty(property, value) {
+      this.registerData[property] = value;
+    },
     async registerUser() {
+      const { email, password, firstName, lastName, dateOfBirth } =
+        this.registerData;
       const user = {
-        email: this.email.inputValue,
-        password: this.password.inputValue,
-        first_name: this.firstName.inputValue,
-        last_name: this.lastName.inputValue,
-        date_of_birth: this.dateOfBirth.inputValue,
+        email,
+        password,
+        first_name: firstName,
+        last_name: lastName,
+        date_of_birth: dateOfBirth,
       };
       const { registeredUser, token } = await saveRegisterUser({ user });
       authStore.user = registeredUser;
@@ -31,12 +37,13 @@ export const useRegisterStore = defineStore({
       this.$router.push({ name: "Home" });
     },
     resetRegisterData() {
-      this.email = { inputValue: "", isValid: false };
-      this.password = { inputValue: "", isValid: false };
-      this.firstName = { inputValue: "", isValid: false };
-      this.lastName = { inputValue: "", isValid: false };
-      this.dateOfBirth = { inputValue: null, isValid: false };
-      this.areTermsAccepted = { inputValue: false, isValid: false };
+      this.registerData = {
+        email: "",
+        password: "",
+        firstName: "",
+        lastName: "",
+        dateOfBirth: null,
+      };
     },
   },
 });
