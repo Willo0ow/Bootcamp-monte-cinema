@@ -36,7 +36,7 @@ const router = createRouter({
     },
     {
       path: "/login",
-      component: () => import("@/pages/RegisterPage.vue"),
+      component: () => import("@/pages/LoginPage.vue"),
       name: "Login",
       meta: { navVariant: "NavBarRegister" },
     },

@@ -113,7 +113,10 @@ export default {
   }
 }
 .form-card {
-  &__input,
+  &__input {
+    width: 100%;
+    margin-bottom: 24px;
+  }
   &__button {
     width: 100%;
     margin-bottom: 24px;
