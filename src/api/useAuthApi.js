@@ -10,3 +10,14 @@ export const saveRegisterUser = async (registerData) => {
     return null;
   }
 };
+export const loginUser = async (email, password) => {
+  try {
+    const res = await axios.post(`/${auth.LOGIN}`, {
+      user: { email, password },
+    });
+    return { user: res.data, token: res.headers.authorization };
+  } catch (error) {
+    console.log(error);
+    return { user: null, token: "" };
+  }
+};

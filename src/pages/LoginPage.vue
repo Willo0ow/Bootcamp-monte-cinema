@@ -1,6 +1,6 @@
 <template>
-  <div class="register">
-    <div class="register__title">
+  <div class="login">
+    <div class="login__title">
       <SectionTitle variation="40-60-80">Hi there!</SectionTitle>
       <SectionTitle color="bombay" variation="40-60-80"
         >Care to log in?</SectionTitle
@@ -13,7 +13,7 @@
           class="form-card__input"
           v-model="email"
           label="Email"
-          placeholder="Something ending with monterail"
+          placeholder="Something ending with monterail.com"
           type="email"
         />
         <CustomInput
@@ -37,6 +37,10 @@
         >
       </template>
     </FormCard>
+    <div class="login__caption">
+      Did you forget your password?
+      <a class="login__caption-link" href="#">Reset it now</a>
+    </div>
   </div>
 </template>
 
@@ -46,14 +50,17 @@ import SectionTitle from "../components/common/SectionTitle.vue";
 import FormCard from "../components/Register/FormCard.vue";
 import CustomInput from "../components/common/CustomInput.vue";
 import CustomButton from "../components/common/CustomButton.vue";
+import { useAuthStore } from "@/stores/auth";
 
 export default {
   components: { SectionTitle, FormCard, CustomInput, CustomButton },
   setup() {
     const email = ref("");
     const password = ref("");
+    const authStore = useAuthStore();
     async function handleSubmit(event) {
       event.preventDefault();
+      await authStore.login(email.value, password.value);
     }
     return { email, password, handleSubmit };
   },
@@ -61,7 +68,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.register {
+.login {
   max-width: 470px;
   padding-top: 64px;
   @include breakpoint-md {
@@ -76,6 +83,18 @@ export default {
       text-align: center;
       margin-right: 24px;
       margin-left: 24px;
+    }
+  }
+  &__caption {
+    @include font-roboto(16px, 400, 170%, $gray-tuna);
+    margin-top: 40px;
+    text-align: center;
+    @include mx-screen-sm-only(24px);
+    @include breakpoint-sm {
+      text-align: start;
+    }
+    &-link {
+      @include font-roboto(16px, 400, 170%, $cherry-red);
     }
   }
 }
