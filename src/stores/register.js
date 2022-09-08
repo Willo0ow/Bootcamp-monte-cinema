@@ -1,5 +1,8 @@
 import { defineStore } from "pinia";
 import { saveRegisterUser } from "../api/useAuthApi";
+import { useAuthStore } from "@/stores/auth";
+
+const authStore = useAuthStore();
 
 export const useRegisterStore = defineStore({
   id: "register",
@@ -21,8 +24,11 @@ export const useRegisterStore = defineStore({
         last_name: this.lastName.inputValue,
         date_of_birth: this.dateOfBirth.inputValue,
       };
-      const newUser = await saveRegisterUser({ user });
+      const { registeredUser, token } = await saveRegisterUser({ user });
+      authStore.user = registeredUser;
+      authStore.setUserToken(token);
       this.resetRegisterData();
+      this.$router.push({ name: "Home" });
     },
     resetRegisterData() {
       this.email = { inputValue: "", isValid: false };

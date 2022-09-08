@@ -9,13 +9,19 @@
 <script>
 import NavBar from "@components/common/NavBar.vue";
 import NavBarRegister from "@components/common/NavBarRegister.vue";
-import { computed } from "vue";
+import { computed, onBeforeMount } from "vue";
 import { useRoute } from "vue-router";
+import { useAuthStore } from "@/stores/auth";
 export default {
   components: { NavBar, NavBarRegister },
   setup() {
     const route = useRoute();
     const navVariant = computed(() => route.meta.navVariant || "NavBar");
+
+    const authStore = useAuthStore();
+    onBeforeMount(() => {
+      authStore.restoreUserToken();
+    });
     return { navVariant };
   },
 };

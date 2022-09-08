@@ -82,7 +82,6 @@ export default {
       event.preventDefault();
       if (validateForm()) {
         context.emit("goToNextStep");
-        console.log("nextStep");
       }
     }
     return {
