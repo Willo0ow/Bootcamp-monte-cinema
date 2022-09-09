@@ -5,7 +5,7 @@
       >Care to register?</SectionTitle
     >
   </div>
-  <FormCard @onSubmit="(event) => onSubmit(event)">
+  <FormCard @submit="handleSubmit">
     <template #inputs>
       <CustomInput
         ref="emailInput"
@@ -29,10 +29,14 @@
       />
     </template>
     <template #buttons>
-      <CustomButton class="form-card__button" raw-text :to="{ name: 'Login' }"
+      <CustomButton
+        class="form-card__button"
+        width="100%"
+        raw-text
+        :to="{ name: 'Login' }"
         >Log in instead</CustomButton
       >
-      <CustomButton class="form-card__button" type="submit"
+      <CustomButton class="form-card__button" width="100%" type="submit"
         >Next step</CustomButton
       >
     </template>
@@ -46,6 +50,12 @@ import CustomInput from "@components/common/CustomInput.vue";
 import CustomButton from "@components/common/CustomButton.vue";
 import { useRegisterStore } from "@/stores/register";
 import { ref, reactive } from "vue";
+import {
+  minLength,
+  hasLetters,
+  hasDigits,
+  isEmailValid,
+} from "@helpers/validationRules";
 
 export default {
   emits: ["goToNextStep"],
@@ -54,21 +64,8 @@ export default {
     const email = reactive({ inputValue: "", isValid: false });
     const password = reactive({ inputValue: "", isValid: false });
 
-    const passwordRules = [
-      { isValid: (val) => val.length >= 8, message: "At least 8 characters" },
-      {
-        isValid: (val) => /[a-zA-Z]/.test(val),
-        message: "At least one letter",
-      },
-      { isValid: (val) => /\d/.test(val), message: "At least one digit" },
-    ];
-    const emailRules = [
-      {
-        isValid: (val) => /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]+/.test(val),
-        message: "email error",
-        visible: false,
-      },
-    ];
+    const passwordRules = [hasLetters(), hasDigits(), minLength(8)];
+    const emailRules = [isEmailValid(false)];
     const emailInput = ref(null);
     const passwordInput = ref(null);
 
@@ -80,8 +77,7 @@ export default {
 
     const registerStore = useRegisterStore();
 
-    function onSubmit(event) {
-      event.preventDefault();
+    function handleSubmit() {
       if (validateForm()) {
         registerStore.setFormProperty("email", email.inputValue);
         registerStore.setFormProperty("password", password.inputValue);
@@ -93,7 +89,7 @@ export default {
       password,
       emailRules,
       passwordRules,
-      onSubmit,
+      handleSubmit,
       emailInput,
       passwordInput,
     };
@@ -109,19 +105,6 @@ export default {
       text-align: center;
       margin-right: 24px;
       margin-left: 24px;
-    }
-  }
-}
-.form-card {
-  &__input {
-    width: 100%;
-    margin-bottom: 24px;
-  }
-  &__button {
-    width: 100%;
-    margin-bottom: 24px;
-    @include breakpoint-sm {
-      margin-bottom: 0;
     }
   }
 }

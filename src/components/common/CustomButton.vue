@@ -19,6 +19,7 @@ export default {
     href: { type: String, default: "" },
     to: { type: [Object, String], default: "" },
     size: { type: String, default: "40" },
+    width: { type: String, default: "fit-content" },
     class: { type: [String, Array, Object], default: "" },
   },
   emits: ["click"],
@@ -39,7 +40,7 @@ export default {
   color: white;
   border-radius: 64px;
   border: none;
-  width: fit-content;
+  width: v-bind(width);
   text-decoration: none;
   box-sizing: border-box;
 

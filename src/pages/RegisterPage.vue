@@ -3,14 +3,14 @@
     <CredentialsSection
       v-if="currentPanel === 'CredentialsSection'"
       @goToNextStep="goToNextStep"
-    ></CredentialsSection>
-    <AdditionalDetailsSection v-else></AdditionalDetailsSection>
+    />
+    <AdditionalDetailsSection v-else />
   </div>
 </template>
 
 <script>
-import CredentialsSection from "../components/Register/CredentialsSection.vue";
-import AdditionalDetailsSection from "../components/Register/AdditionalDetailsSection.vue";
+import CredentialsSection from "@components/Register/CredentialsSection.vue";
+import AdditionalDetailsSection from "@components/Register/AdditionalDetailsSection.vue";
 import { ref } from "vue";
 
 export default {

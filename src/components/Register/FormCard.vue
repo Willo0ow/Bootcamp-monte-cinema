@@ -2,7 +2,7 @@
   <div class="form-card">
     <form
       class="form-card__form"
-      @submit="$emit('onSubmit', $event)"
+      @submit.prevent="$emit('submit', $event)"
       novalidate
     >
       <slot name="inputs" />
@@ -14,10 +14,10 @@
 </template>
 <script>
 export default {
-  emits: ["onSubmit"],
+  emits: ["submit"],
 };
 </script>
-<style lang="scss" scoped>
+<style lang="scss">
 .form-card {
   display: flex;
   width: fit-content;
@@ -46,6 +46,12 @@ export default {
       @include flex(row);
     }
     margin-top: 40px;
+    & .custom-button {
+      margin-bottom: 24px;
+      @include breakpoint-sm {
+        margin-bottom: 0;
+      }
+    }
   }
 }
 </style>

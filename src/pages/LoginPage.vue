@@ -98,17 +98,5 @@ export default {
     }
   }
 }
-.form-card {
-  &__input {
-    width: 100%;
-    margin-bottom: 24px;
-  }
-  &__button {
-    width: 100%;
-    margin-bottom: 24px;
-    @include breakpoint-sm {
-      margin-bottom: 0;
-    }
-  }
-}
+
 </style>

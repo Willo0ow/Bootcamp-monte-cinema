@@ -15,7 +15,7 @@
     >
     <DatePicker
       v-model="selectedDay"
-      @update:modelValue="(event) => selectDay(event.toDateString())"
+      @update:modelValue="selectDay($event.toDateString())"
       color="red"
     >
       <template v-slot="{ togglePopover }">

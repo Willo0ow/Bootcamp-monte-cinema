@@ -5,7 +5,7 @@
       >Now your name</SectionTitle
     >
   </div>
-  <FormCard @onSubmit="(event) => onSubmit(event)">
+  <FormCard @submit="handleSubmit">
     <template #inputs>
       <CustomInput
         ref="firstNameInput"
@@ -48,10 +48,14 @@
       >
     </template>
     <template #buttons>
-      <CustomButton class="form-card__button" raw-text :to="{ name: 'Login' }"
+      <CustomButton
+        class="form-card__button"
+        width="100%"
+        raw-text
+        :to="{ name: 'Login' }"
         >Log in instead</CustomButton
       >
-      <CustomButton class="form-card__button" type="submit"
+      <CustomButton class="form-card__button" width="100%" type="submit"
         >Register</CustomButton
       >
     </template>
@@ -66,6 +70,7 @@ import CustomButton from "@components/common/CustomButton.vue";
 import CustomCheckbox from "@components/common/CustomCheckbox.vue";
 import { useRegisterStore } from "@/stores/register";
 import { ref, reactive } from "vue";
+import { minLength, isOldEnough } from "@helpers/validationRules";
 
 export default {
   components: {
@@ -81,25 +86,8 @@ export default {
     const dateOfBirth = reactive({ inputValue: null, isValid: false });
     const areTermsAccepted = reactive({ inputValue: false, isValid: false });
 
-    const nameRules = [
-      {
-        isValid: (val) => val.length > 3,
-        message: "At least 3 characters",
-        visible: false,
-      },
-    ];
-    function checkUserAge(value) {
-      const selectedDate = new Date(value);
-      let dateToCompare = new Date();
-      dateToCompare.setFullYear(dateToCompare.getFullYear() - 18);
-      return !!value && selectedDate < dateToCompare;
-    }
-    const dateOfBirthRules = [
-      {
-        isValid: (val) => checkUserAge(val),
-        message: "You should be minimum 18 years old",
-      },
-    ];
+    const nameRules = [minLength(3, false)];
+    const dateOfBirthRules = [isOldEnough(18)];
     const firstNameInput = ref(null);
     const lastNameInput = ref(null);
     const dateOfBirthInput = ref(null);
@@ -120,8 +108,7 @@ export default {
 
     const registerStore = useRegisterStore();
 
-    async function onSubmit(event) {
-      event.preventDefault();
+    async function handleSubmit() {
       if (validateForm()) {
         registerStore.setFormProperty("firstName", firstName.inputValue);
         registerStore.setFormProperty("lastName", lastName.inputValue);
@@ -136,7 +123,7 @@ export default {
       areTermsAccepted,
       nameRules,
       dateOfBirthRules,
-      onSubmit,
+      handleSubmit,
       firstNameInput,
       lastNameInput,
       dateOfBirthInput,
@@ -154,19 +141,6 @@ export default {
       text-align: center;
       margin-right: 24px;
       margin-left: 24px;
-    }
-  }
-}
-.form-card {
-  &__input {
-    width: 100%;
-    margin-bottom: 24px;
-  }
-  &__button {
-    width: 100%;
-    margin-bottom: 24px;
-    @include breakpoint-sm {
-      margin-bottom: 0;
     }
   }
 }

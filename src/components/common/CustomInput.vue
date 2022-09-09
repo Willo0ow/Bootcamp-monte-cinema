@@ -39,6 +39,7 @@ export default {
     label: { type: String, default: "" },
     type: { type: String, default: "text" },
     rules: { type: Array, default: () => [] },
+    width: { type: String, default: "unset" },
   },
   emits: ["update:modelValue", "updateValidation"],
   setup(props, context) {
@@ -106,6 +107,10 @@ export default {
 </script>
 <style lang="scss" scoped>
 .custom-input {
+  & + & {
+    margin-top: 24px;
+    width: v-bind(width);
+  }
   &__base {
     @include font-roboto(16px, 400, 100%, $gray-tuna);
     background: $gray-athens;
