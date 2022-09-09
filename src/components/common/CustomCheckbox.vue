@@ -6,7 +6,7 @@
       :id="name"
       :name="name"
       :checked="modelValue"
-      @change="(event) => updateValue(event.target.checked)"
+      @change="updateValue($event.target.checked)"
       :class="validationClasses"
       @blur="validate"
     />

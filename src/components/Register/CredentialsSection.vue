@@ -5,7 +5,7 @@
       >Care to register?</SectionTitle
     >
   </div>
-  <FormCard @submit="(event) => handleSubmit(event)">
+  <FormCard @submit="handleSubmit">
     <template #inputs>
       <CustomInput
         ref="emailInput"
@@ -55,7 +55,7 @@ import {
   hasLetters,
   hasDigits,
   isEmailValid,
-} from "../../helpers/validationRules";
+} from "@helpers/validationRules";
 
 export default {
   emits: ["goToNextStep"],

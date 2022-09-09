@@ -5,7 +5,7 @@
       >Now your name</SectionTitle
     >
   </div>
-  <FormCard @submit="(event) => handleSubmit(event)">
+  <FormCard @submit="handleSubmit">
     <template #inputs>
       <CustomInput
         ref="firstNameInput"
@@ -70,7 +70,7 @@ import CustomButton from "@components/common/CustomButton.vue";
 import CustomCheckbox from "@components/common/CustomCheckbox.vue";
 import { useRegisterStore } from "@/stores/register";
 import { ref, reactive } from "vue";
-import { minLength, isOldEnough } from "@/helpers/validationRules";
+import { minLength, isOldEnough } from "@helpers/validationRules";
 
 export default {
   components: {

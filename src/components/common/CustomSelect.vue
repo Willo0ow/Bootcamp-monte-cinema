@@ -5,7 +5,7 @@
     :options="options"
     :reduce="(filter) => filter[optionValue]"
     :model-value="modelValue"
-    @update:modelValue="(event) => updateValue(event)"
+    @update:modelValue="updateValue"
     :label="optionLabel"
   ></VSelect>
 </template>
