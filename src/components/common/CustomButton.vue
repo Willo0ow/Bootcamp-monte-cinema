@@ -19,6 +19,7 @@ export default {
     href: { type: String, default: "" },
     to: { type: [Object, String], default: "" },
     size: { type: String, default: "40" },
+    width: { type: String, default: "fit-content" },
     class: { type: [String, Array, Object], default: "" },
   },
   emits: ["click"],
@@ -39,7 +40,7 @@ export default {
   color: white;
   border-radius: 64px;
   border: none;
-  width: fit-content;
+  width: v-bind(width);
   text-decoration: none;
   box-sizing: border-box;
 
@@ -89,7 +90,7 @@ export default {
   &[color="red"] {
     background: $cherry-red;
     border-color: $cherry-red;
-    &[text] {
+    &[raw-text] {
       color: $cherry-red;
       &.selected {
         background: $cherry-red;
@@ -123,7 +124,7 @@ export default {
   &[color="gray"] {
     background: $gray-tuna;
     border-color: $gray-tuna;
-    &[text] {
+    &[raw-text] {
       color: $gray-tuna;
       &.selected {
         background: $gray-tuna;
@@ -160,7 +161,7 @@ export default {
       border: 2px solid #626262;
     }
   }
-  &[text] {
+  &[raw-text] {
     background: transparent;
     border-color: none;
   }

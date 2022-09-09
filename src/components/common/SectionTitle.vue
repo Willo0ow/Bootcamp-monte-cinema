@@ -38,6 +38,15 @@ export default {
       font-size: 32px;
     }
   }
+  &--40-60-80 {
+    @include font-eczar(40px, 600, 102%, $gray-tuna);
+    @include breakpoint-sm {
+      font-size: 55px;
+    }
+    @include breakpoint-md {
+      font-size: 80px;
+    }
+  }
   &[color="bombay"] {
     color: $gray-bombay;
   }

@@ -1,76 +1,170 @@
 <template>
-  <CustomLabel :for="label">{{ label }}</CustomLabel>
-  <div class="input__container">
-    <input
-      v-bind="$attrs"
-      :name="label"
-      :id="label"
-      class="input__base"
-      :value="value"
-      @input="updateValue($event)"
-      :type="type"
-    />
-    <div class="input__icon--append">
-      <slot name="appendIcon" />
+  <div class="custom-input">
+    <CustomLabel :for="label">{{ label }}</CustomLabel>
+    <div class="custom-input__container">
+      <input
+        v-bind="$attrs"
+        :name="label"
+        :id="label"
+        class="custom-input__base"
+        :class="validationClasses"
+        :value="value"
+        @input="updateValue($event)"
+        :type="type"
+        @blur="validate"
+      />
+      <div class="custom-input__icon--append">
+        <slot name="appendIcon" />
+      </div>
+    </div>
+    <div class="custom-input__messages-wrapper">
+      <div
+        v-for="(message, index) in messages"
+        :key="index"
+        class="custom-input__message"
+        :class="`custom-input__message--${message.type}`"
+      >
+        {{ message.visible ? message.text : "" }}
+      </div>
     </div>
   </div>
 </template>
 <script>
 import CustomLabel from "@components/common/CustomLabel.vue";
-import { ref } from "vue";
+import { ref, computed, watch } from "vue";
 export default {
   components: { CustomLabel },
   props: {
     modelValue: { type: [Number, String], default: null },
     label: { type: String, default: "" },
     type: { type: String, default: "text" },
+    rules: { type: Array, default: () => [] },
+    width: { type: String, default: "unset" },
   },
-  emits: ["update:modelValue"],
+  emits: ["update:modelValue", "updateValidation"],
   setup(props, context) {
     const value = ref(props.modelValue);
+
     function updateValue(event) {
       value.value = event.target.value;
       context.emit("update:modelValue", value.value);
     }
+
+    const applyValidation = ref(false);
+    function validate() {
+      applyValidation.value = true;
+    }
+
+    const messages = computed(() => {
+      if (props.rules.length) {
+        return props.rules.map((rule) => {
+          const validationResult = rule.isValid(value.value);
+          const message = { text: rule.message };
+          if (applyValidation.value) {
+            message.type = validationResult ? "success" : "error";
+          } else {
+            message.type = validationResult ? "success" : "normal";
+          }
+          message.visible = rule.visible === false ? false : true;
+          return message;
+        });
+      }
+      return [];
+    });
+
+    const isInputValid = computed(() => {
+      if (
+        !messages.value.length ||
+        messages.value.every((message) => message.type === "success")
+      )
+        return true;
+      return false;
+    });
+
+    watch(isInputValid, (newValue, oldValue) => {
+      if (newValue !== oldValue) {
+        context.emit("updateValidation", newValue);
+      }
+    });
+
+    const validationClasses = computed(() => ({
+      "custom-input__base--error": !isInputValid.value && applyValidation.value,
+      "custom-input__base--success":
+        isInputValid.value && applyValidation.value,
+    }));
+
     return {
       value,
       updateValue,
+      messages,
+      validate,
+      isInputValid,
+      applyValidation,
+      validationClasses,
     };
   },
 };
 </script>
 <style lang="scss" scoped>
-.input__base {
-  @include font-roboto(16px, 400, 100%, $gray-tuna);
-  background: $gray-athens;
-  border-radius: 8px;
-  border: none;
-  padding: 16px 24px;
-  width: 100%;
-  box-sizing: border-box;
-  &:hover {
-    background: $gray-some;
+.custom-input {
+  & + & {
+    margin-top: 24px;
+    width: v-bind(width);
   }
-  &:active,
-  &:focus {
-    outline: 1px solid $blue-intense;
-    background: $blue-bg;
+  &__base {
+    @include font-roboto(16px, 400, 100%, $gray-tuna);
+    background: $gray-athens;
+    border-radius: 8px;
+    border: none;
+    padding: 16px 24px;
+    width: 100%;
+    box-sizing: border-box;
+    &--error,
+    &--error:focus {
+      outline: $cherry-red 1px solid;
+    }
+    &:hover {
+      background: $gray-some;
+    }
+    &:active,
+    &:focus {
+      outline: 1px solid $blue-intense;
+      background: $blue-bg;
+    }
+    &:invalid {
+      outline: 1px solid $cherry-red;
+    }
+    &--success {
+      outline: $green-success 1px solid;
+    }
   }
-  &:invalid {
-    outline: 1px solid $cherry-red;
+  &__container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
   }
-}
-
-.input__container {
-  position: relative;
-  width: 100%;
-  display: flex;
-  align-items: center;
-}
-.input__icon--append {
-  position: absolute;
-  right: 24px;
-  min-width: 18px;
-  text-align: center;
+  &__icon--append {
+    position: absolute;
+    right: 24px;
+    min-width: 18px;
+    text-align: center;
+  }
+  &__messages-wrapper {
+    margin-top: 8px;
+  }
+  &__message {
+    @include font-roboto(14px, 400, 24px);
+    letter-spacing: 0.04em;
+    &--normal {
+      color: $gray-tuna;
+    }
+    &--error {
+      color: $cherry-red;
+    }
+    &--success {
+      color: $green-success;
+    }
+  }
 }
 </style>

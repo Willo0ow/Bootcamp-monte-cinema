@@ -1,6 +1,6 @@
 <template>
   <header>
-    <NavBar />
+    <component :is="navVariant"></component>
   </header>
   <main>
     <router-view></router-view>
@@ -8,9 +8,22 @@
 </template>
 <script>
 import NavBar from "@components/common/NavBar.vue";
+import NavBarRegister from "@components/common/NavBarRegister.vue";
+import { computed, onBeforeMount } from "vue";
+import { useRoute } from "vue-router";
+import { useAuthStore } from "@/stores/auth";
 export default {
-  components: { NavBar },
-  setup() {},
+  components: { NavBar, NavBarRegister },
+  setup() {
+    const route = useRoute();
+    const navVariant = computed(() => route.meta.navVariant || "NavBar");
+
+    const authStore = useAuthStore();
+    onBeforeMount(() => {
+      authStore.restoreUserToken();
+    });
+    return { navVariant };
+  },
 };
 </script>
 
