@@ -50,6 +50,12 @@ import CustomInput from "@components/common/CustomInput.vue";
 import CustomButton from "@components/common/CustomButton.vue";
 import { useRegisterStore } from "@/stores/register";
 import { ref, reactive } from "vue";
+import {
+  minLength,
+  hasLetters,
+  hasDigits,
+  isEmailValid,
+} from "../../helpers/validationRules";
 
 export default {
   emits: ["goToNextStep"],
@@ -58,21 +64,8 @@ export default {
     const email = reactive({ inputValue: "", isValid: false });
     const password = reactive({ inputValue: "", isValid: false });
 
-    const passwordRules = [
-      { isValid: (val) => val.length >= 8, message: "At least 8 characters" },
-      {
-        isValid: (val) => /[a-zA-Z]/.test(val),
-        message: "At least one letter",
-      },
-      { isValid: (val) => /\d/.test(val), message: "At least one digit" },
-    ];
-    const emailRules = [
-      {
-        isValid: (val) => /[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-z]+/.test(val),
-        message: "email error",
-        visible: false,
-      },
-    ];
+    const passwordRules = [hasLetters(), hasDigits(), minLength(8)];
+    const emailRules = [isEmailValid(false)];
     const emailInput = ref(null);
     const passwordInput = ref(null);
 

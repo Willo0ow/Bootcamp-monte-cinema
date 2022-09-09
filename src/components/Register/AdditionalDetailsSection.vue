@@ -70,6 +70,7 @@ import CustomButton from "@components/common/CustomButton.vue";
 import CustomCheckbox from "@components/common/CustomCheckbox.vue";
 import { useRegisterStore } from "@/stores/register";
 import { ref, reactive } from "vue";
+import { minLength, isOldEnough } from "@/helpers/validationRules";
 
 export default {
   components: {
@@ -85,25 +86,8 @@ export default {
     const dateOfBirth = reactive({ inputValue: null, isValid: false });
     const areTermsAccepted = reactive({ inputValue: false, isValid: false });
 
-    const nameRules = [
-      {
-        isValid: (val) => val.length > 3,
-        message: "At least 3 characters",
-        visible: false,
-      },
-    ];
-    function checkUserAge(value) {
-      const selectedDate = new Date(value);
-      let dateToCompare = new Date();
-      dateToCompare.setFullYear(dateToCompare.getFullYear() - 18);
-      return !!value && selectedDate < dateToCompare;
-    }
-    const dateOfBirthRules = [
-      {
-        isValid: (val) => checkUserAge(val),
-        message: "You should be minimum 18 years old",
-      },
-    ];
+    const nameRules = [minLength(3, false)];
+    const dateOfBirthRules = [isOldEnough(18)];
     const firstNameInput = ref(null);
     const lastNameInput = ref(null);
     const dateOfBirthInput = ref(null);
