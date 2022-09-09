@@ -1,5 +1,5 @@
 <template>
-  <div class="card-subtitle">
+  <div class="card-subtitle" data-spec="card-subtitle">
     <slot />
   </div>
 </template>

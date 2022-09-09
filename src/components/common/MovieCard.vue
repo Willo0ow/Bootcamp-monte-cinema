@@ -1,12 +1,17 @@
 <template>
-  <component :is="to ? 'router-link' : 'div'" :to="to" class="card">
+  <component
+    :is="to ? 'router-link' : 'div'"
+    :to="to"
+    class="card"
+    data-spec="movie-card"
+  >
     <div>
       <CardTitle size="36">{{ movie.title }}</CardTitle>
     </div>
     <div>
       <CardSubtitle>{{ movie.length }}</CardSubtitle>
       <div class="card__image">
-        <img :src="movie.poster_url" />
+        <img :src="movie.poster_url" data-spec="card__image" />
       </div>
       <div class="card__tags">
         <CustomChip>{{ movie.genre?.name }}</CustomChip>

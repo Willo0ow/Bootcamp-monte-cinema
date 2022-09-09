@@ -1,5 +1,5 @@
 <template>
-  <div class="card-title" size="36">
+  <div class="card-title" size="36" data-spec="card-title">
     <slot />
   </div>
 </template>
