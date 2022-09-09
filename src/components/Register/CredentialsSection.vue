@@ -5,7 +5,7 @@
       >Care to register?</SectionTitle
     >
   </div>
-  <FormCard @onSubmit="(event) => onSubmit(event)">
+  <FormCard @submit="(event) => handleSubmit(event)">
     <template #inputs>
       <CustomInput
         ref="emailInput"
@@ -29,10 +29,14 @@
       />
     </template>
     <template #buttons>
-      <CustomButton class="form-card__button" raw-text :to="{ name: 'Login' }"
+      <CustomButton
+        class="form-card__button"
+        width="100%"
+        raw-text
+        :to="{ name: 'Login' }"
         >Log in instead</CustomButton
       >
-      <CustomButton class="form-card__button" type="submit"
+      <CustomButton class="form-card__button" width="100%" type="submit"
         >Next step</CustomButton
       >
     </template>
@@ -80,8 +84,7 @@ export default {
 
     const registerStore = useRegisterStore();
 
-    function onSubmit(event) {
-      event.preventDefault();
+    function handleSubmit() {
       if (validateForm()) {
         registerStore.setFormProperty("email", email.inputValue);
         registerStore.setFormProperty("password", password.inputValue);
@@ -93,7 +96,7 @@ export default {
       password,
       emailRules,
       passwordRules,
-      onSubmit,
+      handleSubmit,
       emailInput,
       passwordInput,
     };
@@ -109,16 +112,6 @@ export default {
       text-align: center;
       margin-right: 24px;
       margin-left: 24px;
-    }
-  }
-}
-.form-card {
-  &__input,
-  &__button {
-    width: 100%;
-    margin-bottom: 24px;
-    @include breakpoint-sm {
-      margin-bottom: 0;
     }
   }
 }

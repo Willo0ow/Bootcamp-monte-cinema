@@ -3,8 +3,8 @@
     <CredentialsSection
       v-if="currentPanel === 'CredentialsSection'"
       @goToNextStep="goToNextStep"
-    ></CredentialsSection>
-    <AdditionalDetailsSection v-else></AdditionalDetailsSection>
+    />
+    <AdditionalDetailsSection v-else />
   </div>
 </template>
 

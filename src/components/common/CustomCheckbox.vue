@@ -3,10 +3,9 @@
     <input
       class="custom-checkbox__input"
       type="checkbox"
-      value="agreed"
       :id="name"
       :name="name"
-      v-model="value"
+      :checked="modelValue"
       @change="(event) => updateValue(event.target.checked)"
       :class="validationClasses"
       @blur="validate"

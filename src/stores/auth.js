@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import { setAuthHeader, removeAuthHeader } from "@/axios";
+import $router from "@/router";
 const STORAGE_KEY_TOKEN = "authToken";
 
 export const useAuthStore = defineStore({
@@ -27,7 +28,7 @@ export const useAuthStore = defineStore({
     logout() {
       this.resetUserToken();
       this.user = null;
-      this.$router.push({ name: "Login" });
+      $router.push({ name: "Login" });
     },
     restoreUserToken() {
       const token = sessionStorage.getItem(STORAGE_KEY_TOKEN);

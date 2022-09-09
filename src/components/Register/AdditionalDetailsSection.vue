@@ -5,7 +5,7 @@
       >Now your name</SectionTitle
     >
   </div>
-  <FormCard @onSubmit="(event) => onSubmit(event)">
+  <FormCard @submit="(event) => handleSubmit(event)">
     <template #inputs>
       <CustomInput
         ref="firstNameInput"
@@ -48,10 +48,14 @@
       >
     </template>
     <template #buttons>
-      <CustomButton class="form-card__button" raw-text :to="{ name: 'Login' }"
+      <CustomButton
+        class="form-card__button"
+        width="100%"
+        raw-text
+        :to="{ name: 'Login' }"
         >Log in instead</CustomButton
       >
-      <CustomButton class="form-card__button" type="submit"
+      <CustomButton class="form-card__button" width="100%" type="submit"
         >Register</CustomButton
       >
     </template>
@@ -120,8 +124,7 @@ export default {
 
     const registerStore = useRegisterStore();
 
-    async function onSubmit(event) {
-      event.preventDefault();
+    async function handleSubmit() {
       if (validateForm()) {
         registerStore.setFormProperty("firstName", firstName.inputValue);
         registerStore.setFormProperty("lastName", lastName.inputValue);
@@ -136,7 +139,7 @@ export default {
       areTermsAccepted,
       nameRules,
       dateOfBirthRules,
-      onSubmit,
+      handleSubmit,
       firstNameInput,
       lastNameInput,
       dateOfBirthInput,
@@ -154,16 +157,6 @@ export default {
       text-align: center;
       margin-right: 24px;
       margin-left: 24px;
-    }
-  }
-}
-.form-card {
-  &__input,
-  &__button {
-    width: 100%;
-    margin-bottom: 24px;
-    @include breakpoint-sm {
-      margin-bottom: 0;
     }
   }
 }
