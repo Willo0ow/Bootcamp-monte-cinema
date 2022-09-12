@@ -40,6 +40,11 @@ const router = createRouter({
       name: "Login",
       meta: { navVariant: "NavBarRegister" },
     },
+    {
+      path: "/reservation/:seanceId",
+      component: () => import("@/pages/ReservationPage.vue"),
+      name: "Reservation",
+    },
   ],
 });
 export default router;

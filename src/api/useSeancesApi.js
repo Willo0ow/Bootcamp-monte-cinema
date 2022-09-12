@@ -15,3 +15,13 @@ export const retrieveSeances = async ({ date = null, movieId = null }) => {
     return [];
   }
 };
+
+export const retrieveSeance = async (seanceId) => {
+  try {
+    const res = await axios.get(`/${SEANCES}/${seanceId}`);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
