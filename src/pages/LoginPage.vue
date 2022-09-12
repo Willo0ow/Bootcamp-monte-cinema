@@ -6,7 +6,7 @@
         >Care to log in?</SectionTitle
       >
     </div>
-    <FormCard @onSubmit="(event) => handleSubmit(event)">
+    <FormCard @submit="handleSubmit">
       <template #inputs>
         <CustomInput
           ref="emailInput"
@@ -29,10 +29,11 @@
         <CustomButton
           class="form-card__button"
           raw-text
+          width="100%"
           :to="{ name: 'Register' }"
           >Register instead</CustomButton
         >
-        <CustomButton class="form-card__button" type="submit"
+        <CustomButton class="form-card__button" width="100%" type="submit"
           >Log in</CustomButton
         >
       </template>

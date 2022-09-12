@@ -7,11 +7,16 @@
           <router-link :to="tab.path">{{ tab.label }}</router-link>
         </li>
         <hr class="menu__divider" />
-        <li class="menu__option">
-          <router-link to="/">Login</router-link>
-        </li>
-        <li class="menu__option">
-          <router-link :to="{ name: 'Register' }">Register</router-link>
+        <template v-if="!isUserLoggedIn">
+          <li class="menu__option">
+            <router-link to="/">Login</router-link>
+          </li>
+          <li class="menu__option">
+            <router-link :to="{ name: 'Register' }">Register</router-link>
+          </li>
+        </template>
+        <li class="menu__option" v-else>
+          <div @click="authStore.logout">Logout</div>
         </li>
       </ul>
     </SDropdown>
@@ -19,10 +24,17 @@
 </template>
 <script>
 import NavigationIcon from "@components/icons/NavigationIcon.vue";
+import { useAuthStore } from "../../stores/auth";
+import { storeToRefs } from "pinia";
 export default {
   components: { NavigationIcon },
   props: {
     tabs: { type: Array, default: () => [] },
+  },
+  setup() {
+    const authStore = useAuthStore();
+    const { isUserLoggedIn } = storeToRefs(authStore);
+    return { isUserLoggedIn, authStore };
   },
 };
 </script>
