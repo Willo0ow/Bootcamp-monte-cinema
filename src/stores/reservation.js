@@ -9,8 +9,43 @@ export const useReservationStore = defineStore({
     seance: null,
     hall: null,
     movie: null,
+    // hallMatrix: null,
   }),
-  getters: {},
+  getters: {
+    hallMatrix() {
+      if (this.seance) {
+        const seats = [
+          ...this.seance.taken_seats.map((seat) => ({
+            seat,
+            taken: true,
+            row: seat.slice(0, 1),
+            column: +seat.slice(1),
+          })),
+          ...this.seance.available_seats.map((seat) => ({
+            seat,
+            taken: false,
+            row: seat.slice(0, 1),
+            column: +seat.slice(1),
+          })),
+        ];
+        const hallRows = seats.reduce((rows, seat) => {
+          const _rows = { ...rows };
+          if (_rows[seat.row]) {
+            _rows[seat.row].push(seat);
+          } else {
+            _rows[seat.row] = [seat];
+          }
+          return _rows;
+        }, {});
+        Object.keys(hallRows).forEach((row) =>
+          hallRows[row].sort((a, b) => a.column - b.column)
+        );
+        return hallRows;
+      } else {
+        return {};
+      }
+    },
+  },
   actions: {
     async getSeanceData(seanceId) {
       this.seance = await retrieveSeance(seanceId);
