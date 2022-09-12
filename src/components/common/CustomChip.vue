@@ -1,5 +1,5 @@
 <template>
-  <div class="chip">
+  <div class="chip" data-spec="chip">
     <slot />
   </div>
 </template>
