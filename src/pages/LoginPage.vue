@@ -47,10 +47,10 @@
 
 <script>
 import { ref } from "vue";
-import SectionTitle from "../components/common/SectionTitle.vue";
-import FormCard from "../components/Register/FormCard.vue";
-import CustomInput from "../components/common/CustomInput.vue";
-import CustomButton from "../components/common/CustomButton.vue";
+import SectionTitle from "@components/common/SectionTitle.vue";
+import FormCard from "@components/Register/FormCard.vue";
+import CustomInput from "@components/common/CustomInput.vue";
+import CustomButton from "@components/common/CustomButton.vue";
 import { useAuthStore } from "@/stores/auth";
 
 export default {

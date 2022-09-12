@@ -9,7 +9,7 @@
         <hr class="menu__divider" />
         <template v-if="!isUserLoggedIn">
           <li class="menu__option">
-            <router-link to="/">Login</router-link>
+            <router-link :to="{ name: 'Login' }">Login</router-link>
           </li>
           <li class="menu__option">
             <router-link :to="{ name: 'Register' }">Register</router-link>
@@ -24,7 +24,7 @@
 </template>
 <script>
 import NavigationIcon from "@components/icons/NavigationIcon.vue";
-import { useAuthStore } from "../../stores/auth";
+import { useAuthStore } from "@/stores/auth";
 import { storeToRefs } from "pinia";
 export default {
   components: { NavigationIcon },

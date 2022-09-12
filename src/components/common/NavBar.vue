@@ -28,7 +28,7 @@ import CustomButton from "@components/common/CustomButton.vue";
 import TabHeader from "@components/common/TabHeader.vue";
 import { useRouter } from "vue-router";
 import CustomMenu from "@components/common/CustomMenu.vue";
-import { useAuthStore } from "../../stores/auth";
+import { useAuthStore } from "@/stores/auth";
 import { storeToRefs } from "pinia";
 export default {
   components: { Logo, TabHeader, CustomButton, CustomMenu },

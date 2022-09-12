@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { saveRegisterUser } from "../api/useAuthApi";
+import { saveRegisterUser } from "@/api/useAuthApi";
 import { useAuthStore } from "@/stores/auth";
 import $router from "@/router";
 
@@ -39,7 +39,7 @@ export const useRegisterStore = defineStore({
         $router.push({ name: "Home" });
       } else {
         this.resetRegisterData();
-        $router.push({ name: "Login" });
+        $router.push({ name: "Register" });
       }
     },
     resetRegisterData() {
