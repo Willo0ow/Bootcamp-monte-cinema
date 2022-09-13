@@ -22,6 +22,7 @@
             class="card__actions-btn"
             v-for="seance in movie.seances"
             :key="seance.id"
+            :to="{ name: 'Reservation', params: { seanceId: seance.id } }"
             outlined
             @click="selectScreening(seance.id)"
             :class="{ selected: selectedScreening === seance.id }"
