@@ -59,8 +59,7 @@ export default {
     const email = ref("");
     const password = ref("");
     const authStore = useAuthStore();
-    async function handleSubmit(event) {
-      event.preventDefault();
+    async function handleSubmit() {
       await authStore.login(email.value, password.value);
     }
     return { email, password, handleSubmit };

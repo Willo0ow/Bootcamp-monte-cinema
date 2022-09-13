@@ -7,7 +7,7 @@ export const saveRegisterUser = async (registerData) => {
     const res = await axios.post(`/${auth.REGISTER}`, registerData);
     return { user: res.data, token: res.headers.authorization };
   } catch (error) {
-    if (error.response.data.errors?.email[0] === "has already been taken") {
+    if (error.response.data.errors?.email.includes("has already been taken")) {
       notify({
         title: "This email is already taken",
         text: "There is an account associated to provided email",

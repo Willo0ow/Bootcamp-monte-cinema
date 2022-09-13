@@ -12,7 +12,7 @@ export const useAuthStore = defineStore({
   }),
   getters: {
     isUserLoggedIn() {
-      return this.token ? true : false;
+      return Boolean(this.token);
     },
   },
   actions: {
