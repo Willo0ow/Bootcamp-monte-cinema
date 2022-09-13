@@ -9,7 +9,6 @@ export const useReservationStore = defineStore({
     seance: null,
     hall: null,
     movie: null,
-    // hallMatrix: null,
   }),
   getters: {
     hallMatrix() {
