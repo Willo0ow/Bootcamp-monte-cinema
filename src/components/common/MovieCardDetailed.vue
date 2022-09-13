@@ -16,7 +16,7 @@
         </div>
       </div>
       <div class="card__actions">
-        <slot name="cardActions" :seance="movie.seances">
+        <slot name="cardActions">
           <CustomButton
             sm-size="24"
             class="card__actions-btn"
@@ -104,7 +104,7 @@ export default {
   }
   &__actions {
     grid-area: actions;
-    @include flex();
+    @include flex(row, false, end);
     &-btn {
       margin-right: 8px;
     }

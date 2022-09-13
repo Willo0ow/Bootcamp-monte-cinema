@@ -38,6 +38,12 @@ export default {
       font-size: 32px;
     }
   }
+  &--40-48 {
+    @include font-eczar(40px, 600, 102%, $gray-tuna);
+    @include breakpoint-sm {
+      font-size: 48px;
+    }
+  }
   &--40-60-80 {
     @include font-eczar(40px, 600, 102%, $gray-tuna);
     @include breakpoint-sm {

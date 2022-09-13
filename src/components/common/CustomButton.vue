@@ -173,6 +173,11 @@ export default {
       border: 2px solid #626262;
     }
   }
+  &:disabled {
+    background-color: transparent;
+    border: 1px solid $pink-sweet;
+    color: $pink-sweet;
+  }
   &[raw-text] {
     background: transparent;
     border-color: none;
