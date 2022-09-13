@@ -1,16 +1,17 @@
 <template>
   <div class="reservation">
     <div class="reservation__panel-headers">
-      <PanelSelector order="1" :active="activePanel === 1"
-        >Choose seat</PanelSelector
-      >
-      <PanelSelector order="2" :active="activePanel === 2"
-        >Book tickets</PanelSelector
+      <PanelSelector
+        v-for="(panel, index) in contentPanels"
+        :key="panel.order"
+        :order="panel.order"
+        :active="activePanel === index"
+        >{{ panel.selectorLabel }}</PanelSelector
       >
     </div>
-    <SectionTitle class="reservation__title" variation="40-48"
-      >Choose your seats</SectionTitle
-    >
+    <SectionTitle class="reservation__title" variation="40-48">{{
+      contentPanels[activePanel].title
+    }}</SectionTitle>
     <MovieCardDetailed :movie="movie" v-if="movie" class="reservation__movie">
       <template #cardActions>
         <CustomChip class="reservation__seance-time">{{
@@ -18,7 +19,12 @@
         }}</CustomChip></template
       >
     </MovieCardDetailed>
-    <HallPlan class="reservation__hall" @selectSeats="selectSeats" />
+    <HallPlan
+      class="reservation__hall"
+      @selectSeats="selectSeats"
+      v-if="activePanel === 0"
+    />
+    <DefineTickets v-else :selectedSeats="selectedSeats" />
   </div>
 </template>
 
@@ -34,6 +40,7 @@ import { computed, ref } from "vue";
 import { useWeekdays } from "../helpers/useWeekdays";
 import SectionTitle from "../components/common/SectionTitle.vue";
 import PanelSelector from "../components/Reservation/PanelSelector.vue";
+import DefineTickets from "@components/Reservation/DefineTickets.vue";
 
 export default {
   components: {
@@ -42,8 +49,23 @@ export default {
     CustomChip,
     SectionTitle,
     PanelSelector,
+    DefineTickets,
   },
   setup() {
+    const contentPanels = [
+      {
+        order: 1,
+        selectorLabel: "Choose seats",
+        title: "Choose your seats",
+        component: "HallPlan",
+      },
+      {
+        order: 2,
+        selectorLabel: "Book tickets",
+        title: "Choose your tickets",
+        component: "DefineTickets",
+      },
+    ];
     const reservationStore = useReservationStore();
     const { seance, hall, movie } = storeToRefs(reservationStore);
     const weekdays = useWeekdays();
@@ -57,12 +79,14 @@ export default {
       }
       return "";
     });
-    const activePanel = ref(1);
+    const activePanel = ref(0);
     const selectedSeats = ref([]);
 
     function selectSeats(seats) {
-      activePanel.value = 2;
-      selectedSeats.value = seats;
+      activePanel.value = 1;
+      selectedSeats.value = seats.map((seat) => {
+        return { seat, ticketType: 1, price: 13 };
+      });
     }
 
     const route = useRoute();
@@ -77,6 +101,7 @@ export default {
       activePanel,
       selectSeats,
       selectedSeats,
+      contentPanels,
     };
   },
 };
