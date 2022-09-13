@@ -37,7 +37,7 @@
 import { useReservationStore } from "@/stores/reservation";
 import { storeToRefs } from "pinia";
 import { ref } from "vue";
-import CustomButton from "../common/CustomButton.vue";
+import CustomButton from "@components/common/CustomButton.vue";
 export default {
   components: { CustomButton },
   emits: ["selectSeats"],
