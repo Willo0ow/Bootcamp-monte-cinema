@@ -10,9 +10,12 @@
         >{{ tab.label }}</TabHeader
       >
     </div>
-    <div class="nav__buttons">
+    <div class="nav__buttons" v-if="!isUserLoggedIn">
       <CustomButton raw-text :to="{ name: 'Register' }">Register</CustomButton>
-      <CustomButton>Login</CustomButton>
+      <CustomButton :to="{ name: 'Login' }">Login</CustomButton>
+    </div>
+    <div class="nav__buttons" v-else>
+      <CustomButton @click="authStore.logout">Logout</CustomButton>
     </div>
     <div class="nav__menu">
       <CustomMenu :tabs="tabs" />
@@ -25,6 +28,8 @@ import CustomButton from "@components/common/CustomButton.vue";
 import TabHeader from "@components/common/TabHeader.vue";
 import { useRouter } from "vue-router";
 import CustomMenu from "@components/common/CustomMenu.vue";
+import { useAuthStore } from "@/stores/auth";
+import { storeToRefs } from "pinia";
 export default {
   components: { Logo, TabHeader, CustomButton, CustomMenu },
   setup() {
@@ -37,9 +42,13 @@ export default {
     function isCurrentPath(pathName) {
       return router.currentRoute.value.name === pathName;
     }
+    const authStore = useAuthStore();
+    const { isUserLoggedIn } = storeToRefs(authStore);
     return {
       tabs,
       isCurrentPath,
+      isUserLoggedIn,
+      authStore,
     };
   },
 };

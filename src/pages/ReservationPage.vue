@@ -29,13 +29,13 @@ import { useReservationStore } from "@/stores/reservation";
 import { storeToRefs } from "pinia";
 import { onBeforeMount } from "vue";
 import { useRoute } from "vue-router";
-import HallPlan from "../components/Reservation/HallPlan.vue";
-import MovieCardDetailed from "../components/common/MovieCardDetailed.vue";
-import CustomChip from "../components/common/CustomChip.vue";
+import HallPlan from "@components/Reservation/HallPlan.vue";
+import MovieCardDetailed from "@components/common/MovieCardDetailed.vue";
+import CustomChip from "@components/common/CustomChip.vue";
 import { computed } from "vue";
-import { useWeekdays } from "../helpers/useWeekdays";
-import SectionTitle from "../components/common/SectionTitle.vue";
-import PanelSelector from "../components/Reservation/PanelSelector.vue";
+import { useWeekdays } from "@helpers/useWeekdays";
+import SectionTitle from "@components/common/SectionTitle.vue";
+import PanelSelector from "@components/Reservation/PanelSelector.vue";
 import DefineTickets from "@components/Reservation/DefineTickets.vue";
 
 export default {

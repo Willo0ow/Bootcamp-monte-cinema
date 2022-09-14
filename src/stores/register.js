@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { saveRegisterUser } from "../api/useAuthApi";
+import { saveRegisterUser } from "@/api/useAuthApi";
 import { useAuthStore } from "@/stores/auth";
 import $router from "@/router";
 
@@ -32,10 +32,15 @@ export const useRegisterStore = defineStore({
         date_of_birth: dateOfBirth,
       };
       const { registeredUser, token } = await saveRegisterUser({ user });
-      authStore.user = registeredUser;
-      authStore.setUserToken(token);
-      this.resetRegisterData();
-      $router.push({ name: "Home" });
+      if (registeredUser) {
+        authStore.user = registeredUser;
+        authStore.setUserToken(token);
+        this.resetRegisterData();
+        $router.push({ name: "Home" });
+      } else {
+        this.resetRegisterData();
+        $router.push({ name: "Register" });
+      }
     },
     resetRegisterData() {
       this.registerData = {
