@@ -21,6 +21,7 @@
           option-value="id"
           option-label="label"
           :model-value="seat.ticketType"
+          @update:modelValue="reservationStore.updateTicketType($event, index)"
         />
       </div>
       <CustomButton class="tickets__item-btn" outlined color="gray" size="56"
@@ -35,10 +36,15 @@
       I accept <a href="#">Terms & Conditions</a></CustomCheckbox
     >
     <div class="tickets__buttons">
-      <CustomButton class="tickets__button" outlined color="gray" size="56"
+      <CustomButton
+        class="tickets__button"
+        v-model="areTermsAccepted"
+        outlined
+        color="gray"
+        size="56"
         >Go Back</CustomButton
       >
-      <CustomButton class="tickets__button" size="56"
+      <CustomButton class="tickets__button" size="56" @click="bookTickets"
         >Book Tickets</CustomButton
       >
     </div>
@@ -51,14 +57,28 @@ import CustomSelect from "@components/common/CustomSelect.vue";
 import CustomLabel from "@components/common/CustomLabel.vue";
 import CustomButton from "@components/common/CustomButton.vue";
 import CustomCheckbox from "@components/common/CustomCheckbox.vue";
+import { useReservationStore } from "../../stores/reservation";
+import { storeToRefs } from "pinia";
+import { ref } from "vue";
 export default {
-  props: {
-    selectedSeats: { type: Array, default: () => [] },
-  },
   components: { CustomSelect, CustomLabel, CustomButton, CustomCheckbox },
   setup() {
     const ticketsTable = useTicketsTable();
-    return { ticketsTable };
+    const reservationStore = useReservationStore();
+    const { selectedSeats } = storeToRefs(reservationStore);
+    const areTermsAccepted = ref(false);
+    function bookTickets() {
+      if (areTermsAccepted.value) {
+        reservationStore.bookTickets();
+      }
+    }
+    return {
+      ticketsTable,
+      selectedSeats,
+      reservationStore,
+      areTermsAccepted,
+      bookTickets,
+    };
   },
 };
 </script>
@@ -128,7 +148,7 @@ export default {
   }
   &__buttons {
     @include flex(column-reverse);
-    margin-top: 24px;
+    margin-top: 32px;
     @include breakpoint-md {
       margin-top: 64px;
       @include flex(row, space-between, false);

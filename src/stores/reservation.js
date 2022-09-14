@@ -10,6 +10,8 @@ export const useReservationStore = defineStore({
     seance: null,
     hall: null,
     movie: null,
+    selectedSeats: [],
+    activePanel: 0,
   }),
   getters: {
     hallMatrix() {
@@ -54,5 +56,17 @@ export const useReservationStore = defineStore({
       movie.length = formatMovieLength(movie.length);
       this.movie = movie;
     },
+    selectSeats(seats) {
+      this.activePanel = 1;
+      this.selectedSeats = seats.map((seat) => {
+        return { seat, ticketType: 1, price: 13 };
+      });
+    },
+    updateTicketType(type, seatIndex) {
+      this.selectedSeats[seatIndex].ticketType = type;
+    },
+    bookTickets(){
+
+    }
   },
 });

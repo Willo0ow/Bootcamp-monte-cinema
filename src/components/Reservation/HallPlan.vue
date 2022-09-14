@@ -25,7 +25,7 @@
       <CustomButton
         size="56"
         class="hall-plan__btn"
-        @click="$emit('selectSeats', selectedSeats)"
+        @click="saveSelectedSeats"
         :disabled="selectedSeats.length === 0"
         >Choose {{ selectedSeats.length || "" }} seats</CustomButton
       >
@@ -40,7 +40,6 @@ import { ref } from "vue";
 import CustomButton from "../common/CustomButton.vue";
 export default {
   components: { CustomButton },
-  emits: ["selectSeats"],
   setup() {
     const reservationStore = useReservationStore();
     const { hallMatrix } = storeToRefs(reservationStore);
@@ -52,13 +51,22 @@ export default {
       if (seatIndex < 0) selectedSeats.value.push(seatNumber);
       else selectedSeats.value.splice(seatIndex, 1);
     }
+    function saveSelectedSeats() {
+      reservationStore.selectSeats(selectedSeats.value);
+    }
     function getSeatClasses(seat) {
       return {
         "hall-plan__seat--taken": seat.taken,
         "hall-plan__seat--selected": selectedSeats.value.includes(seat.seat),
       };
     }
-    return { hallMatrix, selectedSeats, toggleSeat, getSeatClasses };
+    return {
+      hallMatrix,
+      selectedSeats,
+      toggleSeat,
+      getSeatClasses,
+      saveSelectedSeats,
+    };
   },
 };
 </script>

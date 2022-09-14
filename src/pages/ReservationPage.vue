@@ -19,12 +19,8 @@
         }}</CustomChip></template
       >
     </MovieCardDetailed>
-    <HallPlan
-      class="reservation__hall"
-      @selectSeats="selectSeats"
-      v-if="activePanel === 0"
-    />
-    <DefineTickets v-else :selectedSeats="selectedSeats" />
+    <HallPlan class="reservation__hall" v-if="activePanel === 0" />
+    <DefineTickets v-else />
   </div>
 </template>
 
@@ -36,7 +32,7 @@ import { useRoute } from "vue-router";
 import HallPlan from "../components/Reservation/HallPlan.vue";
 import MovieCardDetailed from "../components/common/MovieCardDetailed.vue";
 import CustomChip from "../components/common/CustomChip.vue";
-import { computed, ref } from "vue";
+import { computed } from "vue";
 import { useWeekdays } from "../helpers/useWeekdays";
 import SectionTitle from "../components/common/SectionTitle.vue";
 import PanelSelector from "../components/Reservation/PanelSelector.vue";
@@ -67,7 +63,7 @@ export default {
       },
     ];
     const reservationStore = useReservationStore();
-    const { seance, hall, movie } = storeToRefs(reservationStore);
+    const { seance, hall, movie, activePanel } = storeToRefs(reservationStore);
     const weekdays = useWeekdays();
     const seanceTime = computed(() => {
       if (seance.value) {
@@ -79,15 +75,6 @@ export default {
       }
       return "";
     });
-    const activePanel = ref(0);
-    const selectedSeats = ref([]);
-
-    function selectSeats(seats) {
-      activePanel.value = 1;
-      selectedSeats.value = seats.map((seat) => {
-        return { seat, ticketType: 1, price: 13 };
-      });
-    }
 
     const route = useRoute();
     onBeforeMount(async () => {
@@ -99,8 +86,6 @@ export default {
       movie,
       seanceTime,
       activePanel,
-      selectSeats,
-      selectedSeats,
       contentPanels,
     };
   },
