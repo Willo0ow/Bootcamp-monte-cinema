@@ -42,8 +42,8 @@ export default {
   components: { CustomButton },
   setup() {
     const reservationStore = useReservationStore();
-    const { hallMatrix } = storeToRefs(reservationStore);
-    const selectedSeats = ref([]);
+    const { hallMatrix, selectedSeatsRaw } = storeToRefs(reservationStore);
+    const selectedSeats = ref(selectedSeatsRaw.value);
     function toggleSeat(seatNumber) {
       const seatIndex = selectedSeats.value.findIndex(
         (element) => element === seatNumber

@@ -24,7 +24,12 @@
           @update:modelValue="reservationStore.updateTicketType($event, index)"
         />
       </div>
-      <CustomButton class="tickets__item-btn" outlined color="gray" size="56"
+      <CustomButton
+        class="tickets__item-btn"
+        outlined
+        color="gray"
+        size="56"
+        @click="reservationStore.removeSeat(index)"
         >Remove</CustomButton
       >
     </div>
@@ -32,16 +37,17 @@
       class="tickets__terms"
       name="termsCheckbox"
       :required="true"
+      v-model="areTermsAccepted"
     >
       I accept <a href="#">Terms & Conditions</a></CustomCheckbox
     >
     <div class="tickets__buttons">
       <CustomButton
         class="tickets__button"
-        v-model="areTermsAccepted"
         outlined
         color="gray"
         size="56"
+        @click="goBack"
         >Go Back</CustomButton
       >
       <CustomButton class="tickets__button" size="56" @click="bookTickets"
@@ -72,12 +78,17 @@ export default {
         reservationStore.bookTickets();
       }
     }
+    function goBack() {
+      areTermsAccepted.value = false;
+      reservationStore.revertDefiningTickets();
+    }
     return {
       ticketsTable,
       selectedSeats,
       reservationStore,
       areTermsAccepted,
       bookTickets,
+      goBack,
     };
   },
 };

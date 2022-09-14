@@ -10,6 +10,7 @@ export const useReservationStore = defineStore({
     seance: null,
     hall: null,
     movie: null,
+    selectedSeatsRaw: [],
     selectedSeats: [],
     activePanel: 0,
   }),
@@ -58,15 +59,23 @@ export const useReservationStore = defineStore({
     },
     selectSeats(seats) {
       this.activePanel = 1;
+      this.selectedSeatsRaw = seats;
       this.selectedSeats = seats.map((seat) => {
-        return { seat, ticketType: 1, price: 13 };
+        return { seat, ticketType: 1 };
       });
     },
     updateTicketType(type, seatIndex) {
       this.selectedSeats[seatIndex].ticketType = type;
     },
-    bookTickets(){
-
-    }
+    removeSeat(seatIndex) {
+      this.selectedSeats.splice(seatIndex, 1);
+    },
+    revertDefiningTickets() {
+      this.selectedSeats.forEach((seat, index) => {
+        this.selectedSeats[index].ticketType = 1;
+      });
+      this.activePanel = 0;
+    },
+    bookTickets() {},
   },
 });
