@@ -87,11 +87,17 @@ export default {
       }
     });
 
-    const validationClasses = computed(() => ({
-      "custom-input__base--error": !isInputValid.value && applyValidation.value,
-      "custom-input__base--success":
-        isInputValid.value && applyValidation.value,
-    }));
+    const validationClasses = computed(() => {
+      if (props.rules.length) {
+        return {
+          "custom-input__base--error":
+            !isInputValid.value && applyValidation.value,
+          "custom-input__base--success":
+            isInputValid.value && applyValidation.value,
+        };
+      }
+      return {};
+    });
 
     return {
       value,

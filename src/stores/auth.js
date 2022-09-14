@@ -1,5 +1,6 @@
 import { defineStore } from "pinia";
 import { setAuthHeader, removeAuthHeader } from "@/axios";
+import { loginUser, logoutUser } from "@/api/useAuthApi";
 import $router from "@/router";
 const STORAGE_KEY_TOKEN = "authToken";
 
@@ -11,7 +12,7 @@ export const useAuthStore = defineStore({
   }),
   getters: {
     isUserLoggedIn() {
-      return !!this.token;
+      return Boolean(this.token);
     },
   },
   actions: {
@@ -25,10 +26,19 @@ export const useAuthStore = defineStore({
       sessionStorage.removeItem(STORAGE_KEY_TOKEN);
       removeAuthHeader();
     },
-    logout() {
+    async logout() {
+      await logoutUser();
       this.resetUserToken();
       this.user = null;
       $router.push({ name: "Login" });
+    },
+    async login(email, password) {
+      const res = await loginUser(email, password);
+      if (res.token) {
+        this.user = res.user;
+        this.setUserToken(res.token);
+        $router.push({ name: "Home" });
+      }
     },
     restoreUserToken() {
       const token = sessionStorage.getItem(STORAGE_KEY_TOKEN);
