@@ -3,6 +3,11 @@
     <component :is="navVariant"></component>
   </header>
   <main>
+    <notifications
+      group="auth"
+      position="center right"
+      class="my-notification"
+    />
     <router-view></router-view>
   </main>
 </template>
@@ -41,6 +46,14 @@ main {
   @include breakpoint-xl {
     width: calc(1440px - 2 * 48px);
     margin: 0 auto;
+  }
+}
+.my-notification {
+  .notification-title {
+    @include font-roboto(18px, 500, 28px, $gray-athens);
+  }
+  .notification-content {
+    @include font-roboto(16px, 400, 28px, $gray-athens);
   }
 }
 </style>
