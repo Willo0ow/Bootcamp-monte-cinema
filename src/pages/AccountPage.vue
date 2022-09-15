@@ -50,6 +50,11 @@ const route: RouteLocationNormalized = useRoute();
     }
   }
   &__tab-content {
+    @include breakpoint-md {
+      box-shadow: 0px 4px 22px rgba(52, 53, 65, 0.15);
+      border-radius: 24px;
+      padding: 64px;
+    }
   }
 }
 </style>
