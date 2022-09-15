@@ -3,6 +3,7 @@ import { retrieveSeance } from "@/api/useSeancesApi.js";
 import { retrieveHall } from "@/api/useHallsApi.js";
 import { retrieveMovie } from "@/api/useMoviesApi.js";
 import { formatMovieLength } from "@helpers/useFormatMovieLength";
+import { saveReservation } from "@/api/useReservationApi";
 
 export const useReservationStore = defineStore({
   id: "reservation",
@@ -76,6 +77,17 @@ export const useReservationStore = defineStore({
       });
       this.activePanel = 0;
     },
-    bookTickets() {},
+    async bookTickets() {
+      const tickets = this.selectedSeats.map((seat) => {
+        return { seat: seat.seat, ticket_type_id: seat.ticketType };
+      });
+      const isSuccessful = await saveReservation({
+        seanceId: this.seance.id,
+        tickets,
+      });
+      if (isSuccessful) {
+        this.activePanel = 2;
+      }
+    },
   },
 });

@@ -50,7 +50,11 @@
         @click="goBack"
         >Go Back</CustomButton
       >
-      <CustomButton class="tickets__button" size="56" @click="bookTickets"
+      <CustomButton
+        class="tickets__button"
+        size="56"
+        @click="bookTickets"
+        :disabled="!areTermsAccepted"
         >Book Tickets</CustomButton
       >
     </div>
@@ -66,16 +70,23 @@ import CustomCheckbox from "@components/common/CustomCheckbox.vue";
 import { useReservationStore } from "../../stores/reservation";
 import { storeToRefs } from "pinia";
 import { ref } from "vue";
+import { useAuthStore } from "../../stores/auth";
 export default {
   components: { CustomSelect, CustomLabel, CustomButton, CustomCheckbox },
   setup() {
     const ticketsTable = useTicketsTable();
     const reservationStore = useReservationStore();
+    const authStore = useAuthStore();
+    const { isUserLoggedIn } = storeToRefs(authStore);
     const { selectedSeats } = storeToRefs(reservationStore);
     const areTermsAccepted = ref(false);
     function bookTickets() {
       if (areTermsAccepted.value) {
-        reservationStore.bookTickets();
+        if (isUserLoggedIn.value) {
+          reservationStore.bookTickets();
+        } else {
+          authStore.forceLogin();
+        }
       }
     }
     function goBack() {
