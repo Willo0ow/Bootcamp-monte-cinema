@@ -10,7 +10,7 @@
           <div class="hall-plan__row-label">{{ label }}</div>
           <div
             class="hall-plan__seat"
-            @click="toggleSeat(seat.seat)"
+            @click="toggleSeat(seat.taken, seat.seat)"
             v-for="seat in row"
             :class="getSeatClasses(seat)"
             :key="seat.column"
@@ -44,12 +44,14 @@ export default {
     const reservationStore = useReservationStore();
     const { hallMatrix, selectedSeatsRaw } = storeToRefs(reservationStore);
     const selectedSeats = ref(selectedSeatsRaw.value);
-    function toggleSeat(seatNumber) {
-      const seatIndex = selectedSeats.value.findIndex(
-        (element) => element === seatNumber
-      );
-      if (seatIndex < 0) selectedSeats.value.push(seatNumber);
-      else selectedSeats.value.splice(seatIndex, 1);
+    function toggleSeat(isTaken, seatNumber) {
+      if (!isTaken) {
+        const seatIndex = selectedSeats.value.findIndex(
+          (element) => element === seatNumber
+        );
+        if (seatIndex < 0) selectedSeats.value.push(seatNumber);
+        else selectedSeats.value.splice(seatIndex, 1);
+      }
     }
     function saveSelectedSeats() {
       reservationStore.selectSeats(selectedSeats.value);
