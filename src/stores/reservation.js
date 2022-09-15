@@ -4,6 +4,7 @@ import { retrieveHall } from "@/api/useHallsApi.js";
 import { retrieveMovie } from "@/api/useMoviesApi.js";
 import { formatMovieLength } from "@helpers/useFormatMovieLength";
 import { saveReservation } from "@/api/useReservationApi";
+import $router from "@/router";
 
 export const useReservationStore = defineStore({
   id: "reservation",
@@ -77,16 +78,25 @@ export const useReservationStore = defineStore({
       });
       this.activePanel = 0;
     },
+    resetReservation() {
+      this.seance = null;
+      this.hall = null;
+      this.movie = null;
+      this.selectedSeatsRaw = [];
+      this.selectedSeats = [];
+      this.activePanel = 0;
+    },
     async bookTickets() {
       const tickets = this.selectedSeats.map((seat) => {
         return { seat: seat.seat, ticket_type_id: seat.ticketType };
       });
-      const isSuccessful = await saveReservation({
+      const reservationId = await saveReservation({
         seanceId: this.seance.id,
         tickets,
       });
-      if (isSuccessful) {
-        this.activePanel = 2;
+      if (reservationId) {
+        $router.push({ name: "ReservationSummary", params: { reservationId } });
+        this.resetReservation();
       }
     },
   },
