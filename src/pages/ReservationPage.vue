@@ -33,10 +33,10 @@ import HallPlan from "@components/Reservation/HallPlan.vue";
 import MovieCardDetailed from "@components/common/MovieCardDetailed.vue";
 import CustomChip from "@components/common/CustomChip.vue";
 import { computed } from "vue";
-import { useWeekdays } from "@helpers/useWeekdays";
 import SectionTitle from "@components/common/SectionTitle.vue";
 import PanelSelector from "@components/Reservation/PanelSelector.vue";
 import DefineTickets from "@components/Reservation/DefineTickets.vue";
+import { formatSeanceDatetime } from "@helpers/useFormatSeanceDatetime";
 
 export default {
   components: {
@@ -64,17 +64,9 @@ export default {
     ];
     const reservationStore = useReservationStore();
     const { seance, hall, movie, activePanel } = storeToRefs(reservationStore);
-    const weekdays = useWeekdays();
-    const seanceTime = computed(() => {
-      if (seance.value) {
-        const seanceDateTime = new Date(seance.value.datetime);
-        const day = weekdays[seanceDateTime.getDay()].fullName;
-        const date = seanceDateTime.toLocaleDateString().replace(/\./g, "/");
-        const time = seanceDateTime.toTimeString().slice(0, 5);
-        return `${day} ${date} - ${time}`;
-      }
-      return "";
-    });
+    const seanceTime = computed(() =>
+      formatSeanceDatetime(seance.value?.datetime)
+    );
 
     const route = useRoute();
     onBeforeMount(async () => {

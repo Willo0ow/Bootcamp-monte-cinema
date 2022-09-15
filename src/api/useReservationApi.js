@@ -7,7 +7,16 @@ export const saveReservation = async ({ seanceId, tickets }) => {
       seance_id: seanceId,
       tickets,
     });
-    return +res.status === 201;
+    return res.data.id;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+export const retrieveReservation = async (reservationId) => {
+  try {
+    const res = await axios.get(`/${RESERVATIONS}/${reservationId}`);
+    return res.data;
   } catch (error) {
     console.log(error);
     return null;

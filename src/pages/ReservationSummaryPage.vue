@@ -1,5 +1,5 @@
 <template>
-  <div class="reservation-summary">
+  <div class="reservation-summary" v-if="reservation">
     <div class="reservation-summary__header">
       <SectionTitle class="reservation-summary__header-title" variation="40-48"
         >Hell yeah!</SectionTitle
@@ -8,18 +8,18 @@
         class="reservation-summary__header-title"
         variation="40-48"
         color="red"
-        >You booked {{ ticketsCount }} tickets</SectionTitle
+        >You booked {{ reservation.ticketsCount }} tickets</SectionTitle
       >
     </div>
     <div class="reservation-summary__ticket-list">
       <div
         class="reservation-summary__ticket"
-        v-for="ticket in tickets"
-        :key="ticket.seat"
+        v-for="ticket in reservation.tickets"
+        :key="ticket.id"
       >
         <div class="reservation-summary__ticket-movie">
           <CustomLabel>Movie</CustomLabel>
-          <div>{{ movie.title }}</div>
+          <div>{{ reservation.movie }}</div>
         </div>
         <div class="reservation-summary__ticket-seat">
           <CustomLabel>Seat</CustomLabel>
@@ -27,11 +27,11 @@
         </div>
         <div class="reservation-summary__ticket-time">
           <CustomLabel>Time</CustomLabel>
-          <div>{{ ticket.time }}</div>
+          <div>{{ reservation.time }}</div>
         </div>
         <div class="reservation-summary__ticket-type">
           <CustomLabel>Ticket Type</CustomLabel>
-          <div>{{ getTicketType(ticket.ticketType) }}</div>
+          <div>{{ ticket.typeLabel }}</div>
         </div>
       </div>
     </div>
@@ -47,43 +47,44 @@
 </template>
 
 <script>
-import { computed } from "vue";
-import SectionTitle from "../components/common/SectionTitle.vue";
-import CustomLabel from "../components/common/CustomLabel.vue";
-import { useTicketsTable } from "../helpers/useTicketsTable";
-import CustomButton from "../components/common/CustomButton.vue";
+import { onBeforeMount, ref } from "vue";
+import SectionTitle from "@components/common/SectionTitle.vue";
+import CustomLabel from "@components/common/CustomLabel.vue";
+import CustomButton from "@components/common/CustomButton.vue";
+import { retrieveReservation } from "@/api/useReservationApi";
+import { useRoute } from "vue-router";
+import { formatSeanceDatetime } from "@helpers/useFormatSeanceDatetime";
 export default {
   setup() {
-    const ticketsCount = 2;
-    const movie = { title: "Predator" };
-    const tickets = [
-      {
-        row: "P",
-        column: 10,
-        seat: "P10",
-        time: "Wednesday 16/02.2022 - 22:30",
-        ticketType: 1,
-      },
-      {
-        row: "P",
-        column: 10,
-        seat: "P10",
-        time: "Wednesday 16/02.2022 - 22:30",
-        ticketType: 1,
-      },
-      {
-        row: "P",
-        column: 10,
-        seat: "P10",
-        time: "Wednesday 16/02.2022 - 22:30",
-        ticketType: 1,
-      },
-    ];
-    const ticketsTable = useTicketsTable();
-    function getTicketType(ticketTypeId) {
-      return ticketsTable.find((type) => type.id === ticketTypeId).label;
+    const path = useRoute();
+    const reservation = ref(null);
+    onBeforeMount(async () => {
+      const reservationData = await retrieveReservation(
+        path.params.reservationId
+      );
+      reservation.value = formatReservationData(reservationData);
+    });
+
+    function formatReservationData(reservationData) {
+      const { movie_title, seance_datetime, tickets } = reservationData;
+      return {
+        movie: movie_title,
+        time: formatSeanceDatetime(seance_datetime),
+        tickets: tickets.map((ticket) => {
+          const { id, seat, type, price } = ticket;
+          return {
+            id,
+            seat,
+            row: seat.slice(0, 1),
+            column: seat.slice(1),
+            typeLabel: `${type} - $${price}`,
+          };
+        }),
+        ticketsCount: tickets.length,
+      };
     }
-    return { ticketsCount, movie, tickets, getTicketType };
+
+    return { reservation };
   },
   components: { SectionTitle, CustomLabel, CustomButton },
 };

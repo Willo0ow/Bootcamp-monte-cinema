@@ -67,10 +67,10 @@ import CustomSelect from "@components/common/CustomSelect.vue";
 import CustomLabel from "@components/common/CustomLabel.vue";
 import CustomButton from "@components/common/CustomButton.vue";
 import CustomCheckbox from "@components/common/CustomCheckbox.vue";
-import { useReservationStore } from "../../stores/reservation";
+import { useReservationStore } from "@/stores/reservation";
 import { storeToRefs } from "pinia";
 import { ref } from "vue";
-import { useAuthStore } from "../../stores/auth";
+import { useAuthStore } from "@/stores/auth";
 export default {
   components: { CustomSelect, CustomLabel, CustomButton, CustomCheckbox },
   setup() {
