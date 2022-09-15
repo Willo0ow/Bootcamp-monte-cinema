@@ -40,6 +40,22 @@ const router = createRouter({
       name: "Login",
       meta: { navVariant: "NavBarRegister" },
     },
+    {
+      path: "/account",
+      component: () => import("@/pages/AccountPage.vue"),
+      children: [
+        {
+          path: "",
+          component: () => import("@components/Account/AccountDetails.vue"),
+          name: "Account",
+        },
+        {
+          path: "reservations",
+          component: () => import("@components/Account/UserReservations.vue"),
+          name: "UserReservations",
+        },
+      ],
+    },
   ],
 });
 export default router;
