@@ -12,11 +12,13 @@ export const useReservationStore = defineStore({
     seance: null,
     hall: null,
     movie: null,
-    selectedSeatsRaw: [],
     selectedSeats: [],
     activePanel: 0,
   }),
   getters: {
+    selectedSeatsNumbers() {
+      return this.selectedSeats.map((seat) => seat.seat);
+    },
     hallMatrix() {
       if (this.seance) {
         const seats = [
@@ -61,7 +63,6 @@ export const useReservationStore = defineStore({
     },
     selectSeats(seats) {
       this.activePanel = 1;
-      this.selectedSeatsRaw = seats;
       this.selectedSeats = seats.map((seat) => {
         return { seat, ticketType: 1 };
       });
@@ -82,7 +83,6 @@ export const useReservationStore = defineStore({
       this.seance = null;
       this.hall = null;
       this.movie = null;
-      this.selectedSeatsRaw = [];
       this.selectedSeats = [];
       this.activePanel = 0;
     },
