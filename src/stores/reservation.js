@@ -29,13 +29,12 @@ export const useReservationStore = defineStore({
           })),
         ];
         const hallRows = seats.reduce((rows, seat) => {
-          const _rows = { ...rows };
-          if (_rows[seat.row]) {
-            _rows[seat.row].push(seat);
+          if (rows[seat.row]) {
+            rows[seat.row].push(seat);
           } else {
-            _rows[seat.row] = [seat];
+            rows[seat.row] = [seat];
           }
-          return _rows;
+          return rows;
         }, {});
         Object.keys(hallRows).forEach((row) =>
           hallRows[row].sort((a, b) => a.column - b.column)
