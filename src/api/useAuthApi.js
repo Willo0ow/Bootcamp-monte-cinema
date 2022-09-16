@@ -47,3 +47,21 @@ export const logoutUser = async () => {
     console.log(error);
   }
 };
+export const retrieveCurrentUser = async () => {
+  try {
+    const res = await axios.get(`/${auth.AUTH_USER}`);
+    return res.data;
+  } catch (error) {
+    console.log(error);
+    return null;
+  }
+};
+export const updateCurrentUser = async (user) => {
+  try {
+    const res = await axios.patch(`/${auth.AUTH_USER}`, { user });
+    return res.status;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
+};

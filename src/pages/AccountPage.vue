@@ -24,7 +24,7 @@
 </template>
 
 <script lang="ts" setup>
-import SectionTitle from "../components/common/SectionTitle.vue";
+import SectionTitle from "@/components/common/SectionTitle.vue";
 import { useRoute } from "vue-router";
 import { RouteLocationNormalized } from "vue-router";
 

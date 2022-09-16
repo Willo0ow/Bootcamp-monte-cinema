@@ -116,6 +116,13 @@ export default {
           stroke: white;
         }
       }
+      &:disabled {
+        color: $pink-sweet;
+        border-color: $pink-sweet;
+        &:hover {
+          background-color: white;
+        }
+      }
     }
     &:active {
       border: 2px solid #f47073;
