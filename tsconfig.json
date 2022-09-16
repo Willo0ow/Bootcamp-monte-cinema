@@ -9,11 +9,11 @@
       "baseUrl": ".",
       "jsx": "preserve",
       "paths": {
-        "@assets": ["./src/assets"],
-        "@components": ["./src/components"],
-        "@helpers": ["./src/helpers"],
-        "@icons": ["./src/components/icons"],
-        "@": ["./src"],
+        "@/*": ["./src/*"],
+        "@components/*": ["./src/components/*"],
+        "@helpers/*": ["./src/helpers/*"],
+        "@assets/*": ["./src/assets/*"],
+        "@icons/*": ["./src/components/icons/*"],
       }
     }
   }

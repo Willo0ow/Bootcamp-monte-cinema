@@ -1,4 +1,4 @@
-interface ValidationRule {
+export interface ValidationRule {
   isValid: (val: string) => boolean;
   message: string;
   visible?: boolean;

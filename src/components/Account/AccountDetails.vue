@@ -56,28 +56,34 @@
 </template>
 
 <script lang="ts" setup>
-import CustomInput from "../common/CustomInput.vue";
-import { reactive, ref, Ref } from "vue";
-import { isEmailValid, minLength, isOldEnough } from "@helpers/validationRules";
-import CustomButton from "../common/CustomButton.vue";
+import CustomInput from "@/components/common/CustomInput.vue";
+import { reactive, ref } from "vue";
+import {
+  isEmailValid,
+  minLength,
+  isOldEnough,
+  ValidationRule,
+} from "@/helpers/validationRules";
+import CustomButton from "@/components/common/CustomButton.vue";
 
-interface Credential {
+interface UserDetail {
   inputValue: string;
   isValid: boolean;
 }
 
-const email: Credential = reactive({ inputValue: "", isValid: false });
-const firstName = reactive({ inputValue: "", isValid: false });
-const lastName = reactive({ inputValue: "", isValid: false });
-const dateOfBirth = reactive({ inputValue: null, isValid: false });
+const email: UserDetail = reactive({ inputValue: "", isValid: false });
+const firstName: UserDetail = reactive({ inputValue: "", isValid: false });
+const lastName: UserDetail = reactive({ inputValue: "", isValid: false });
+const dateOfBirth: UserDetail = reactive({ inputValue: null, isValid: false });
 
-const emailRules = [isEmailValid(false)];
-const nameRules = [minLength(3, false)];
-const dateOfBirthRules = [isOldEnough(18)];
-const emailInput: Ref<any> = ref(null);
-const firstNameInput: Ref<any> = ref(null);
-const lastNameInput: Ref<any> = ref(null);
-const dateOfBirthInput: Ref<any> = ref(null);
+const emailRules: Array<ValidationRule> = [isEmailValid(false)];
+const nameRules: Array<ValidationRule> = [minLength(3, false)];
+const dateOfBirthRules: Array<ValidationRule> = [isOldEnough(18)];
+const emailInput = ref<InstanceType<typeof CustomInput> | null>(null);
+const firstNameInput = ref<InstanceType<typeof CustomInput> | null>(null);
+const lastNameInput = ref<InstanceType<typeof CustomInput> | null>(null);
+const dateOfBirthInput = ref<InstanceType<typeof CustomInput> | null>(null);
+
 </script>
 
 <style lang="scss" scoped>
