@@ -56,5 +56,8 @@ export default {
   &[color="bombay"] {
     color: $gray-bombay;
   }
+  &[color="red"] {
+    color: $red-bittersweet;
+  }
 }
 </style>

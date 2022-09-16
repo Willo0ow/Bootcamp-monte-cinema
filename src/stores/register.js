@@ -3,8 +3,6 @@ import { saveRegisterUser } from "@/api/useAuthApi";
 import { useAuthStore } from "@/stores/auth";
 import $router from "@/router";
 
-const authStore = useAuthStore();
-
 export const useRegisterStore = defineStore({
   id: "register",
   state: () => ({
@@ -31,12 +29,17 @@ export const useRegisterStore = defineStore({
         last_name: lastName,
         date_of_birth: dateOfBirth,
       };
-      const { registeredUser, token } = await saveRegisterUser({ user });
-      if (registeredUser) {
-        authStore.user = registeredUser;
-        authStore.setUserToken(token);
+      const registerResponse = await saveRegisterUser({ user });
+      if (registerResponse.user) {
+        const authStore = useAuthStore();
+        authStore.user = registerResponse.user;
+        authStore.setUserToken(registerResponse.token);
         this.resetRegisterData();
-        $router.push({ name: "Home" });
+        if (authStore.isForcedLogin) {
+          authStore.returnFromForcedLogin();
+        } else {
+          $router.push({ name: "Home" });
+        }
       } else {
         this.resetRegisterData();
         $router.push({ name: "Register" });

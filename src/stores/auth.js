@@ -9,10 +9,14 @@ export const useAuthStore = defineStore({
   state: () => ({
     user: null,
     token: "",
+    forcedFromPath: "",
   }),
   getters: {
     isUserLoggedIn() {
       return Boolean(this.token);
+    },
+    isForcedLogin() {
+      return Boolean(this.forcedFromPath);
     },
   },
   actions: {
@@ -26,24 +30,40 @@ export const useAuthStore = defineStore({
       sessionStorage.removeItem(STORAGE_KEY_TOKEN);
       removeAuthHeader();
     },
-    async logout() {
+    async logout(forced = false) {
       await logoutUser();
       this.resetUserToken();
       this.user = null;
-      $router.push({ name: "Login" });
+      if (forced) {
+        this.forceLogin();
+      } else {
+        $router.push({ name: "Login" });
+      }
     },
     async login(email, password) {
       const res = await loginUser(email, password);
       if (res.token) {
         this.user = res.user;
         this.setUserToken(res.token);
-        $router.push({ name: "Home" });
+        if (this.isForcedLogin) {
+          this.returnFromForcedLogin();
+        } else {
+          $router.push({ name: "Home" });
+        }
       }
     },
     restoreUserToken() {
       const token = sessionStorage.getItem(STORAGE_KEY_TOKEN);
       this.token = token || "";
       setAuthHeader(token);
+    },
+    forceLogin() {
+      this.forcedFromPath = $router.currentRoute.value.fullPath;
+      $router.push({ name: "Login" });
+    },
+    returnFromForcedLogin() {
+      $router.push(this.forcedFromPath);
+      this.forcedFromPath = "";
     },
   },
 });

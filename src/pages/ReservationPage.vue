@@ -1,16 +1,17 @@
 <template>
   <div class="reservation">
     <div class="reservation__panel-headers">
-      <PanelSelector order="1" :active="activePanel === 1"
-        >Choose seat</PanelSelector
-      >
-      <PanelSelector order="2" :active="activePanel === 2"
-        >Book tickets</PanelSelector
+      <PanelSelector
+        v-for="(panel, index) in contentPanels"
+        :key="panel.order"
+        :order="panel.order"
+        :active="activePanel === index"
+        >{{ panel.selectorLabel }}</PanelSelector
       >
     </div>
-    <SectionTitle class="reservation__title" variation="40-48"
-      >Choose your seats</SectionTitle
-    >
+    <SectionTitle class="reservation__title" variation="40-48">{{
+      contentPanels[activePanel].title
+    }}</SectionTitle>
     <MovieCardDetailed :movie="movie" v-if="movie" class="reservation__movie">
       <template #cardActions>
         <CustomChip class="reservation__seance-time">{{
@@ -18,7 +19,8 @@
         }}</CustomChip></template
       >
     </MovieCardDetailed>
-    <HallPlan class="reservation__hall" @selectSeats="selectSeats" />
+    <HallPlan class="reservation__hall" v-if="activePanel === 0" />
+    <DefineTickets v-else />
   </div>
 </template>
 
@@ -30,10 +32,11 @@ import { useRoute } from "vue-router";
 import HallPlan from "@components/Reservation/HallPlan.vue";
 import MovieCardDetailed from "@components/common/MovieCardDetailed.vue";
 import CustomChip from "@components/common/CustomChip.vue";
-import { computed, ref } from "vue";
-import { useWeekdays } from "@helpers/useWeekdays";
+import { computed } from "vue";
 import SectionTitle from "@components/common/SectionTitle.vue";
 import PanelSelector from "@components/Reservation/PanelSelector.vue";
+import DefineTickets from "@components/Reservation/DefineTickets.vue";
+import { formatSeanceDatetime } from "@helpers/useFormatSeanceDatetime";
 
 export default {
   components: {
@@ -42,28 +45,28 @@ export default {
     CustomChip,
     SectionTitle,
     PanelSelector,
+    DefineTickets,
   },
   setup() {
+    const contentPanels = [
+      {
+        order: 1,
+        selectorLabel: "Choose seats",
+        title: "Choose your seats",
+        component: "HallPlan",
+      },
+      {
+        order: 2,
+        selectorLabel: "Book tickets",
+        title: "Choose your tickets",
+        component: "DefineTickets",
+      },
+    ];
     const reservationStore = useReservationStore();
-    const { seance, hall, movie } = storeToRefs(reservationStore);
-    const weekdays = useWeekdays();
-    const seanceTime = computed(() => {
-      if (seance.value) {
-        const seanceDateTime = new Date(seance.value.datetime);
-        const day = weekdays[seanceDateTime.getDay()].fullName;
-        const date = seanceDateTime.toLocaleDateString().replace(/\./g, "/");
-        const time = seanceDateTime.toTimeString().slice(0, 5);
-        return `${day} ${date} - ${time}`;
-      }
-      return "";
-    });
-    const activePanel = ref(1);
-    const selectedSeats = ref([]);
-
-    function selectSeats(seats) {
-      activePanel.value = 2;
-      selectedSeats.value = seats;
-    }
+    const { seance, hall, movie, activePanel } = storeToRefs(reservationStore);
+    const seanceTime = computed(() =>
+      formatSeanceDatetime(seance.value?.datetime)
+    );
 
     const route = useRoute();
     onBeforeMount(async () => {
@@ -75,8 +78,7 @@ export default {
       movie,
       seanceTime,
       activePanel,
-      selectSeats,
-      selectedSeats,
+      contentPanels,
     };
   },
 };

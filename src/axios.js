@@ -11,7 +11,7 @@ axiosApi.interceptors.response.use(
   async (error) => {
     if (error.response.status === 401) {
       const authStore = useAuthStore();
-      await authStore.logout();
+      await authStore.logout(true);
     }
     return Promise.reject(error);
   }

@@ -8,7 +8,7 @@
 <script>
 export default {
   props: {
-    order: { type: String, default: "" },
+    order: { type: [String, Number], default: "" },
     active: { type: Boolean, default: false },
   },
   setup() {},

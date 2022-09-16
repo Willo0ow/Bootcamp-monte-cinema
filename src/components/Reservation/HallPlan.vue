@@ -10,7 +10,7 @@
           <div class="hall-plan__row-label">{{ label }}</div>
           <div
             class="hall-plan__seat"
-            @click="toggleSeat(seat.seat)"
+            @click="toggleSeat(seat.taken, seat.seat)"
             v-for="seat in row"
             :class="getSeatClasses(seat)"
             :key="seat.column"
@@ -25,7 +25,7 @@
       <CustomButton
         size="56"
         class="hall-plan__btn"
-        @click="$emit('selectSeats', selectedSeats)"
+        @click="saveSelectedSeats"
         :disabled="selectedSeats.length === 0"
         >Choose {{ selectedSeats.length || "" }} seats</CustomButton
       >
@@ -40,17 +40,21 @@ import { ref } from "vue";
 import CustomButton from "@components/common/CustomButton.vue";
 export default {
   components: { CustomButton },
-  emits: ["selectSeats"],
   setup() {
     const reservationStore = useReservationStore();
-    const { hallMatrix } = storeToRefs(reservationStore);
-    const selectedSeats = ref([]);
-    function toggleSeat(seatNumber) {
-      const seatIndex = selectedSeats.value.findIndex(
-        (element) => element === seatNumber
-      );
-      if (seatIndex < 0) selectedSeats.value.push(seatNumber);
-      else selectedSeats.value.splice(seatIndex, 1);
+    const { hallMatrix, selectedSeatsNumbers } = storeToRefs(reservationStore);
+    const selectedSeats = ref(selectedSeatsNumbers.value);
+    function toggleSeat(isTaken, seatNumber) {
+      if (!isTaken) {
+        const seatIndex = selectedSeats.value.findIndex(
+          (element) => element === seatNumber
+        );
+        if (seatIndex < 0) selectedSeats.value.push(seatNumber);
+        else selectedSeats.value.splice(seatIndex, 1);
+      }
+    }
+    function saveSelectedSeats() {
+      reservationStore.selectSeats(selectedSeats.value);
     }
     function getSeatClasses(seat) {
       return {
@@ -58,7 +62,13 @@ export default {
         "hall-plan__seat--selected": selectedSeats.value.includes(seat.seat),
       };
     }
-    return { hallMatrix, selectedSeats, toggleSeat, getSeatClasses };
+    return {
+      hallMatrix,
+      selectedSeats,
+      toggleSeat,
+      getSeatClasses,
+      saveSelectedSeats,
+    };
   },
 };
 </script>

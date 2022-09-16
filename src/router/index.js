@@ -41,9 +41,14 @@ const router = createRouter({
       meta: { navVariant: "NavBarRegister" },
     },
     {
-      path: "/reservation/:seanceId",
+      path: "/makeReservation/:seanceId",
       component: () => import("@/pages/ReservationPage.vue"),
-      name: "Reservation",
+      name: "MakeReservation",
+    },
+    {
+      path: "/reservationSummary/:reservationId",
+      component: () => import("@/pages/ReservationSummaryPage.vue"),
+      name: "ReservationSummary",
     },
   ],
 });
