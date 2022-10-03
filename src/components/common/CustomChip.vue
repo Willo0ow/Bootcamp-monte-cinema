@@ -13,5 +13,6 @@ export default {};
   background: $pink-wisp;
   @include font-roboto(14px, 700, 16px, $red-bittersweet);
   display: inline-block;
+  height: fit-content;
 }
 </style>

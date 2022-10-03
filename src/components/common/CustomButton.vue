@@ -6,7 +6,7 @@
     :size="size"
     class="custom-button"
     :href="href"
-    :class="class"
+    :class="btnClasses"
     :to="to"
     ><slot
   /></component>
@@ -29,7 +29,11 @@ export default {
       if (props.to) return "router-link";
       return "button";
     });
-    return { element };
+    const btnClasses = computed(() => [
+      props.class,
+      `custom-button--size-${props.size}`,
+    ]);
+    return { element, btnClasses };
   },
 };
 </script>
@@ -44,7 +48,7 @@ export default {
   text-decoration: none;
   box-sizing: border-box;
 
-  &[size="56"] {
+  &--size-56 {
     padding: 19px 40px;
     font-size: 18px;
     height: 56px;
@@ -52,7 +56,7 @@ export default {
       width: 56px;
     }
   }
-  &[size="40"] {
+  &--size-40 {
     padding: 12px 32px;
     font-size: 16px;
     height: 40px;
@@ -60,7 +64,7 @@ export default {
       width: 40px;
     }
   }
-  &[size="24"] {
+  &--size-24 {
     padding: 5px 16px;
     font-size: 14px;
     height: 24px;
@@ -68,7 +72,7 @@ export default {
       width: 24px;
     }
   }
-  &[size="32"] {
+  &--size-32 {
     padding: 9px 24px;
     font-size: 14px;
     height: 32px;
@@ -83,6 +87,14 @@ export default {
       height: 32px;
       &[rounded] {
         width: 32px;
+      }
+    }
+    &[sm-size="24"] {
+      padding: 5px 16px;
+      font-size: 14px;
+      height: 24px;
+      &[rounded] {
+        width: 24px;
       }
     }
   }
@@ -167,6 +179,11 @@ export default {
     &:active {
       border: 2px solid #626262;
     }
+  }
+  &:disabled {
+    background-color: transparent;
+    border: 1px solid $pink-sweet;
+    color: $pink-sweet;
   }
   &[raw-text] {
     background: transparent;

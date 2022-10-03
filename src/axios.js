@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useAuthStore } from "./stores/auth";
+import { useAuthStore } from "@/stores/auth";
 
 const axiosApi = axios.create({
   baseURL: "http://127.0.0.1:3000",
@@ -11,7 +11,7 @@ axiosApi.interceptors.response.use(
   async (error) => {
     if (error.response.status === 401) {
       const authStore = useAuthStore();
-      await authStore.logout();
+      await authStore.logout(true);
     }
     return Promise.reject(error);
   }
