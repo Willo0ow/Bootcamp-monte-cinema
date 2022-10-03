@@ -6,12 +6,16 @@
         class="account-details__input"
         v-model="user.email.inputValue"
         label="Email"
-        placeholder="Something ending with monterail"
+        placeholder="Something ending with monterail.com"
         type="email"
         :rules="emailRules"
         @updateValidation="(value) => (user.email.isValid = value)"
       />
-      <CustomButton outlined size="40" class="account-details__password-btn"
+      <CustomButton
+        outlined
+        size="40"
+        href="#"
+        class="account-details__password-btn"
         >Change Password</CustomButton
       >
       <CustomInput

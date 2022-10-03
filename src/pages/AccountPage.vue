@@ -26,9 +26,8 @@
 <script lang="ts" setup>
 import SectionTitle from "@/components/common/SectionTitle.vue";
 import { useRoute } from "vue-router";
-import { RouteLocationNormalized } from "vue-router";
 
-const route: RouteLocationNormalized = useRoute();
+const route = useRoute();
 </script>
 
 <style lang="scss" scoped>
