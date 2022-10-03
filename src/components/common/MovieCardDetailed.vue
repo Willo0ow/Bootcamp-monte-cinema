@@ -5,41 +5,31 @@
         <img :src="movie.poster_url" />
       </div>
       <div class="card__details">
-        <div>
-          <CardTitle size="24" nowrap>{{ movie.title }}</CardTitle>
-          <div class="card__basics">
-            <div class="card__tags">
-              <CustomChip v-for="tag in [movie.genre?.name]" :key="tag">{{
-                tag
-              }}</CustomChip>
-            </div>
-            <CardSubtitle>{{ movie.length }}</CardSubtitle>
+        <CardTitle size="24" nowrap>{{ movie.title }}</CardTitle>
+        <div class="card__basics">
+          <div class="card__tags">
+            <CustomChip v-for="tag in [movie.genre?.name]" :key="tag">{{
+              tag
+            }}</CustomChip>
           </div>
+          <CardSubtitle>{{ movie.length }}</CardSubtitle>
         </div>
-        <div class="card__actions-desktop">
+      </div>
+      <div class="card__actions">
+        <slot name="cardActions">
           <CustomButton
+            sm-size="24"
             class="card__actions-btn"
             v-for="seance in movie.seances"
             :key="seance.id"
+            :to="{ name: 'MakeReservation', params: { seanceId: seance.id } }"
             outlined
             @click="selectScreening(seance.id)"
             :class="{ selected: selectedScreening === seance.id }"
             >{{ seance.time }}</CustomButton
           >
-        </div>
+        </slot>
       </div>
-    </div>
-    <div class="card__actions-mobile">
-      <CustomButton
-        size="24"
-        class="card__actions-btn"
-        v-for="seance in movie.seances"
-        :key="seance.id"
-        outlined
-        @click="selectScreening(seance.id)"
-        :class="{ selected: selectedScreening === seance.id }"
-        >{{ seance.time }}</CustomButton
-      >
     </div>
   </div>
 </template>
@@ -83,9 +73,18 @@ export default {
     border-radius: 8px;
   }
   &__container {
-    @include flex();
+    display: grid;
+    grid-template-areas: "image title" "image title" "actions actions";
+    grid-template-rows: 46px 46px 34px;
+    grid-template-columns: 84px 1fr;
+    @include breakpoint-md {
+      grid-template-areas: "image title" "image title" "image actions";
+      grid-template-rows: 44px 44px 44px;
+      grid-template-columns: 138px 1fr;
+    }
   }
   &__image {
+    grid-area: image;
     margin-right: 16px;
     @include breakpoint-md {
       margin-right: 40px;
@@ -101,6 +100,16 @@ export default {
       }
     }
   }
+  &__details {
+    grid-area: title;
+  }
+  &__actions {
+    grid-area: actions;
+    @include flex(row, false, end);
+    &-btn {
+      margin-right: 8px;
+    }
+  }
   &__tags {
     font-size: 22px;
     display: inline-block;
@@ -108,27 +117,6 @@ export default {
   }
   &__basics {
     @include flex(row, false, center);
-  }
-  &__actions {
-    &-btn {
-      margin-right: 8px;
-    }
-    &-desktop {
-      display: none;
-      @include breakpoint-md {
-        @include flex();
-      }
-    }
-    &-mobile {
-      margin-top: 21px;
-      @include flex();
-      @include breakpoint-md {
-        display: none;
-      }
-    }
-  }
-  &__details {
-    @include flex(column, space-between);
   }
 }
 </style>

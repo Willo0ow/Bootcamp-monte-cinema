@@ -1,4 +1,4 @@
-import { useWeekdays } from "./useWeekdays";
+import { useWeekdays } from "@helpers/useWeekdays";
 const weekdays = useWeekdays();
 
 export const formatDateString = (date) => {
