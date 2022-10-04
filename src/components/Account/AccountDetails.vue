@@ -146,7 +146,7 @@ async function saveChanges() {
     ...updateForm,
     current_password: password.value,
   });
-  if (status > 200 && status < 300) {
+  if (status >= 200 && status < 300) {
     notify({
       title: "Success",
       text: "Your account details have been updated",
@@ -156,6 +156,14 @@ async function saveChanges() {
     });
     password.value = "";
     await getCurrentUserDetails();
+  } else {
+    notify({
+      title: "Error",
+      text: "Something went wrong. We were not able to save your changes.",
+      type: "error",
+      group: "auth",
+      duration: 5000,
+    });
   }
 }
 </script>

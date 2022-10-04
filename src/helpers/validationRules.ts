@@ -1,5 +1,5 @@
-export interface ValidationRule {
-  isValid: (val: string) => boolean;
+export interface ValidationRule<Val = string> {
+  isValid: (val: Val) => boolean;
   message: string;
   visible?: boolean;
 }
