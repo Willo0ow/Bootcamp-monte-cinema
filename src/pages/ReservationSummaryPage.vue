@@ -12,28 +12,13 @@
       >
     </div>
     <div class="reservation-summary__ticket-list">
-      <div
-        class="reservation-summary__ticket"
+      <ReservationTicket
         v-for="ticket in reservation.tickets"
         :key="ticket.id"
-      >
-        <div class="reservation-summary__ticket-movie">
-          <CustomLabel>Movie</CustomLabel>
-          <div>{{ reservation.movie }}</div>
-        </div>
-        <div class="reservation-summary__ticket-seat">
-          <CustomLabel>Seat</CustomLabel>
-          <div>Row {{ ticket.row }}, Seat {{ ticket.column }}</div>
-        </div>
-        <div class="reservation-summary__ticket-time">
-          <CustomLabel>Time</CustomLabel>
-          <div>{{ reservation.time }}</div>
-        </div>
-        <div class="reservation-summary__ticket-type">
-          <CustomLabel>Ticket Type</CustomLabel>
-          <div>{{ ticket.typeLabel }}</div>
-        </div>
-      </div>
+        :movie-title="reservation.movie"
+        :time="reservation.time"
+        :ticket="ticket"
+      />
     </div>
     <div class="reservation-summary__actions">
       <CustomButton
@@ -49,11 +34,11 @@
 <script>
 import { onBeforeMount, ref } from "vue";
 import SectionTitle from "@components/common/SectionTitle.vue";
-import CustomLabel from "@components/common/CustomLabel.vue";
 import CustomButton from "@components/common/CustomButton.vue";
 import { retrieveReservation } from "@/api/useReservationApi";
 import { useRoute } from "vue-router";
 import { formatSeanceDatetime } from "@helpers/useFormatSeanceDatetime";
+import ReservationTicket from "@/components/Reservation/ReservationTicket.vue";
 export default {
   setup() {
     const path = useRoute();
@@ -86,7 +71,7 @@ export default {
 
     return { reservation };
   },
-  components: { SectionTitle, CustomLabel, CustomButton },
+  components: { SectionTitle, ReservationTicket, CustomButton },
 };
 </script>
 
@@ -103,25 +88,6 @@ export default {
   }
   &__ticket-list {
     margin-top: 64px;
-  }
-  &__ticket {
-    margin-bottom: 48px;
-    @include flex(column);
-    @include breakpoint-md {
-      margin-bottom: 24px;
-      @include flex(row);
-    }
-    &-movie,
-    &-seat,
-    &-time {
-      margin-bottom: 12px;
-      @include breakpoint-md {
-        margin-right: 30px;
-      }
-      @include breakpoint-md-plus {
-        margin-right: 50px;
-      }
-    }
   }
   &__actions {
     @include flex(row, center, center);
