@@ -20,7 +20,10 @@ export default {
   @include font-roboto(18px, 400, 21px, $gray-jumbo);
   letter-spacing: 0em;
   display: inline-block;
-  width: 141px;
+  width: 130px;
+  @include breakpoint-lg {
+    width: 141px;
+  }
   text-align: center;
 }
 </style>

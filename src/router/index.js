@@ -41,6 +41,22 @@ const router = createRouter({
       meta: { navVariant: "NavBarRegister" },
     },
     {
+      path: "/account",
+      component: () => import("@/pages/AccountPage.vue"),
+      children: [
+        {
+          path: "",
+          component: () => import("@components/Account/AccountDetails.vue"),
+          name: "Account",
+        },
+        {
+          path: "reservations",
+          component: () => import("@components/Account/UserReservations.vue"),
+          name: "UserReservations",
+        },
+      ],
+    },
+    {
       path: "/makeReservation/:seanceId",
       component: () => import("@/pages/ReservationPage.vue"),
       name: "MakeReservation",

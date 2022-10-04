@@ -15,6 +15,9 @@
       <CustomButton :to="{ name: 'Login' }">Login</CustomButton>
     </div>
     <div class="nav__buttons" v-else>
+      <CustomButton raw-text :to="{ name: 'Account' }" class="nav__button"
+        >My account</CustomButton
+      >
       <CustomButton @click="authStore.logout">Logout</CustomButton>
     </div>
     <div class="nav__menu">
@@ -71,6 +74,12 @@ export default {
     display: none;
     @include breakpoint-md-plus {
       @include flex();
+    }
+  }
+  &__button {
+    margin-right: 16px;
+    &.router-link-active {
+      background-color: $pink-fair;
     }
   }
   &__headers {

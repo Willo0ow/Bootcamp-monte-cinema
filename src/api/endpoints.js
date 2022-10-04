@@ -8,5 +8,6 @@ const auth = {
   LOGIN: "login",
   LOGOUT: "logout",
   REGISTER: "register",
+  AUTH_USER: "user",
 };
 export { HALLS, MOVIE_GENRES, MOVIES, RESERVATIONS, SEANCES, USERS, auth };

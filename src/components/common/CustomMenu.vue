@@ -15,9 +15,14 @@
             <router-link :to="{ name: 'Register' }">Register</router-link>
           </li>
         </template>
-        <li class="menu__option" v-else>
-          <div @click="authStore.logout">Logout</div>
-        </li>
+        <template v-else>
+          <li class="menu__option">
+            <router-link :to="{ name: 'Account' }">My account</router-link>
+          </li>
+          <li class="menu__option">
+            <div @click="authStore.logout">Logout</div>
+          </li>
+        </template>
       </ul>
     </SDropdown>
   </div>
