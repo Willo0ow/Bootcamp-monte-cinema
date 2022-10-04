@@ -1,6 +1,6 @@
 <template>
   <div class="account-details">
-    <form v-if="user" @submit.prevent="saveChanges">
+    <form v-if="currentUser && user" @submit.prevent="saveChanges">
       <CustomInput
         ref="emailInput"
         class="account-details__input"
@@ -79,20 +79,24 @@ import {
   isOldEnough,
   ValidationRule,
 } from "@/helpers/validationRules";
-import { retrieveCurrentUser, updateCurrentUser } from "@/api/useAuthApi";
+import { updateCurrentUser, UserUpdate } from "@/api/useAuthApi";
 import { notify } from "@kyvg/vue3-notification";
+import { useAuthStore } from "@/stores/auth";
+import { storeToRefs } from "pinia";
+const authStore = useAuthStore();
+const { user: currentUser } = storeToRefs(authStore);
 
 interface UserDetail {
-  inputValue: string;
+  inputValue: string | Date;
   isValid: boolean;
 }
-interface User {
+interface UserUpdateData {
   email: UserDetail;
   first_name: UserDetail;
   last_name: UserDetail;
   date_of_birth: UserDetail;
 }
-const user: Ref<User | null> = ref(null);
+const user: Ref<UserUpdateData | null> = ref(null);
 
 const fields: Array<string> = [
   "email",
@@ -101,11 +105,10 @@ const fields: Array<string> = [
   "date_of_birth",
 ];
 async function getCurrentUserDetails() {
-  const retrievedUser = await retrieveCurrentUser();
   user.value = fields.reduce(
-    (userInputs: User, property) => {
+    (userInputs: UserUpdateData, property) => {
       userInputs[property] = {
-        inputValue: retrievedUser[property],
+        inputValue: currentUser.value[property],
         isValid: true,
       };
       return userInputs;
@@ -138,14 +141,17 @@ const dateOfBirthInput = ref<CustomInputRef>(null);
 const enableSave = computed<boolean>(() => password.value.length >= 8);
 
 async function saveChanges() {
-  const updateForm = {};
+  const updateForm: UserUpdate = {
+    email: "",
+    first_name: "",
+    last_name: "",
+    date_of_birth: "",
+    current_password: password.value,
+  };
   fields.forEach(
     (property) => (updateForm[property] = user.value[property].inputValue)
   );
-  const status: number = await updateCurrentUser({
-    ...updateForm,
-    current_password: password.value,
-  });
+  const status: number = await updateCurrentUser(updateForm);
   if (status >= 200 && status < 300) {
     notify({
       title: "Success",
@@ -155,6 +161,7 @@ async function saveChanges() {
       duration: 5000,
     });
     password.value = "";
+    await authStore.getCurrentUser();
     await getCurrentUserDetails();
   } else {
     notify({
