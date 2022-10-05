@@ -20,6 +20,9 @@ export default {
       font-size: 80px;
     }
   }
+  &--24 {
+    @include font-eczar(24px, 600, 102%, $gray-tuna);
+  }
   &--48-64 {
     @include font-eczar(48px, 600, 102%, $gray-tuna);
     @include breakpoint-sm {

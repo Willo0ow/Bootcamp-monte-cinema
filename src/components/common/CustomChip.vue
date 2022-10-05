@@ -14,5 +14,9 @@ export default {};
   @include font-roboto(14px, 700, 16px, $red-bittersweet);
   display: inline-block;
   height: fit-content;
+  &--gray {
+    background: $gray-athens;
+    color: $gray-jumbo;
+  }
 }
 </style>

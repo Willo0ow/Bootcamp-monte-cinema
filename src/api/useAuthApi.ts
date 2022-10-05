@@ -2,7 +2,26 @@ import axios from "@/axios";
 import { auth } from "@/api/endpoints.js";
 import { notify } from "@kyvg/vue3-notification";
 
-export const saveRegisterUser = async (registerData) => {
+export interface User {
+  email: string;
+  first_name: string;
+  last_name: string;
+  date_of_birth: string;
+  id: number;
+  role: string;
+}
+interface RegisterOutput {
+  user: User | null;
+  token: string;
+}
+
+interface RegisterData extends User {
+  password: string;
+}
+
+export const saveRegisterUser = async (
+  registerData: RegisterData
+): Promise<RegisterOutput> => {
   try {
     const res = await axios.post(`/${auth.REGISTER}`, registerData);
     return { user: res.data, token: res.headers.authorization };
@@ -56,7 +75,16 @@ export const retrieveCurrentUser = async () => {
     return null;
   }
 };
-export const updateCurrentUser = async (user) => {
+
+export interface UserUpdate {
+  email: string;
+  first_name: string;
+  last_name: string;
+  date_of_birth: Date | String;
+  current_password: string;
+}
+
+export const updateCurrentUser = async (user: UserUpdate) => {
   try {
     const res = await axios.patch(`/${auth.AUTH_USER}`, { user });
     return res.status;
