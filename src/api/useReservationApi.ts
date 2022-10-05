@@ -25,7 +25,7 @@ export const retrieveReservation = async (reservationId) => {
 export const retrieveUserReservations = async (userEmail: string) => {
   try {
     const res = await axios.get(
-      `/${RESERVATIONS}?user_email=${userEmail}&page=1&per_page=100`
+      `/${RESERVATIONS}?user_email=${userEmail}&page=1&per_page=1000`
     );
     return res.data;
   } catch (error) {

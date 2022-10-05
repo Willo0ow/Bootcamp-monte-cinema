@@ -1,20 +1,23 @@
 <template>
   <div class="ticket">
     <div class="ticket__movie">
-      <CustomLabel>Movie</CustomLabel>
+      <CustomLabel class="ticket__property-label">Movie</CustomLabel>
       <div>{{ movieTitle }}</div>
     </div>
     <div class="ticket__seat">
-      <CustomLabel>Seat</CustomLabel>
+      <CustomLabel class="ticket__property-label">Seat</CustomLabel>
       <div>Row {{ ticket.row }}, Seat {{ ticket.column }}</div>
     </div>
     <div class="ticket__time">
-      <CustomLabel>Time</CustomLabel>
+      <CustomLabel class="ticket__property-label">Time</CustomLabel>
       <div>{{ time }}</div>
     </div>
     <div class="ticket__type">
-      <CustomLabel>Ticket Type</CustomLabel>
+      <CustomLabel class="ticket__property-label">Ticket Type</CustomLabel>
       <div>{{ ticket.typeLabel }}</div>
+    </div>
+    <div class="ticket__actions">
+      <slot name="actions" />
     </div>
   </div>
 </template>
@@ -36,22 +39,45 @@ defineProps<{
 
 <style lang="scss" scoped>
 .ticket {
+  @include font-roboto(16px, 400, 19px, $gray-charade);
   margin-bottom: 48px;
-  @include flex(column);
+  display: grid;
+  grid-template-areas: "movie actions" "seat actions" "time actions" "ticket actions";
+  grid-template-rows: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 2fr 1fr;
   @include breakpoint-md {
-    margin-bottom: 24px;
-    @include flex(row);
+    grid-template-areas: "movie seat time ticket actions";
+    grid-template-rows: auto;
+    grid-template-columns: 2fr 1fr 2fr 1fr 1fr;
   }
   &__movie,
   &__seat,
+  &__type,
   &__time {
+    padding-right: 0;
     margin-bottom: 12px;
     @include breakpoint-md {
-      margin-right: 30px;
+      margin-right: 20px;
+      margin-bottom: 0;
     }
-    @include breakpoint-md-plus {
-      margin-right: 50px;
-    }
+  }
+  &__seat {
+    grid-area: seat;
+  }
+  &__time {
+    grid-area: time;
+  }
+  &__movie {
+    grid-area: movie;
+  }
+  &__type {
+    grid-area: ticket;
+  }
+  &__actions {
+    grid-area: actions;
+  }
+  &__property-label {
+    margin-bottom: 8px;
   }
 }
 </style>
