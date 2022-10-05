@@ -26,6 +26,11 @@
 <script lang="ts" setup>
 import SectionTitle from "@/components/common/SectionTitle.vue";
 import { useRoute } from "vue-router";
+import { useMeta } from "vue-meta";
+
+const { meta } = useMeta({
+  title: "My Account",
+});
 
 const route = useRoute();
 </script>

@@ -11,6 +11,7 @@ import MovieRow from "@components/HomePage/MovieRow.vue";
 import WelcomeSection from "@components/HomePage/WelcomeSection.vue";
 import { onMounted } from "vue";
 import { useMovieStore } from "@/stores/movies";
+import { useMeta } from "vue-meta";
 export default {
   components: {
     WelcomeSection,
@@ -19,6 +20,9 @@ export default {
     ContactUs,
   },
   setup() {
+    const { meta } = useMeta({
+      title: "Home",
+    });
     const movieStore = useMovieStore();
     onMounted(async () => {
       await movieStore.getMovies();

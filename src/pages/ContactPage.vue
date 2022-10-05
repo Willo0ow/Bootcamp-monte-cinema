@@ -34,10 +34,14 @@ import InstagramIcon from "@assets/images/icons/instagram.svg?component";
 import GitIcon from "@assets/images/icons/git.svg?component";
 import BeIcon from "@assets/images/icons/be.svg?component";
 import BasketballIcon from "@assets/images/icons/basketball.svg?component";
+import { useMeta } from "vue-meta";
 
 export default {
   setup() {
     const breadcrumbSteps = ref([{ text: "Contact us", isLink: false }]);
+    const { meta } = useMeta({
+      title: "Contact",
+    });
     return {
       breadcrumbSteps,
     };

@@ -12,10 +12,14 @@
 import CredentialsSection from "@components/Register/CredentialsSection.vue";
 import AdditionalDetailsSection from "@components/Register/AdditionalDetailsSection.vue";
 import { ref } from "vue";
+import { useMeta } from "vue-meta";
 
 export default {
   components: { CredentialsSection, AdditionalDetailsSection },
   setup() {
+    const { meta } = useMeta({
+      title: "Register",
+    });
     const currentPanel = ref("CredentialsSection");
     function goToNextStep() {
       currentPanel.value = "AdditionalDetailsSection";
