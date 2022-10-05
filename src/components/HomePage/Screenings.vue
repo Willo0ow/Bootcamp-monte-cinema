@@ -34,7 +34,7 @@ import SectionTitle from "@components/common/SectionTitle.vue";
 import MovieList from "@components/common/MovieList.vue";
 import CustomSelect from "@components/common/CustomSelect.vue";
 import { storeToRefs } from "pinia";
-
+import { useI18n } from "vue-i18n";
 export default {
   components: { SectionTitle, MovieList, CustomSelect, SelectDayFilter },
   props: {
@@ -44,6 +44,7 @@ export default {
     },
   },
   setup() {
+    const { d } = useI18n();
     const selectedFilter = ref(0);
     const weekdays = useWeekdays();
     const currentDate = ref(new Date());
@@ -55,9 +56,9 @@ export default {
 
     const dateString = computed(
       () =>
-        `${weekdays[currentDate.value.getDay()].fullName} ${currentDate.value
-          .toLocaleDateString()
-          .replace(/\./g, "/")}`
+        `${weekdays[currentDate.value.getDay()].fullName} ${d(
+          currentDate.value
+        )}`
     );
 
     const seanceStore = useSeanceStore();

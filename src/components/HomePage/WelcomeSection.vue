@@ -1,20 +1,20 @@
 <template>
   <div class="welcome">
     <div class="welcome__text">
-      <SectionTitle class="welcome__title"
-        >Welcome to the best cinema in Monterail</SectionTitle
-      >
+      <SectionTitle class="welcome__title">{{
+        t("welcomeSection.title")
+      }}</SectionTitle>
       <div class="welcome__subtitles">
-        <SectionSubtitle class="welcome__subtitle"
-          >Best movies, best experiences, best people.</SectionSubtitle
-        >
-        <SectionSubtitle class="welcome__subtitle"
-          >And all that doesn't exist. Yikes.</SectionSubtitle
-        >
+        <SectionSubtitle class="welcome__subtitle">{{
+          t("welcomeSection.subtitle1")
+        }}</SectionSubtitle>
+        <SectionSubtitle class="welcome__subtitle">{{
+          t("welcomeSection.subtitle2")
+        }}</SectionSubtitle>
       </div>
-      <CustomButton class="welcome__book-button" href="/book" size="56"
-        >Book a ticket</CustomButton
-      >
+      <CustomButton class="welcome__book-button" href="/book" size="56">{{
+        t("welcomeSection.bookButton")
+      }}</CustomButton>
     </div>
     <div class="welcome__image">
       <WelcomeImage />
@@ -26,6 +26,7 @@ import WelcomeImage from "@assets/images/welcome.svg?component";
 import CustomButton from "@components/common/CustomButton.vue";
 import SectionTitle from "@components/common/SectionTitle.vue";
 import SectionSubtitle from "@components/common/SectionSubtitle.vue";
+import { useI18n } from "vue-i18n";
 
 export default {
   components: {
@@ -35,7 +36,8 @@ export default {
     WelcomeImage,
   },
   setup() {
-    return {};
+    const { t } = useI18n();
+    return { t };
   },
 };
 </script>
