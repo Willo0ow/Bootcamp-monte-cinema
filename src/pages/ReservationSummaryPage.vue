@@ -54,8 +54,12 @@ import CustomButton from "@components/common/CustomButton.vue";
 import { retrieveReservation } from "@/api/useReservationApi";
 import { useRoute } from "vue-router";
 import { formatSeanceDatetime } from "@helpers/useFormatSeanceDatetime";
+import { useMeta } from "vue-meta";
 export default {
   setup() {
+    const { meta } = useMeta({
+      title: "Reservation",
+    });
     const path = useRoute();
     const reservation = ref(null);
     onBeforeMount(async () => {

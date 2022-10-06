@@ -57,12 +57,15 @@ import MovieCardDetailed from "@components/common/MovieCardDetailed.vue";
 import { addDateAndTimeToSeances } from "@helpers/useAddDateAndTimeToSeances";
 
 import { formatDateString } from "@helpers/useFormatDateString";
+import { useMeta } from "vue-meta";
 
 export default {
   setup() {
     const route = useRoute();
 
     const movie = ref(null);
+    const meta = computed(() => ({ title: movie.value?.title || "" }));
+    useMeta(meta);
 
     const releaseYear = computed(() =>
       movie.value?.release_date

@@ -45,6 +45,7 @@ import SearchIcon from "@assets/images/icons/magnifyIcon.svg?component";
 import MovieCard from "@components/common/MovieCard.vue";
 import { useMovieStore } from "@/stores/movies";
 import { storeToRefs } from "pinia";
+import { useMeta } from "vue-meta";
 export default {
   components: {
     BreadCrumbs,
@@ -55,6 +56,9 @@ export default {
     MovieCard,
   },
   setup() {
+    const { meta } = useMeta({
+      title: "Movies",
+    });
     const movieStore = useMovieStore();
     const { movies } = storeToRefs(movieStore);
     const breadcrumbSteps = [{ text: "Movies", isLink: false }];
