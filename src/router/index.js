@@ -1,5 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 
+import NotFoundPage from "@/pages/NotFoundPage.vue";
+
 const router = createRouter({
   history: createWebHistory(),
   routes: [
@@ -65,6 +67,14 @@ const router = createRouter({
       path: "/reservationSummary/:reservationId",
       component: () => import("@/pages/ReservationSummaryPage.vue"),
       name: "ReservationSummary",
+    },
+    {
+      path: "/404",
+      component: NotFoundPage,
+    },
+    {
+      path: "/:pathName*",
+      redirect: "/404",
     },
   ],
 });

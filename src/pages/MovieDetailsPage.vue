@@ -1,5 +1,5 @@
 <template>
-  <div class="movie">
+  <div class="movie" v-if="movie">
     <BreadCrumbs :steps="breadcrumbSteps" :back-route="{ name: 'Movies' }" />
     <div class="movie__details">
       <div class="movie__details-wrapper">
@@ -43,7 +43,7 @@
 
 <script>
 import BreadCrumbs from "@components/common/BreadCrumbs.vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { retrieveMovie } from "@/api/useMoviesApi";
 import { computed, onBeforeMount, ref } from "vue";
 import SectionTitle from "@components/common/SectionTitle.vue";
@@ -89,9 +89,13 @@ export default {
       currentDate.value = new Date(newDate);
       await getSeances();
     }
+    const router = useRouter();
 
     onBeforeMount(async () => {
       movie.value = await retrieveMovie(route.params.id);
+      if (!movie.value) {
+        router.push("/404");
+      }
       movie.value.length = formatMovieLength(movie.value.length);
       await getSeances();
     });
