@@ -10,6 +10,9 @@
         >{{ tab.label }}</TabHeader
       >
     </div>
+    <div>
+      <CustomSelect v-model="$i18n.locale" :options="languages" />
+    </div>
     <div class="nav__buttons" v-if="!isUserLoggedIn">
       <CustomButton raw-text :to="{ name: 'Register' }">Register</CustomButton>
       <CustomButton :to="{ name: 'Login' }">Login</CustomButton>
@@ -33,8 +36,9 @@ import { useRouter } from "vue-router";
 import CustomMenu from "@components/common/CustomMenu.vue";
 import { useAuthStore } from "@/stores/auth";
 import { storeToRefs } from "pinia";
+import CustomSelect from "@components/common/CustomSelect.vue";
 export default {
-  components: { Logo, TabHeader, CustomButton, CustomMenu },
+  components: { Logo, TabHeader, CustomButton, CustomMenu, CustomSelect },
   setup() {
     const tabs = [
       { label: "Movies", path: { name: "Movies" } },
@@ -47,11 +51,16 @@ export default {
     }
     const authStore = useAuthStore();
     const { isUserLoggedIn } = storeToRefs(authStore);
+    const languages = [
+      { label: "PL", value: "pl" },
+      { label: "EN", value: "en" },
+    ];
     return {
       tabs,
       isCurrentPath,
       isUserLoggedIn,
       authStore,
+      languages,
     };
   },
 };

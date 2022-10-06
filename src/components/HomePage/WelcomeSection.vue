@@ -1,20 +1,20 @@
 <template>
   <div class="welcome">
     <div class="welcome__text">
-      <SectionTitle class="welcome__title"
-        >Welcome to the best cinema in Monterail</SectionTitle
-      >
+      <SectionTitle class="welcome__title">{{
+        $t("welcomeSection.title")
+      }}</SectionTitle>
       <div class="welcome__subtitles">
-        <SectionSubtitle class="welcome__subtitle"
-          >Best movies, best experiences, best people.</SectionSubtitle
-        >
-        <SectionSubtitle class="welcome__subtitle"
-          >And all that doesn't exist. Yikes.</SectionSubtitle
-        >
+        <SectionSubtitle class="welcome__subtitle">{{
+          $t("welcomeSection.subtitle1")
+        }}</SectionSubtitle>
+        <SectionSubtitle class="welcome__subtitle">{{
+          $t("welcomeSection.subtitle2")
+        }}</SectionSubtitle>
       </div>
-      <CustomButton class="welcome__book-button" href="/book" size="56"
-        >Book a ticket</CustomButton
-      >
+      <CustomButton class="welcome__book-button" href="/book" size="56">{{
+        $t("welcomeSection.bookButton")
+      }}</CustomButton>
     </div>
     <div class="welcome__image">
       <WelcomeImage />
@@ -33,9 +33,6 @@ export default {
     SectionSubtitle,
     CustomButton,
     WelcomeImage,
-  },
-  setup() {
-    return {};
   },
 };
 </script>
