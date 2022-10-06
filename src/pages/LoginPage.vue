@@ -52,6 +52,7 @@ import FormCard from "@components/Register/FormCard.vue";
 import CustomInput from "@components/common/CustomInput.vue";
 import CustomButton from "@components/common/CustomButton.vue";
 import { useAuthStore } from "@/stores/auth";
+import { useMeta } from "vue-meta";
 
 export default {
   components: { SectionTitle, FormCard, CustomInput, CustomButton },
@@ -62,6 +63,9 @@ export default {
     async function handleSubmit() {
       await authStore.login(email.value, password.value);
     }
+    const { meta } = useMeta({
+      title: "Login",
+    });
     return { email, password, handleSubmit };
   },
 };
@@ -98,5 +102,4 @@ export default {
     }
   }
 }
-
 </style>

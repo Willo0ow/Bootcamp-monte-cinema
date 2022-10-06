@@ -37,6 +37,7 @@ import SectionTitle from "@components/common/SectionTitle.vue";
 import PanelSelector from "@components/Reservation/PanelSelector.vue";
 import DefineTickets from "@components/Reservation/DefineTickets.vue";
 import { formatSeanceDatetime } from "@helpers/useFormatSeanceDatetime";
+import { useMeta } from "vue-meta";
 
 export default {
   components: {
@@ -48,6 +49,9 @@ export default {
     DefineTickets,
   },
   setup() {
+    const { meta } = useMeta({
+      title: "Reservation",
+    });
     const contentPanels = [
       {
         order: 1,

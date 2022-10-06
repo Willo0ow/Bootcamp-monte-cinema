@@ -1,4 +1,9 @@
 <template>
+  <metainfo>
+    <template #title="{ content }">
+      {{ content ? `${content} | ${appTitle}` : `${appTitle}` }}
+    </template>
+  </metainfo>
   <header>
     <component :is="navVariant"></component>
   </header>
@@ -27,7 +32,8 @@ export default {
     onBeforeMount(() => {
       authStore.restoreUserToken();
     });
-    return { navVariant };
+    const appTitle = "MonteCinema";
+    return { navVariant, appTitle };
   },
 };
 </script>

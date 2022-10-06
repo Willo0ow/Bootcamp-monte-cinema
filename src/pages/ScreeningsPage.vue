@@ -12,12 +12,16 @@ import Screenings from "@components/HomePage/Screenings.vue";
 import { useMovieStore } from "@/stores/movies";
 import { onMounted } from "vue";
 import { storeToRefs } from "pinia";
+import { useMeta } from "vue-meta";
 export default {
   components: {
     BreadCrumbs,
     Screenings,
   },
   setup() {
+    const { meta } = useMeta({
+      title: "Screenings",
+    });
     const breadcrumbSteps = [{ text: "Screenings", isLink: false }];
     const movieStore = useMovieStore();
     const { movies } = storeToRefs(movieStore);
