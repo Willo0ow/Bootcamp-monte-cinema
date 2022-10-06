@@ -2,18 +2,18 @@
   <div class="welcome">
     <div class="welcome__text">
       <SectionTitle class="welcome__title">{{
-        t("welcomeSection.title")
+        $t("welcomeSection.title")
       }}</SectionTitle>
       <div class="welcome__subtitles">
         <SectionSubtitle class="welcome__subtitle">{{
-          t("welcomeSection.subtitle1")
+          $t("welcomeSection.subtitle1")
         }}</SectionSubtitle>
         <SectionSubtitle class="welcome__subtitle">{{
-          t("welcomeSection.subtitle2")
+          $t("welcomeSection.subtitle2")
         }}</SectionSubtitle>
       </div>
       <CustomButton class="welcome__book-button" href="/book" size="56">{{
-        t("welcomeSection.bookButton")
+        $t("welcomeSection.bookButton")
       }}</CustomButton>
     </div>
     <div class="welcome__image">
@@ -26,7 +26,6 @@ import WelcomeImage from "@assets/images/welcome.svg?component";
 import CustomButton from "@components/common/CustomButton.vue";
 import SectionTitle from "@components/common/SectionTitle.vue";
 import SectionSubtitle from "@components/common/SectionSubtitle.vue";
-import { useI18n } from "vue-i18n";
 
 export default {
   components: {
@@ -34,10 +33,6 @@ export default {
     SectionSubtitle,
     CustomButton,
     WelcomeImage,
-  },
-  setup() {
-    const { t } = useI18n();
-    return { t };
   },
 };
 </script>

@@ -11,7 +11,7 @@
       >
     </div>
     <div>
-      <CustomSelect v-model="locale" :options="languages" />
+      <CustomSelect v-model="$i18n.locale" :options="languages" />
     </div>
     <div class="nav__buttons" v-if="!isUserLoggedIn">
       <CustomButton raw-text :to="{ name: 'Register' }">Register</CustomButton>
@@ -36,7 +36,6 @@ import { useRouter } from "vue-router";
 import CustomMenu from "@components/common/CustomMenu.vue";
 import { useAuthStore } from "@/stores/auth";
 import { storeToRefs } from "pinia";
-import { useI18n } from "vue-i18n";
 import CustomSelect from "@components/common/CustomSelect.vue";
 export default {
   components: { Logo, TabHeader, CustomButton, CustomMenu, CustomSelect },
@@ -56,15 +55,12 @@ export default {
       { label: "PL", value: "pl" },
       { label: "EN", value: "en" },
     ];
-    const { t, locale } = useI18n();
     return {
       tabs,
       isCurrentPath,
       isUserLoggedIn,
       authStore,
       languages,
-      t,
-      locale,
     };
   },
 };
